@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/app_navigation"
+    app:startDestination="@id/studentsListFragment">
+
+    <fragment
+        android:id="@+id/studentsListFragment"
+        android:name="com.sr.techhelper.ui.main.fragments.student_details.StudentDetailsFragment"
+        android:label="Students_List"
+        tools:layout="@layout/fragment_students_list">
+        <action
+            android:id="@+id/action_studentsListFragment_to_studentDetailsFragment"
+            app:destination="@id/studentDetailsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/studentDetailsFragment"
+        android:name="com.sr.techhelper.ui.main.fragments.student_details.StudentDetailsFragment"
+        android:label="Student Details"
+        tools:layout="@layout/fragment_student_details">
+
+        <action
+            android:id="@+id/action_studentDetailsFragment_to_editStudentFragment"
+            app:destination="@id/editStudentFragment" />
+        <argument
+            android:name="review_id"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/createStudentFragment"
+        android:name="com.sr.techhelper.ui.main.fragments.create_student.CreateStudentFragment"
+        android:label="CreateStudentFragment"
+        tools:layout="@layout/fragment_create_student">
+        <action
+            android:id="@+id/action_createStudentFragment_to_studentsListFragment"
+            app:destination="@id/studentsListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editStudentFragment"
+        android:name="com.sr.techhelper.ui.main.fragments.edit_student.EditStudentFragment"
+        android:label="editStudentFragment"
+        tools:layout="@layout/fragment_edit_student">
+        <action
+            android:id="@+id/action_editStudentFragment_to_studentDetailsFragment"
+            app:destination="@id/studentDetailsFragment" />
+        <action
+            android:id="@+id/action_editStudentFragment_to_studentsListFragment"
+            app:destination="@id/studentsListFragment" />
+        <argument
+            android:name="student_id"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/profilePageFragment"
+        android:name="com.sr.techhelper.ui.main.fragments.profile_page.ProfilePageFragment"
+        android:label="fragment_profile_page"
+        tools:layout="@layout/fragment_profile_page" >
+        <action
+            android:id="@+id/action_profilePageFragment_to_studentDetailsFragment"
+            app:destination="@id/studentDetailsFragment" />
+    </fragment>
+</navigation>
