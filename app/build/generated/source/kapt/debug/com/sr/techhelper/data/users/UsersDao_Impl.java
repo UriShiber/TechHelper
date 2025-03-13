@@ -265,8 +265,8 @@ public final class UsersDao_Impl implements UsersDao {
   }
 
   @Override
-  public Object getExistingUserIds(@NonNull List<String> ids,
-                                   @NonNull Continuation<? super List<? extends String>> $completion) {
+  public Object getExistingUserIds(final List<String> ids,
+      final Continuation<? super List<String>> $completion) {
     final StringBuilder _stringBuilder = StringUtil.newStringBuilder();
     _stringBuilder.append("SELECT id FROM users WHERE id IN (");
     final int _inputSize = ids.size();
@@ -314,6 +314,4 @@ public final class UsersDao_Impl implements UsersDao {
   public static List<Class<?>> getRequiredConverters() {
     return Collections.emptyList();
   }
-
-
 }

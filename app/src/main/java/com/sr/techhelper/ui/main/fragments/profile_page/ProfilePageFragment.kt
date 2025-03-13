@@ -94,7 +94,7 @@ class ProfilePageFragment : Fragment() {
 
 
 
-        studentsList = view.findViewById(R.id.profile_page_posts_list)
+//        studentsList = view.findViewById(R.id.profile_page_posts_list)
         context?.let { initStudentsList(it) }
         viewModel.getAllStudents().observe(viewLifecycleOwner, {
             it?.let {
@@ -109,8 +109,8 @@ class ProfilePageFragment : Fragment() {
     private fun initStudentsList(context: Context) {
         studentsList.run {
             layoutManager = LinearLayoutManager(context)
-            adapter = StudentsAdapter{ id ->
-                val action = ProfilePageFragmentDirections.actionProfilePageFragmentToReviewDetailsFragment(id)
+            adapter = StudentsAdapter{ student ->
+                val action = ProfilePageFragmentDirections.actionProfilePageFragmentToStudentDetailsFragment(student.id)
                 findNavController().navigate(action)
             }
             addItemDecoration(

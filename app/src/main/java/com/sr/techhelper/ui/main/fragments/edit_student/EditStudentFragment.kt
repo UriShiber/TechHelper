@@ -93,11 +93,8 @@ class EditStudentFragment : Fragment() {
 
             // Set the cancelButton action
             cancelButton.setOnClickListener {
-                studentId?.let {
-                    viewModel.deleteStudentById(studentId)
-                }
                 val action =
-                    EditStudentFragmentDirections.actionEditStudentFragmentToStudentsListFragment2()
+                    EditStudentFragmentDirections.actionEditStudentFragmentToStudentsListFragment()
                 Navigation.findNavController(it).navigate(action)
             }
 
@@ -107,7 +104,7 @@ class EditStudentFragment : Fragment() {
                     viewModel.deleteStudentById(studentId)
                 }
                 val action =
-                    EditStudentFragmentDirections.actionEditStudentFragmentToStudentsListFragment2()
+                    EditStudentFragmentDirections.actionEditStudentFragmentToStudentsListFragment()
                 Navigation.findNavController(it).navigate(action)
             }
 
@@ -119,7 +116,7 @@ class EditStudentFragment : Fragment() {
                     phone = phoneText.text.toString(),
                     address = addressText.text.toString(),
                     isChecked = checkBox.isChecked,
-                    image = base64Image,
+//                    image = base64Image,
                 )
 
                 currentStudent?.let { oldStudent ->

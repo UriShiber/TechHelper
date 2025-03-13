@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="app_name">techhelper</string>
-    <style name="Base.Theme.techhelper" parent="Theme.Material3.DayNight.NoActionBar">
-        
-        
-    </style>
-    <style name="Theme.techhelper" parent="Base.Theme.techhelper"/>
-</resources>

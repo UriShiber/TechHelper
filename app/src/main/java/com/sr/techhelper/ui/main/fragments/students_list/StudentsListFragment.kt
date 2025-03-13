@@ -6,13 +6,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.sr.techhelper.R
 import com.sr.techhelper.ui.main.StudentsViewModel
+import com.sr.techhelper.ui.main.fragments.student_details.StudentDetailsFragmentDirections
 
 
 class StudentsListFragment : Fragment() {
@@ -35,14 +38,19 @@ class StudentsListFragment : Fragment() {
             if(it.isEmpty()) viewModel.invalidateStudents()
             (studentsList.adapter as? StudentsAdapter)?.updateStudents(it)
         })
-        //setupToolbar(view)
+
+        val createBtn: Button = view.findViewById(R.id.students_list_add_student_button)
+        createBtn.setOnClickListener {
+            val action = StudentsListFragmentDirections.studentListFragmentAdd()
+            Navigation.findNavController(it).navigate(action)
+        }
     }
 
     private fun initStudentsList(context: Context) {
         studentsList.run {
             layoutManager = LinearLayoutManager(context)
-            adapter = StudentsAdapter{ id ->
-               val action = StudentsListFragmentDirections.actionStudentsListFragmentToStudentDetailsFragment(id)
+            adapter = StudentsAdapter{ student ->
+               val action = StudentsListFragmentDirections.actionStudentsListFragmentToStudentDetailsFragment(student.id)
                 findNavController().navigate(action)
             }
             addItemDecoration(

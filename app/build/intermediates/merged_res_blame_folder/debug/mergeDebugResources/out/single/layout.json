@@ -1,0 +1,38 @@
+[
+    {
+        "merged": "C:\\Users\\Admin\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-mergeDebugResources-69:\\layout\\activity_main.xml",
+        "source": "C:\\Users\\Admin\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-main-72:\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\Admin\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-mergeDebugResources-69:\\layout\\fragment_edit_student.xml",
+        "source": "C:\\Users\\Admin\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-main-72:\\layout\\fragment_edit_student.xml"
+    },
+    {
+        "merged": "C:\\Users\\Admin\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-mergeDebugResources-69:\\layout\\fragment_profile_page.xml",
+        "source": "C:\\Users\\Admin\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-main-72:\\layout\\fragment_profile_page.xml"
+    },
+    {
+        "merged": "C:\\Users\\Admin\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-mergeDebugResources-69:\\layout\\fragment_students_list.xml",
+        "source": "C:\\Users\\Admin\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-main-72:\\layout\\fragment_students_list.xml"
+    },
+    {
+        "merged": "C:\\Users\\Admin\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-mergeDebugResources-69:\\layout\\fragment_create_student.xml",
+        "source": "C:\\Users\\Admin\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-main-72:\\layout\\fragment_create_student.xml"
+    },
+    {
+        "merged": "C:\\Users\\Admin\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-mergeDebugResources-69:\\layout\\fragment_student_details.xml",
+        "source": "C:\\Users\\Admin\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-main-72:\\layout\\fragment_student_details.xml"
+    },
+    {
+        "merged": "C:\\Users\\Admin\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-mergeDebugResources-69:\\layout\\student_list_item.xml",
+        "source": "C:\\Users\\Admin\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-main-72:\\layout\\student_list_item.xml"
+    },
+    {
+        "merged": "com.sr.techhelper.app-mergeDebugResources-69:/layout/fragment_student_details.xml",
+        "source": "com.sr.techhelper.app-main-72:/layout/fragment_student_details.xml"
+    },
+    {
+        "merged": "C:\\Users\\Admin\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-mergeDebugResources-69:\\layout\\activity_auth.xml",
+        "source": "C:\\Users\\Admin\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-main-72:\\layout\\activity_auth.xml"
+    }
+]
