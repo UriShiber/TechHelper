@@ -14,6 +14,7 @@ android {
     namespace = "com.sr.techhelper"
     compileSdk = 35
 
+
     defaultConfig {
         applicationId = "com.sr.techhelper"
         minSdk = 26

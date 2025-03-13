@@ -16,7 +16,7 @@ class StudentsAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StudentViewHolder {
         val inflator = LayoutInflater.from(parent.context)
-            .inflate(R.layout.fragment_students_list, parent, false)
+            .inflate(R.layout.student_list_item, parent, false)
         return StudentViewHolder(inflator)
     }
 

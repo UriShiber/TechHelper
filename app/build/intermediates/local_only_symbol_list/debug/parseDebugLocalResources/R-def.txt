@@ -8,6 +8,7 @@ id action_editStudentFragment_to_studentDetailsFragment
 id action_editStudentFragment_to_studentsListFragment
 id action_profilePageFragment_to_studentDetailsFragment
 id action_studentDetailsFragment_to_editStudentFragment
+id action_studentDetailsFragment_to_studentsListFragment
 id action_studentsListFragment_to_studentDetailsFragment
 id add_student_activity_address_edit_text
 id add_student_activity_address_text_view
@@ -29,13 +30,15 @@ id editStudentFragment
 id edit_button
 id edit_student_image
 id edit_view
-id fragment_container
 id main
+id nav_host_fragment
 id profilePageFragment
 id profile_page_logout_button
 id profile_picture
 id save_button
 id studentDetailsFragment
+id studentListFragmentAdd
+id student_list_item
 id student_list_view
 id student_row_address_label_text_view
 id student_row_address_value_text_view
@@ -62,6 +65,7 @@ layout fragment_edit_student
 layout fragment_profile_page
 layout fragment_student_details
 layout fragment_students_list
+layout student_list_item
 mipmap ic_launcher
 mipmap ic_launcher_round
 navigation app_navigation

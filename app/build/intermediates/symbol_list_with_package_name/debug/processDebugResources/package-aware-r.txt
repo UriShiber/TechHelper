@@ -3298,6 +3298,7 @@ id action_mode_bar_stub
 id action_mode_close_button
 id action_profilePageFragment_to_studentDetailsFragment
 id action_studentDetailsFragment_to_editStudentFragment
+id action_studentDetailsFragment_to_studentsListFragment
 id action_studentsListFragment_to_studentDetailsFragment
 id action_text
 id actions
@@ -3482,7 +3483,6 @@ id fixed
 id flip
 id floating
 id forever
-id fragment_container
 id fragment_container_view_tag
 id fragment_phone
 id fragment_register_email
@@ -3607,6 +3607,7 @@ id multiply
 id name
 id name_layout
 id nav_controller_view_tag
+id nav_host_fragment
 id nav_host_fragment_container
 id navigation_bar_item_active_indicator_view
 id navigation_bar_item_icon_container
@@ -3753,6 +3754,8 @@ id status_bar_latest_event_content
 id stop
 id stretch
 id studentDetailsFragment
+id studentListFragmentAdd
+id student_list_item
 id student_list_view
 id student_row_address_label_text_view
 id student_row_address_value_text_view
@@ -4095,6 +4098,7 @@ layout notification_template_part_time
 layout select_dialog_item_material
 layout select_dialog_multichoice_material
 layout select_dialog_singlechoice_material
+layout student_list_item
 layout support_simple_spinner_dropdown_item
 mipmap ic_launcher
 mipmap ic_launcher_round

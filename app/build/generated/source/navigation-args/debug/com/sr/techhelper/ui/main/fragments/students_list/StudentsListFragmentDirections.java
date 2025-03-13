@@ -2,6 +2,7 @@ package com.sr.techhelper.ui.main.fragments.students_list;
 
 import android.os.Bundle;
 import androidx.annotation.NonNull;
+import androidx.navigation.ActionOnlyNavDirections;
 import androidx.navigation.NavDirections;
 import com.sr.techhelper.R;
 import java.lang.IllegalArgumentException;
@@ -19,6 +20,11 @@ public class StudentsListFragmentDirections {
   public static ActionStudentsListFragmentToStudentDetailsFragment actionStudentsListFragmentToStudentDetailsFragment(
       @NonNull String studentId) {
     return new ActionStudentsListFragmentToStudentDetailsFragment(studentId);
+  }
+
+  @NonNull
+  public static NavDirections studentListFragmentAdd() {
+    return new ActionOnlyNavDirections(R.id.studentListFragmentAdd);
   }
 
   public static class ActionStudentsListFragmentToStudentDetailsFragment implements NavDirections {

@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.widget.AppCompatImageButton
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import com.google.firebase.auth.FirebaseAuth
@@ -51,6 +52,7 @@ class StudentDetailsFragment : Fragment() {
             val checkBox: CheckBox = view.findViewById(R.id.student_row_check_box_value)
             val image = view.findViewById<ImageView>(R.id.edit_student_image)
             val editButton: Button = view.findViewById(R.id.edit_button)
+            val backButton: AppCompatImageButton = view.findViewById(R.id.back_button)
 
             // Update the UI with the new student data
             nameText.text = currentStudent?.name
@@ -60,14 +62,13 @@ class StudentDetailsFragment : Fragment() {
             checkBox.isChecked = currentStudent?.isChecked ?: false
 
 
-            if(studentUid == currentStudent?.id) {
-                editButton.visibility = View.VISIBLE
-            } else {
-                editButton.visibility = View.GONE
-            }
-
             editButton.setOnClickListener {
                 val action = StudentDetailsFragmentDirections.actionStudentDetailsFragmentToEditStudentFragment(studentId ?: "")
+                Navigation.findNavController(it).navigate(action)
+            }
+
+            backButton.setOnClickListener {
+                val action = StudentDetailsFragmentDirections.actionStudentDetailsFragmentToStudentsListFragment()
                 Navigation.findNavController(it).navigate(action)
             }
 

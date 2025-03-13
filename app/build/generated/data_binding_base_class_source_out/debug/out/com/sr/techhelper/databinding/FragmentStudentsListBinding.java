@@ -5,13 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.sr.techhelper.R;
@@ -24,37 +21,19 @@ public final class FragmentStudentsListBinding implements ViewBinding {
   private final ConstraintLayout rootView;
 
   @NonNull
-  public final ImageView editStudentImage;
-
-  @NonNull
   public final ConstraintLayout studentListView;
 
   @NonNull
-  public final CheckBox studentRowCheckBox;
-
-  @NonNull
-  public final TextView studentRowIdTextView;
-
-  @NonNull
-  public final TextView studentRowNameTextView;
-
-  @NonNull
-  public final LinearLayout studentsList;
+  public final RecyclerView studentsList;
 
   @NonNull
   public final Button studentsListAddStudentButton;
 
   private FragmentStudentsListBinding(@NonNull ConstraintLayout rootView,
-      @NonNull ImageView editStudentImage, @NonNull ConstraintLayout studentListView,
-      @NonNull CheckBox studentRowCheckBox, @NonNull TextView studentRowIdTextView,
-      @NonNull TextView studentRowNameTextView, @NonNull LinearLayout studentsList,
+      @NonNull ConstraintLayout studentListView, @NonNull RecyclerView studentsList,
       @NonNull Button studentsListAddStudentButton) {
     this.rootView = rootView;
-    this.editStudentImage = editStudentImage;
     this.studentListView = studentListView;
-    this.studentRowCheckBox = studentRowCheckBox;
-    this.studentRowIdTextView = studentRowIdTextView;
-    this.studentRowNameTextView = studentRowNameTextView;
     this.studentsList = studentsList;
     this.studentsListAddStudentButton = studentsListAddStudentButton;
   }
@@ -86,34 +65,10 @@ public final class FragmentStudentsListBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
-      id = R.id.edit_student_image;
-      ImageView editStudentImage = ViewBindings.findChildViewById(rootView, id);
-      if (editStudentImage == null) {
-        break missingId;
-      }
-
       ConstraintLayout studentListView = (ConstraintLayout) rootView;
 
-      id = R.id.student_row_check_box;
-      CheckBox studentRowCheckBox = ViewBindings.findChildViewById(rootView, id);
-      if (studentRowCheckBox == null) {
-        break missingId;
-      }
-
-      id = R.id.student_row_id_text_view;
-      TextView studentRowIdTextView = ViewBindings.findChildViewById(rootView, id);
-      if (studentRowIdTextView == null) {
-        break missingId;
-      }
-
-      id = R.id.student_row_name_text_view;
-      TextView studentRowNameTextView = ViewBindings.findChildViewById(rootView, id);
-      if (studentRowNameTextView == null) {
-        break missingId;
-      }
-
       id = R.id.students_list;
-      LinearLayout studentsList = ViewBindings.findChildViewById(rootView, id);
+      RecyclerView studentsList = ViewBindings.findChildViewById(rootView, id);
       if (studentsList == null) {
         break missingId;
       }
@@ -124,8 +79,7 @@ public final class FragmentStudentsListBinding implements ViewBinding {
         break missingId;
       }
 
-      return new FragmentStudentsListBinding((ConstraintLayout) rootView, editStudentImage,
-          studentListView, studentRowCheckBox, studentRowIdTextView, studentRowNameTextView,
+      return new FragmentStudentsListBinding((ConstraintLayout) rootView, studentListView,
           studentsList, studentsListAddStudentButton);
     }
     String missingId = rootView.getResources().getResourceName(id);

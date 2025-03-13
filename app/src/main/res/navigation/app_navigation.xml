@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_studentsListFragment_to_studentDetailsFragment"
             app:destination="@id/studentDetailsFragment" />
+        <action
+            android:id="@+id/studentListFragmentAdd"
+            app:destination="@id/createStudentFragment" />
     </fragment>
 
     <fragment
@@ -27,6 +30,9 @@
         <argument
             android:name="student_id"
             app:argType="string" />
+        <action
+            android:id="@+id/action_studentDetailsFragment_to_studentsListFragment"
+            app:destination="@id/studentsListFragment" />
     </fragment>
     <fragment
         android:id="@+id/createStudentFragment"

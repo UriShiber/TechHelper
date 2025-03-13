@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "330191144814-56tntqb2jbd53jqkcmjms9d1qbeba70l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sr.techhelper",
+            "certificate_hash": "fe2b90943d6c71bcf33e60b115953328751074a4"
+          }
+        },
+        {
           "client_id": "330191144814-8vfu436a3sp5oevkoclc3red0j0sq7l4.apps.googleusercontent.com",
           "client_type": 3
         }
