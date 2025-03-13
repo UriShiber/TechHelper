@@ -1,0 +1,3 @@
+com.sr.techhelper.test
+style WhiteBackgroundDialogTheme
+style WhiteBackgroundTheme

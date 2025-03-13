@@ -18,9 +18,11 @@ pluginManagement {
             mavenCentral()
         }
     }
-
     rootProject.name = "TechHelper"
     include(":app")
     include(":app:schemas")
+
 }
+
+
  

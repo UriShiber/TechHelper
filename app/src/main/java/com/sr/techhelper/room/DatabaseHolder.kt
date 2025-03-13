@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 
 object DatabaseHolder {
+    @Volatile
     private var appDatabase: AppDatabase? = null
 
     fun initDatabase(context: Context) {

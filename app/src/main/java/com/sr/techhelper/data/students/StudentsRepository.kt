@@ -10,7 +10,7 @@ import kotlinx.coroutines.withContext
 
 
 class StudentsRepository {
-    private val studentDao = DatabaseHolder.getDatabase().studendsDao()
+    private val studentDao = DatabaseHolder.getDatabase().studentsDao()
     private val firestoreHandle = Firebase.firestore.collection("students")
 
     fun getAllStudents(): LiveData<List<StudentModel>> {

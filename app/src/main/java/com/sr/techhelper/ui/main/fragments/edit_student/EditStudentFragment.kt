@@ -97,7 +97,7 @@ class EditStudentFragment : Fragment() {
                     viewModel.deleteStudentById(studentId)
                 }
                 val action =
-                    EditStudentFragmentDirections.actionEditStudentFragmentToStudentsListFragment2()
+                    EditStudentFragmentDirections.actionEditStudentFragmentToStudentsListFragment()
                 Navigation.findNavController(it).navigate(action)
             }
 
@@ -107,7 +107,7 @@ class EditStudentFragment : Fragment() {
                     viewModel.deleteStudentById(studentId)
                 }
                 val action =
-                    EditStudentFragmentDirections.actionEditStudentFragmentToStudentsListFragment2()
+                    EditStudentFragmentDirections.actionEditStudentFragmentToStudentsListFragment()
                 Navigation.findNavController(it).navigate(action)
             }
 

@@ -10,7 +10,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
-import com.example.finalprojectresturant.ui.main.fragments.review_details.StudentDetailsFragmentDirections
 import com.google.firebase.auth.FirebaseAuth
 import com.sr.techhelper.R
 import com.sr.techhelper.data.students.StudentModel

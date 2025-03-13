@@ -41,8 +41,8 @@ class StudentsListFragment : Fragment() {
     private fun initStudentsList(context: Context) {
         studentsList.run {
             layoutManager = LinearLayoutManager(context)
-            adapter = StudentsAdapter{ id ->
-               val action = StudentsListFragmentDirections.actionStudentsListFragmentToStudentDetailsFragment(id)
+            adapter = StudentsAdapter{ student ->
+               val action = StudentsListFragmentDirections.actionStudentsListFragmentToStudentDetailsFragment(student.id)
                 findNavController().navigate(action)
             }
             addItemDecoration(
