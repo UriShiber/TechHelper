@@ -8,6 +8,8 @@ import android.net.Uri
 import android.os.Bundle
 import android.content.Intent
 import android.provider.MediaStore
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Base64
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -37,7 +39,7 @@ import java.io.ByteArrayOutputStream
 class ProfilePageFragment : Fragment() {
     private lateinit var studentsList: RecyclerView
     private val viewModel: StudentsViewModel by activityViewModels()
-    private var reviewerUid: String = FirebaseAuth.getInstance().currentUser!!.uid
+    private var userId: String = FirebaseAuth.getInstance().currentUser!!.uid
 
     private lateinit var imageView: ImageView
     private lateinit var base64Image: String
@@ -53,12 +55,12 @@ class ProfilePageFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val usernameText = view.findViewById<TextView>(R.id.username_text)
+        val usernameEditText = view.findViewById<TextView>(R.id.username_edit_text)
         imageView = view.findViewById<ImageView>(R.id.profile_picture)
-        viewModel.getUserById(reviewerUid).observe(viewLifecycleOwner) { user ->
+        viewModel.getUserById(userId).observe(viewLifecycleOwner) { user ->
             user?.let {
                 mainUser = it
-                usernameText.text = it.name ?: "Guest"
+                usernameEditText.text = it.name ?: "Guest"
 
                 if(it.profile_picture != "") {
                     imageView.setImageBitmap(decodeBase64ToImage(it.profile_picture ?: ""))
@@ -73,14 +75,12 @@ class ProfilePageFragment : Fragment() {
                 }
 
 
-
-
                 imageView.setOnClickListener {
                     pickImageFromGallery()
                 }
             } ?: run {
                 // Handle user not found
-                usernameText.text = "Guest"
+                usernameEditText.text = "Guest"
             }
         }
 
@@ -92,9 +92,35 @@ class ProfilePageFragment : Fragment() {
             requireActivity().finish()
         }
 
+        val saveButton = view.findViewById<Button>(R.id.save_changes_button)
+        saveButton.visibility = View.GONE // Initially hide the save button
 
+        saveButton.setOnClickListener {
+            val newUsername = usernameEditText.text.toString()
+            mainUser?.let {
+                val newUser = UserModel(id = mainUser!!.id, profile_picture = mainUser!!.profile_picture, name = newUsername, email = mainUser!!.email)
+                viewModel.updateUser(newUser)
+            }
+            saveButton.visibility = View.GONE
+            logout.visibility = View.VISIBLE
+        }
 
-//        studentsList = view.findViewById(R.id.profile_page_posts_list)
+        usernameEditText.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                val newUsername = s.toString()
+                if (newUsername != "" && newUsername != mainUser!!.name) {
+                    saveButton.visibility = View.VISIBLE
+                    logout.visibility = View.GONE
+                } else {
+                    saveButton.visibility = View.GONE
+                    logout.visibility = View.VISIBLE
+                }
+            }
+            override fun afterTextChanged(s: Editable?) {}
+        })
+
+        studentsList = view.findViewById(R.id.profile_page_students_list)
         context?.let { initStudentsList(it) }
         viewModel.getAllStudents().observe(viewLifecycleOwner, {
             it?.let {

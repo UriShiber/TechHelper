@@ -27,7 +27,7 @@ import java.io.ByteArrayOutputStream
 
 class CreateStudentFragment : Fragment() {
     private val viewModel: StudentsViewModel by activityViewModels()
-    private var studentsUid: String = FirebaseAuth.getInstance().currentUser!!.uid
+    private var userUid: String = FirebaseAuth.getInstance().currentUser!!.uid
 
     private lateinit var imageView: ImageView
     private lateinit var base64Image: String
@@ -45,7 +45,6 @@ class CreateStudentFragment : Fragment() {
 
         val saveButton: Button = view.findViewById(R.id.save_button)
         val cancelButton: Button = view.findViewById(R.id.cancel_button)
-        // TODO: rename add_student_activity_name_edit_text to just add student
         val nameEditText = view.findViewById<TextView>(R.id.add_student_activity_name_edit_text)
         val idEditText = view.findViewById<TextView>(R.id.add_student_activity_id_edit_text)
         val phoneEditText = view.findViewById<TextView>(R.id.add_student_activity_phone_edit_text)
@@ -70,8 +69,7 @@ class CreateStudentFragment : Fragment() {
                     address = addressEditText?.text?.toString() ?: "",
                     phone = phoneEditText?.text?.toString() ?: "",
                     isChecked = checkedCheckbox?.isChecked ?: false,
-
-
+                    image = base64Image
                 )
             viewModel.addStudent(newStudent)
             val action = CreateStudentFragmentDirections.actionCreateStudentFragmentToStudentsListFragment()

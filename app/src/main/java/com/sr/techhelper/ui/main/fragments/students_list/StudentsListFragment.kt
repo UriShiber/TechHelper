@@ -38,12 +38,6 @@ class StudentsListFragment : Fragment() {
             if(it.isEmpty()) viewModel.invalidateStudents()
             (studentsList.adapter as? StudentsAdapter)?.updateStudents(it)
         })
-
-        val createBtn: Button = view.findViewById(R.id.students_list_add_student_button)
-        createBtn.setOnClickListener {
-            val action = StudentsListFragmentDirections.studentListFragmentAdd()
-            Navigation.findNavController(it).navigate(action)
-        }
     }
 
     private fun initStudentsList(context: Context) {

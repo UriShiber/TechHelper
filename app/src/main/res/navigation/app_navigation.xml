@@ -13,9 +13,6 @@
         <action
             android:id="@+id/action_studentsListFragment_to_studentDetailsFragment"
             app:destination="@id/studentDetailsFragment" />
-        <action
-            android:id="@+id/studentListFragmentAdd"
-            app:destination="@id/createStudentFragment" />
     </fragment>
 
     <fragment

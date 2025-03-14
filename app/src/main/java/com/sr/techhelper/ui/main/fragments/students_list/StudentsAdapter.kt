@@ -4,10 +4,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.sr.techhelper.R
 import com.sr.techhelper.data.students.StudentModel
+import com.sr.techhelper.utils.decodeBase64ToImage
 
 class StudentsAdapter(
     private val onStudentClick: (StudentModel) -> Unit
@@ -31,6 +33,8 @@ class StudentsAdapter(
         private val studentName: TextView = itemView.findViewById(R.id.student_row_name_text_view)
         private val studentId: TextView = itemView.findViewById(R.id.student_row_id_text_view)
         private val checkBox: CheckBox = itemView.findViewById(R.id.student_row_check_box)
+        private val studentImage : ImageView = itemView.findViewById(R.id.edit_student_image)
+
 
         fun bind(student: StudentModel) {
             studentName.text = student.name
@@ -39,6 +43,11 @@ class StudentsAdapter(
 
             checkBox.setOnCheckedChangeListener { _, isChecked ->
                 student.isChecked = isChecked
+            }
+
+            student.image?.let {
+                val bitmap = decodeBase64ToImage(it)
+                studentImage.setImageBitmap(bitmap)
             }
 
             itemView.setOnClickListener {

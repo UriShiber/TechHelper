@@ -116,7 +116,7 @@ class EditStudentFragment : Fragment() {
                     phone = phoneText.text.toString(),
                     address = addressText.text.toString(),
                     isChecked = checkBox.isChecked,
-//                    image = base64Image,
+                    image = base64Image,
                 )
 
                 currentStudent?.let { oldStudent ->
