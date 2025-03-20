@@ -3452,6 +3452,7 @@ id default_activity_button
 id delete_button
 id deltaRelative
 id dependency_ordering
+id descriptionTextView
 id design_bottom_sheet
 id design_menu_item_action_area
 id design_menu_item_action_area_stub
@@ -3553,6 +3554,7 @@ id ifRoom
 id ignore
 id ignoreRequest
 id image
+id imageView
 id immediateStop
 id included
 id indeterminate
@@ -3857,6 +3859,7 @@ id ticker
 id time
 id title
 id titleDividerNoCustom
+id titleTextView
 id title_template
 id title_text_view
 id toggle
@@ -4029,6 +4032,7 @@ layout activity_main
 layout browser_actions_context_menu_page
 layout browser_actions_context_menu_row
 layout custom_dialog
+layout custom_info_window
 layout design_bottom_navigation_item
 layout design_bottom_sheet_dialog
 layout design_layout_snackbar
