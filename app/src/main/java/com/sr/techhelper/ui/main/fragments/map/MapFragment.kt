@@ -22,6 +22,7 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.sr.techhelper.data.posts.PostDTO
 import com.sr.techhelper.ui.main.PostsViewModel
 import com.sr.techhelper.ui.main.fragments.posts_list.PostsAdapter
+import com.sr.techhelper.utils.decodeBase64ToImage
 
 
 class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener, GoogleMap.InfoWindowAdapter {
@@ -47,14 +48,15 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
 
         viewModel.getAllPosts().observe(viewLifecycleOwner, {
             if(it.isEmpty()) viewModel.invalidatePosts()
-            it.forEach { location ->
-                val latLng = LatLng(location.locationLat, location.locationLng)
+            it.forEach { post ->
+                var postDTO = post.toPostDto()
+                val latLng = LatLng(postDTO.locationLat, postDTO.locationLng)
                 googleMap.addMarker(
                     MarkerOptions()
                         .position(latLng)
-                        .title(location.title)
-                        .snippet(location.description)
-                )?.tag = location // Set the LocationData as a tag
+                        .title(postDTO.title)
+                        .snippet(postDTO.description)
+                )?.tag = postDTO // Set the postDTO as a tag
             }
 
             // Move the camera to show all markers
@@ -64,9 +66,6 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
                 googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(firstLatLng, 2f))
             }
         })
-
-        // Add markers for each sample location
-
     }
 
     override fun onMarkerClick(marker: Marker): Boolean {
@@ -98,7 +97,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
 
     override fun getInfoContents(marker: Marker): View? {
         // Get the LocationData from the marker's tag
-        val location = marker.tag as? PostDTO ?: return null
+        val post = marker.tag as? PostDTO ?: return null
 
         // Inflate the custom layout
         val infoWindowView = layoutInflater.inflate(R.layout.custom_info_window, null)
@@ -109,15 +108,15 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
         val imageView = infoWindowView.findViewById<ImageView>(R.id.imageView)
         val userIdTextView = infoWindowView.findViewById<TextView>(R.id.userIdTextView)
 
-        titleTextView.text = location.title
-        descriptionTextView.text = location.description
-        userIdTextView.text = "By: ${location.userId}"
 
-        // Load the image using Glide
-        Glide.with(this)
-            .load(location.image)
-            .transition(DrawableTransitionOptions.withCrossFade())
-            .into(imageView)
+        titleTextView.text = post.title
+        descriptionTextView.text = post.description
+        userIdTextView.text = "By: ${post.userId}"
+
+        post.image?.let {
+            val bitmap = decodeBase64ToImage(it)
+            imageView.setImageBitmap(bitmap)
+        }
 
         return infoWindowView
     }

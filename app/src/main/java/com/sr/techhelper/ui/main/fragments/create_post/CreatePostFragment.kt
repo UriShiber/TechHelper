@@ -107,7 +107,6 @@ class CreatePostFragment : Fragment() {
                     currentLongitude = location.longitude
                     Log.d("CreatePostFragment", "Latitude: $currentLatitude, Longitude: $currentLongitude")
                 } else {
-                    requestLocationUpdates()
                     Log.e("CreatePostFragment", "Location is null")
                 }
             }
@@ -146,37 +145,6 @@ class CreatePostFragment : Fragment() {
         }
     }
 
-    private fun requestLocationUpdates() {
-        val locationRequest = com.google.android.gms.location.LocationRequest.create().apply {
-            interval = 10000 // Update interval in milliseconds (e.g., 10 seconds)
-            fastestInterval = 5000 // Fastest update interval (e.g., 5 seconds)
-            priority = com.google.android.gms.location.LocationRequest.PRIORITY_HIGH_ACCURACY
-        }
-
-        val locationCallback = object : com.google.android.gms.location.LocationCallback() {
-            override fun onLocationResult(locationResult: com.google.android.gms.location.LocationResult) {
-                locationResult.lastLocation?.let { location ->
-                    currentLatitude = location.latitude
-                    currentLongitude = location.longitude
-                    Log.d("CreatePostFragment", "Updated Latitude: $currentLatitude, Longitude: $currentLongitude")
-                    fusedLocationClient.removeLocationUpdates(this) // Stop updates after getting a fix
-                }
-            }
-        }
-
-        if (ActivityCompat.checkSelfPermission(
-                requireContext(),
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                requireContext(),
-                Manifest.permission.ACCESS_COARSE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            return
-        }
-
-        fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, null)
-    }
 
     private fun pickImageFromGallery() {
         val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
