@@ -55,6 +55,18 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="mapFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="12" />
+                            <option name="y" value="12" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="profilePageFragment">
                     <value>
                       <LayoutPositions>
@@ -92,6 +104,11 @@
                                 <LayoutPositions />
                               </value>
                             </entry>
+                            <entry key="action_studentDetailsFragment_to_studentsListFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                           </map>
                         </option>
                       </LayoutPositions>
@@ -109,11 +126,6 @@
                         <option name="myPositions">
                           <map>
                             <entry key="action_studentsListFragment_to_studentDetailsFragment">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
-                            <entry key="studentListFragmentAdd">
                               <value>
                                 <LayoutPositions />
                               </value>
