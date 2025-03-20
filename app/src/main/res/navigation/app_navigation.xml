@@ -64,4 +64,9 @@
             android:id="@+id/action_profilePageFragment_to_studentDetailsFragment"
             app:destination="@id/studentDetailsFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/mapFragment"
+        android:name="com.sr.techhelper.ui.main.fragments.map.MapFragment"
+        android:label="MapFragment"
+        tools:layout="@layout/fragment_map" />
 </navigation>

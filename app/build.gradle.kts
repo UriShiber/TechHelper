@@ -5,15 +5,15 @@ plugins {
     alias(libs.plugins.kotlin.ksp)
     alias(libs.plugins.androidx.room)
     alias(libs.plugins.gms.services)
-
-    // Add the Google services Gradle plugin
-//    id("com.google.gms.google-services")
 }
 
 android {
     namespace = "com.sr.techhelper"
     compileSdk = 35
 
+    buildFeatures {
+        buildConfig = true
+    }
 
     defaultConfig {
         applicationId = "com.sr.techhelper"
@@ -23,6 +23,7 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        manifestPlaceholders["MAPS_API_KEY"] = System.getenv("MAPS_API_KEY") ?: ""
     }
 
     buildTypes {
@@ -32,6 +33,7 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            buildConfigField("String", "MAPS_API_KEY", "\"${project.properties["MAPS_API_KEY"]}\"")
         }
     }
     compileOptions {
@@ -51,6 +53,7 @@ android {
 }
 
 dependencies {
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -64,6 +67,9 @@ dependencies {
     implementation(libs.androidx.lifecycle.livedata.ktx)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.firebase.ui.auth)
+    implementation(libs.androidx.runtime.android)
+    implementation(libs.androidx.ui.android)
+    implementation(libs.androidx.foundation.layout.android)
     ksp(libs.androidx.room.compiler)
     implementation(libs.androidx.room.runtime)
     implementation(platform(libs.firebase.bom))
@@ -71,22 +77,16 @@ dependencies {
     implementation(libs.retrofit.gsonConverter)
     implementation(libs.firebase.firestore)
     implementation(libs.firebase.firestore.ktx)
-    implementation("com.github.bumptech.glide:glide:4.15.1") // Glide library
-    annotationProcessor("com.github.bumptech.glide:compiler:4.15.1") // Glide compiler
+    implementation("com.github.bumptech.glide:glide:4.15.1")
+    annotationProcessor("com.github.bumptech.glide:compiler:4.15.1")
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    // Import the Firebase BoM
     implementation(platform("com.google.firebase:firebase-bom:33.10.0"))
-
-    // When using the BoM, you don't specify versions in Firebase library dependencies
-
-    // Add the dependency for the Firebase SDK for Google Analytics
     implementation("com.google.firebase:firebase-analytics")
-
-    // TODO: Add the dependencies for any other Firebase products you want to use
-    // See https://firebase.google.com/docs/android/setup#available-libraries
-    // For example, add the dependencies for Firebase Authentication and Cloud Firestore
     implementation("com.google.firebase:firebase-auth")
     implementation("com.google.firebase:firebase-firestore")
+    implementation("com.google.android.gms:play-services-maps:18.2.0")
+    implementation(libs.maps.compose)
+    implementation(libs.play.services.maps)
 }

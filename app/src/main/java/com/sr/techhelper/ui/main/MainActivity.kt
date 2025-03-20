@@ -14,6 +14,7 @@ import com.sr.techhelper.R
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
@@ -44,6 +45,10 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.profile -> {
                     navController.navigate(R.id.profilePageFragment)
+                    true
+                }
+                R.id.mapFragment -> {
+                    navController.navigate(R.id.mapFragment)
                     true
                 }
                 // Add other cases for different items in the bottom navigation
