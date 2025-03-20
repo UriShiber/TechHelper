@@ -28,17 +28,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.sr.techhelper.R
-import com.sr.techhelper.ui.main.fragments.students_list.StudentsAdapter
+import com.sr.techhelper.ui.main.fragments.posts_list.PostsAdapter
 import com.sr.techhelper.data.users.UserModel
 import com.sr.techhelper.ui.auth.AuthActivity
-import com.sr.techhelper.ui.main.StudentsViewModel
+import com.sr.techhelper.ui.main.PostsViewModel
 import com.sr.techhelper.utils.decodeBase64ToImage
 import java.io.ByteArrayOutputStream
 
 
 class ProfilePageFragment : Fragment() {
-    private lateinit var studentsList: RecyclerView
-    private val viewModel: StudentsViewModel by activityViewModels()
+    private lateinit var postsList: RecyclerView
+    private val viewModel: PostsViewModel by activityViewModels()
     private var userId: String = FirebaseAuth.getInstance().currentUser!!.uid
 
     private lateinit var imageView: ImageView
@@ -120,23 +120,23 @@ class ProfilePageFragment : Fragment() {
             override fun afterTextChanged(s: Editable?) {}
         })
 
-        studentsList = view.findViewById(R.id.profile_page_students_list)
-        context?.let { initStudentsList(it) }
-        viewModel.getAllStudents().observe(viewLifecycleOwner, {
+        postsList = view.findViewById(R.id.profile_page_posts_list)
+        context?.let { initPostsList(it) }
+        viewModel.getAllPosts().observe(viewLifecycleOwner, {
             it?.let {
-                if(it.isEmpty()) viewModel.invalidateStudents()
-                (studentsList.adapter as? StudentsAdapter)?.updateStudents(it)
+                if(it.isEmpty()) viewModel.invalidatePosts()
+                (postsList.adapter as? PostsAdapter)?.updatePosts(it)
             }
 
         })
     }
 
 
-    private fun initStudentsList(context: Context) {
-        studentsList.run {
+    private fun initPostsList(context: Context) {
+        postsList.run {
             layoutManager = LinearLayoutManager(context)
-            adapter = StudentsAdapter{ student ->
-                val action = ProfilePageFragmentDirections.actionProfilePageFragmentToStudentDetailsFragment(student.id)
+            adapter = PostsAdapter{ post ->
+                val action = ProfilePageFragmentDirections.actionProfilePageFragmentToPostDetailsFragment(post.id)
                 findNavController().navigate(action)
             }
             addItemDecoration(

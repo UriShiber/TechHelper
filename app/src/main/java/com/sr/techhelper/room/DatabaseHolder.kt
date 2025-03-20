@@ -8,7 +8,7 @@ object DatabaseHolder {
     private var appDatabase: AppDatabase? = null
 
     fun initDatabase(context: Context) {
-        appDatabase = Room.databaseBuilder(context, AppDatabase::class.java, "just-eat-db").fallbackToDestructiveMigration()
+        appDatabase = Room.databaseBuilder(context, AppDatabase::class.java, "tech-helper-db").fallbackToDestructiveMigration()
             .build()
     }
 

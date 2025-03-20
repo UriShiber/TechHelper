@@ -16,30 +16,29 @@ public class ProfilePageFragmentDirections {
   }
 
   @NonNull
-  public static ActionProfilePageFragmentToStudentDetailsFragment actionProfilePageFragmentToStudentDetailsFragment(
-      @NonNull String studentId) {
-    return new ActionProfilePageFragmentToStudentDetailsFragment(studentId);
+  public static ActionProfilePageFragmentToPostDetailsFragment actionProfilePageFragmentToPostDetailsFragment(
+      @NonNull String postId) {
+    return new ActionProfilePageFragmentToPostDetailsFragment(postId);
   }
 
-  public static class ActionProfilePageFragmentToStudentDetailsFragment implements NavDirections {
+  public static class ActionProfilePageFragmentToPostDetailsFragment implements NavDirections {
     private final HashMap arguments = new HashMap();
 
     @SuppressWarnings("unchecked")
-    private ActionProfilePageFragmentToStudentDetailsFragment(@NonNull String studentId) {
-      if (studentId == null) {
-        throw new IllegalArgumentException("Argument \"student_id\" is marked as non-null but was passed a null value.");
+    private ActionProfilePageFragmentToPostDetailsFragment(@NonNull String postId) {
+      if (postId == null) {
+        throw new IllegalArgumentException("Argument \"post_id\" is marked as non-null but was passed a null value.");
       }
-      this.arguments.put("student_id", studentId);
+      this.arguments.put("post_id", postId);
     }
 
     @NonNull
     @SuppressWarnings("unchecked")
-    public ActionProfilePageFragmentToStudentDetailsFragment setStudentId(
-        @NonNull String studentId) {
-      if (studentId == null) {
-        throw new IllegalArgumentException("Argument \"student_id\" is marked as non-null but was passed a null value.");
+    public ActionProfilePageFragmentToPostDetailsFragment setPostId(@NonNull String postId) {
+      if (postId == null) {
+        throw new IllegalArgumentException("Argument \"post_id\" is marked as non-null but was passed a null value.");
       }
-      this.arguments.put("student_id", studentId);
+      this.arguments.put("post_id", postId);
       return this;
     }
 
@@ -48,22 +47,22 @@ public class ProfilePageFragmentDirections {
     @NonNull
     public Bundle getArguments() {
       Bundle __result = new Bundle();
-      if (arguments.containsKey("student_id")) {
-        String studentId = (String) arguments.get("student_id");
-        __result.putString("student_id", studentId);
+      if (arguments.containsKey("post_id")) {
+        String postId = (String) arguments.get("post_id");
+        __result.putString("post_id", postId);
       }
       return __result;
     }
 
     @Override
     public int getActionId() {
-      return R.id.action_profilePageFragment_to_studentDetailsFragment;
+      return R.id.action_profilePageFragment_to_postDetailsFragment;
     }
 
     @SuppressWarnings("unchecked")
     @NonNull
-    public String getStudentId() {
-      return (String) arguments.get("student_id");
+    public String getPostId() {
+      return (String) arguments.get("post_id");
     }
 
     @Override
@@ -74,11 +73,11 @@ public class ProfilePageFragmentDirections {
       if (object == null || getClass() != object.getClass()) {
           return false;
       }
-      ActionProfilePageFragmentToStudentDetailsFragment that = (ActionProfilePageFragmentToStudentDetailsFragment) object;
-      if (arguments.containsKey("student_id") != that.arguments.containsKey("student_id")) {
+      ActionProfilePageFragmentToPostDetailsFragment that = (ActionProfilePageFragmentToPostDetailsFragment) object;
+      if (arguments.containsKey("post_id") != that.arguments.containsKey("post_id")) {
         return false;
       }
-      if (getStudentId() != null ? !getStudentId().equals(that.getStudentId()) : that.getStudentId() != null) {
+      if (getPostId() != null ? !getPostId().equals(that.getPostId()) : that.getPostId() != null) {
         return false;
       }
       if (getActionId() != that.getActionId()) {
@@ -90,15 +89,15 @@ public class ProfilePageFragmentDirections {
     @Override
     public int hashCode() {
       int result = 1;
-      result = 31 * result + (getStudentId() != null ? getStudentId().hashCode() : 0);
+      result = 31 * result + (getPostId() != null ? getPostId().hashCode() : 0);
       result = 31 * result + getActionId();
       return result;
     }
 
     @Override
     public String toString() {
-      return "ActionProfilePageFragmentToStudentDetailsFragment(actionId=" + getActionId() + "){"
-          + "studentId=" + getStudentId()
+      return "ActionProfilePageFragmentToPostDetailsFragment(actionId=" + getActionId() + "){"
+          + "postId=" + getPostId()
           + "}";
     }
   }

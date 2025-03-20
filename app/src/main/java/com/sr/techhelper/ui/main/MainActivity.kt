@@ -36,11 +36,11 @@ class MainActivity : AppCompatActivity() {
             when (item.itemId) {
                 R.id.home -> {
                     // Navigate to the home fragment when the home button is clicked
-                    navController.navigate(R.id.studentsListFragment)
+                    navController.navigate(R.id.postsListFragment)
                     true
                 }
                 R.id.add -> {
-                    navController.navigate(R.id.createStudentFragment)
+                    navController.navigate(R.id.createPostFragment)
                     true
                 }
                 R.id.profile -> {
