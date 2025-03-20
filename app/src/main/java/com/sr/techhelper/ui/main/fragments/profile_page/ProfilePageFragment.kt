@@ -28,17 +28,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.sr.techhelper.R
-import com.sr.techhelper.ui.main.fragments.students_list.StudentsAdapter
+import com.sr.techhelper.ui.main.fragments.posts_list.StudentsAdapter
 import com.sr.techhelper.data.users.UserModel
 import com.sr.techhelper.ui.auth.AuthActivity
-import com.sr.techhelper.ui.main.StudentsViewModel
+import com.sr.techhelper.ui.main.PostsViewModel
 import com.sr.techhelper.utils.decodeBase64ToImage
 import java.io.ByteArrayOutputStream
 
 
 class ProfilePageFragment : Fragment() {
     private lateinit var studentsList: RecyclerView
-    private val viewModel: StudentsViewModel by activityViewModels()
+    private val viewModel: PostsViewModel by activityViewModels()
     private var userId: String = FirebaseAuth.getInstance().currentUser!!.uid
 
     private lateinit var imageView: ImageView
@@ -122,9 +122,9 @@ class ProfilePageFragment : Fragment() {
 
         studentsList = view.findViewById(R.id.profile_page_students_list)
         context?.let { initStudentsList(it) }
-        viewModel.getAllStudents().observe(viewLifecycleOwner, {
+        viewModel.getAllPosts().observe(viewLifecycleOwner, {
             it?.let {
-                if(it.isEmpty()) viewModel.invalidateStudents()
+                if(it.isEmpty()) viewModel.invalidatePosts()
                 (studentsList.adapter as? StudentsAdapter)?.updateStudents(it)
             }
 

@@ -1,0 +1,79 @@
+package com.sr.techhelper.ui.main
+
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.sr.techhelper.data.posts.PostModel
+import com.sr.techhelper.data.posts.PostsRepository
+import com.sr.techhelper.data.users.UserModel
+import com.sr.techhelper.data.users.UsersRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+
+data class PostsUiState(val reviewId: String = "")
+
+class PostsViewModel : ViewModel() {
+    private val repository = PostsRepository() // Adjusted repository for posts
+    private val usersRepository = UsersRepository()
+
+    init {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.loadPostsFromRemoteSource(50, 0) // Fetch posts from remote source
+        }
+    }
+
+    fun getAllPosts(): LiveData<List<PostModel>> {
+        return this.repository.getAllPosts() // Fetch all posts from repository
+    }
+
+    fun getUserById(id: String): LiveData<UserModel?> {
+        val userLiveData = MutableLiveData<UserModel?>()
+        viewModelScope.launch {
+            val user = withContext(Dispatchers.IO) {
+                usersRepository.getUserByUid(id) // Get user by ID for post details
+            }
+            userLiveData.postValue(user)
+        }
+        return userLiveData
+    }
+
+    fun updateUser(
+        user: UserModel,
+    ) {
+        viewModelScope.launch(Dispatchers.Main) {
+            usersRepository.upsertUser(user) // Update user information in the repository
+        }
+    }
+
+    fun addPost(
+        post: PostModel,
+    ) {
+        viewModelScope.launch(Dispatchers.Main) {
+            repository.add(post) // Add a new post to the repository
+        }
+    }
+
+    fun editPost(
+        post: PostModel,
+    ) {
+        viewModelScope.launch(Dispatchers.Main) {
+            repository.edit(post) // Edit an existing post in the repository
+        }
+    }
+
+    fun invalidatePosts() {
+        viewModelScope.launch {
+            repository.loadPostsFromRemoteSource(50, 0) // Reload posts from the remote source
+        }
+    }
+
+    fun deletePostById(
+        postId: String,
+    ) {
+        viewModelScope.launch(Dispatchers.Main) {
+            repository.deleteById(postId) // Delete a post by ID from the repository
+        }
+    }
+}

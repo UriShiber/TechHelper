@@ -3068,6 +3068,7 @@ drawable abc_textfield_search_activated_mtrl_alpha
 drawable abc_textfield_search_default_mtrl_alpha
 drawable abc_textfield_search_material
 drawable abc_vector_test
+drawable add_image_icon
 drawable avd_hide_password
 drawable avd_show_password
 drawable btn_checkbox_checked_mtrl
@@ -3102,6 +3103,7 @@ drawable design_ic_visibility
 drawable design_ic_visibility_off
 drawable design_password_eye
 drawable design_snackbar_background
+drawable empty_profile_picture
 drawable fui_ic_anonymous_white_24dp
 drawable fui_ic_apple_white_24dp
 drawable fui_ic_check_circle_black_128dp
@@ -3125,6 +3127,7 @@ drawable fui_idp_button_background_twitter
 drawable fui_idp_button_background_yahoo
 drawable googleg_disabled_color_18
 drawable googleg_standard_color_18
+drawable ic_add_black_24dp
 drawable ic_arrow_back_black_24
 drawable ic_call_answer
 drawable ic_call_answer_low
@@ -3286,7 +3289,7 @@ id action_bar_subtitle
 id action_bar_title
 id action_container
 id action_context_bar
-id action_createStudentFragment_to_studentsListFragment
+id action_createPostFragment_to_postListFragment
 id action_divider
 id action_editStudentFragment_to_studentDetailsFragment
 id action_editStudentFragment_to_studentsListFragment
@@ -3304,15 +3307,10 @@ id action_text
 id actions
 id activity_chooser_view_content
 id add
-id add_student_activity_address_edit_text
-id add_student_activity_address_text_view
-id add_student_activity_checked_check_box
-id add_student_activity_id_edit_text
-id add_student_activity_id_text_view
-id add_student_activity_name_edit_text
-id add_student_activity_name_text_view
-id add_student_activity_phone_edit_text
-id add_student_activity_phone_text_view
+id add_post_description_edit_text
+id add_post_description_text_view
+id add_post_title_edit_text
+id add_post_title_text_view
 id adjust_height
 id adjust_width
 id alertTitle
@@ -3345,6 +3343,7 @@ id beginning
 id bestChoice
 id blocking
 id bottom
+id bottomNavigationView
 id bounce
 id bounceBoth
 id bounceEnd
@@ -3401,8 +3400,9 @@ id cos
 id counterclockwise
 id country_list
 id cradle
-id createStudentFragment
-id create_student_image
+id createPostFragment
+id create_post_form
+id create_post_image
 id cross_device_linking_body
 id currentState
 id custom
@@ -3417,6 +3417,7 @@ id default_activity_button
 id delete_button
 id deltaRelative
 id dependency_ordering
+id description_text_view
 id design_bottom_sheet
 id design_menu_item_action_area
 id design_menu_item_action_area_stub
@@ -3446,9 +3447,10 @@ id easeInOut
 id easeOut
 id east
 id edge
-id editStudentFragment
+id editPostFragment
 id edit_button
 id edit_phone_number
+id edit_post_image
 id edit_query
 id edit_student_image
 id edit_text_id
@@ -3667,8 +3669,10 @@ id pin
 id position
 id postLayout
 id pressed
+id profile
 id profilePageFragment
 id profile_page_logout_button
+id profile_page_students_list
 id profile_picture
 id progress_circular
 id progress_horizontal
@@ -3688,6 +3692,7 @@ id rounded
 id row_index_key
 id rtl
 id save_button
+id save_changes_button
 id save_non_transition_alpha
 id save_overlay_view
 id sawtooth
@@ -3754,7 +3759,6 @@ id status_bar_latest_event_content
 id stop
 id stretch
 id studentDetailsFragment
-id studentListFragmentAdd
 id student_list_item
 id student_list_view
 id student_row_address_label_text_view
@@ -3772,7 +3776,6 @@ id student_row_phone_label_text_view
 id student_row_phone_value_text_view
 id studentsListFragment
 id students_list
-id students_list_add_student_button
 id submenuarrow
 id submit_area
 id supportScrollUp
@@ -3833,7 +3836,7 @@ id uniform
 id unlabeled
 id up
 id useLogo
-id username_text
+id username_edit_text
 id vertical
 id vertical_only
 id view_offset_helper
@@ -3996,8 +3999,8 @@ layout design_navigation_menu
 layout design_navigation_menu_item
 layout design_text_input_end_icon
 layout design_text_input_start_icon
-layout fragment_create_student
-layout fragment_edit_student
+layout fragment_create_post
+layout fragment_edit_post
 layout fragment_profile_page
 layout fragment_student_details
 layout fragment_students_list
@@ -4100,6 +4103,7 @@ layout select_dialog_multichoice_material
 layout select_dialog_singlechoice_material
 layout student_list_item
 layout support_simple_spinner_dropdown_item
+menu app_menu
 mipmap ic_launcher
 mipmap ic_launcher_round
 navigation app_navigation

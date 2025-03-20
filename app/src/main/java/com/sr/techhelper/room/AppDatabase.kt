@@ -2,16 +2,16 @@ package com.sr.techhelper.room
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.sr.techhelper.data.students.StudentDao
-import com.sr.techhelper.data.students.StudentModel
+import com.sr.techhelper.data.posts.PostDao
+import com.sr.techhelper.data.posts.PostModel
 import com.sr.techhelper.data.users.UserModel
 import com.sr.techhelper.data.users.UsersDao
 
 @Database(
-    entities = [StudentModel::class, UserModel::class], version = 1, exportSchema = false
+    entities = [PostModel::class, UserModel::class], version = 1, exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
     abstract fun usersDao(): UsersDao
-    abstract fun studentsDao(): StudentDao
+    abstract fun postDao(): PostDao
 
 }

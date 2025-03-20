@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.add -> {
-                    navController.navigate(R.id.createStudentFragment)
+                    navController.navigate(R.id.createPostFragment)
                     true
                 }
                 R.id.profile -> {

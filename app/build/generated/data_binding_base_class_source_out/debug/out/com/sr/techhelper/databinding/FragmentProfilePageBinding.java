@@ -5,11 +5,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.sr.techhelper.R;
@@ -25,18 +26,27 @@ public final class FragmentProfilePageBinding implements ViewBinding {
   public final Button profilePageLogoutButton;
 
   @NonNull
+  public final RecyclerView profilePageStudentsList;
+
+  @NonNull
   public final ImageView profilePicture;
 
   @NonNull
-  public final TextView usernameText;
+  public final Button saveChangesButton;
+
+  @NonNull
+  public final EditText usernameEditText;
 
   private FragmentProfilePageBinding(@NonNull LinearLayout rootView,
-      @NonNull Button profilePageLogoutButton, @NonNull ImageView profilePicture,
-      @NonNull TextView usernameText) {
+      @NonNull Button profilePageLogoutButton, @NonNull RecyclerView profilePageStudentsList,
+      @NonNull ImageView profilePicture, @NonNull Button saveChangesButton,
+      @NonNull EditText usernameEditText) {
     this.rootView = rootView;
     this.profilePageLogoutButton = profilePageLogoutButton;
+    this.profilePageStudentsList = profilePageStudentsList;
     this.profilePicture = profilePicture;
-    this.usernameText = usernameText;
+    this.saveChangesButton = saveChangesButton;
+    this.usernameEditText = usernameEditText;
   }
 
   @Override
@@ -72,20 +82,32 @@ public final class FragmentProfilePageBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.profile_page_students_list;
+      RecyclerView profilePageStudentsList = ViewBindings.findChildViewById(rootView, id);
+      if (profilePageStudentsList == null) {
+        break missingId;
+      }
+
       id = R.id.profile_picture;
       ImageView profilePicture = ViewBindings.findChildViewById(rootView, id);
       if (profilePicture == null) {
         break missingId;
       }
 
-      id = R.id.username_text;
-      TextView usernameText = ViewBindings.findChildViewById(rootView, id);
-      if (usernameText == null) {
+      id = R.id.save_changes_button;
+      Button saveChangesButton = ViewBindings.findChildViewById(rootView, id);
+      if (saveChangesButton == null) {
+        break missingId;
+      }
+
+      id = R.id.username_edit_text;
+      EditText usernameEditText = ViewBindings.findChildViewById(rootView, id);
+      if (usernameEditText == null) {
         break missingId;
       }
 
       return new FragmentProfilePageBinding((LinearLayout) rootView, profilePageLogoutButton,
-          profilePicture, usernameText);
+          profilePageStudentsList, profilePicture, saveChangesButton, usernameEditText);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

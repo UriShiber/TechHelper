@@ -8,18 +8,18 @@
             <LayoutPositions>
               <option name="myPositions">
                 <map>
-                  <entry key="createStudentFragment">
+                  <entry key="createPostFragment">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="55" />
-                            <option name="y" value="401" />
+                            <option name="x" value="12" />
+                            <option name="y" value="12" />
                           </Point>
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="action_createStudentFragment_to_studentsListFragment">
+                            <entry key="action_createPostFragment_to_postListFragment">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -92,6 +92,11 @@
                                 <LayoutPositions />
                               </value>
                             </entry>
+                            <entry key="action_studentDetailsFragment_to_studentsListFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                           </map>
                         </option>
                       </LayoutPositions>
@@ -109,11 +114,6 @@
                         <option name="myPositions">
                           <map>
                             <entry key="action_studentsListFragment_to_studentDetailsFragment">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
-                            <entry key="studentListFragmentAdd">
                               <value>
                                 <LayoutPositions />
                               </value>

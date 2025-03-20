@@ -13,7 +13,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import com.google.firebase.auth.FirebaseAuth
 import com.sr.techhelper.R
-import com.sr.techhelper.data.students.StudentModel
+import com.sr.techhelper.data.posts.StudentModel
 import com.sr.techhelper.ui.main.StudentsViewModel
 import com.sr.techhelper.utils.decodeBase64ToImage
 

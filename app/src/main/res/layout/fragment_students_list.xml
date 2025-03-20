@@ -13,7 +13,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.main.fragments.students_list.StudentsListFragment">
+        tools:context=".ui.main.fragments.posts_list.StudentsListFragment">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/students_list"
