@@ -29,13 +29,17 @@ public final class CustomInfoWindowBinding implements ViewBinding {
   @NonNull
   public final TextView titleTextView;
 
+  @NonNull
+  public final TextView userIdTextView;
+
   private CustomInfoWindowBinding(@NonNull LinearLayout rootView,
       @NonNull TextView descriptionTextView, @NonNull ImageView imageView,
-      @NonNull TextView titleTextView) {
+      @NonNull TextView titleTextView, @NonNull TextView userIdTextView) {
     this.rootView = rootView;
     this.descriptionTextView = descriptionTextView;
     this.imageView = imageView;
     this.titleTextView = titleTextView;
+    this.userIdTextView = userIdTextView;
   }
 
   @Override
@@ -83,8 +87,14 @@ public final class CustomInfoWindowBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.userIdTextView;
+      TextView userIdTextView = ViewBindings.findChildViewById(rootView, id);
+      if (userIdTextView == null) {
+        break missingId;
+      }
+
       return new CustomInfoWindowBinding((LinearLayout) rootView, descriptionTextView, imageView,
-          titleTextView);
+          titleTextView, userIdTextView);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

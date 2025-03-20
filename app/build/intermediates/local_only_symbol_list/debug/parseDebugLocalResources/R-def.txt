@@ -1,10 +1,16 @@
 R_DEF: Internal format may change without notice
 local
+color black
+color dark_gray
+color gray
+color light_gray
+color white
 drawable empty_profile_picture
 drawable ic_add_black_24dp
 drawable ic_launcher_background
 drawable ic_launcher_foreground
 drawable ic_map
+drawable info_window_background
 drawable student
 id action_createStudentFragment_to_studentsListFragment
 id action_editStudentFragment_to_studentDetailsFragment
@@ -70,6 +76,7 @@ id studentsListFragment
 id students_list
 id titleTextView
 id title_text_view
+id userIdTextView
 id username_edit_text
 layout activity_auth
 layout activity_main

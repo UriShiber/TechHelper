@@ -156,9 +156,11 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
         val titleTextView = infoWindowView.findViewById<TextView>(R.id.titleTextView)
         val descriptionTextView = infoWindowView.findViewById<TextView>(R.id.descriptionTextView)
         val imageView = infoWindowView.findViewById<ImageView>(R.id.imageView)
+        val userIdTextView = infoWindowView.findViewById<TextView>(R.id.userIdTextView)
 
         titleTextView.text = location.title
         descriptionTextView.text = location.description
+        userIdTextView.text = "By: ${location.userId}"
 
         // Load the image using Glide
         Glide.with(this)
