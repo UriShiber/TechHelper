@@ -17,35 +17,34 @@ public class EditPostFragmentDirections {
   }
 
   @NonNull
-  public static ActionEditStudentFragmentToStudentDetailsFragment actionEditStudentFragmentToStudentDetailsFragment(
-      @NonNull String studentId) {
-    return new ActionEditStudentFragmentToStudentDetailsFragment(studentId);
+  public static ActionEditPostFragmentToPostDetailsFragment actionEditPostFragmentToPostDetailsFragment(
+      @NonNull String postId) {
+    return new ActionEditPostFragmentToPostDetailsFragment(postId);
   }
 
   @NonNull
-  public static NavDirections actionEditStudentFragmentToStudentsListFragment() {
-    return new ActionOnlyNavDirections(R.id.action_editStudentFragment_to_studentsListFragment);
+  public static NavDirections actionEditPostFragmentToPostListFragment() {
+    return new ActionOnlyNavDirections(R.id.action_editPostFragment_to_postListFragment);
   }
 
-  public static class ActionEditStudentFragmentToStudentDetailsFragment implements NavDirections {
+  public static class ActionEditPostFragmentToPostDetailsFragment implements NavDirections {
     private final HashMap arguments = new HashMap();
 
     @SuppressWarnings("unchecked")
-    private ActionEditStudentFragmentToStudentDetailsFragment(@NonNull String studentId) {
-      if (studentId == null) {
-        throw new IllegalArgumentException("Argument \"student_id\" is marked as non-null but was passed a null value.");
+    private ActionEditPostFragmentToPostDetailsFragment(@NonNull String postId) {
+      if (postId == null) {
+        throw new IllegalArgumentException("Argument \"post_id\" is marked as non-null but was passed a null value.");
       }
-      this.arguments.put("student_id", studentId);
+      this.arguments.put("post_id", postId);
     }
 
     @NonNull
     @SuppressWarnings("unchecked")
-    public ActionEditStudentFragmentToStudentDetailsFragment setStudentId(
-        @NonNull String studentId) {
-      if (studentId == null) {
-        throw new IllegalArgumentException("Argument \"student_id\" is marked as non-null but was passed a null value.");
+    public ActionEditPostFragmentToPostDetailsFragment setPostId(@NonNull String postId) {
+      if (postId == null) {
+        throw new IllegalArgumentException("Argument \"post_id\" is marked as non-null but was passed a null value.");
       }
-      this.arguments.put("student_id", studentId);
+      this.arguments.put("post_id", postId);
       return this;
     }
 
@@ -54,22 +53,22 @@ public class EditPostFragmentDirections {
     @NonNull
     public Bundle getArguments() {
       Bundle __result = new Bundle();
-      if (arguments.containsKey("student_id")) {
-        String studentId = (String) arguments.get("student_id");
-        __result.putString("student_id", studentId);
+      if (arguments.containsKey("post_id")) {
+        String postId = (String) arguments.get("post_id");
+        __result.putString("post_id", postId);
       }
       return __result;
     }
 
     @Override
     public int getActionId() {
-      return R.id.action_editStudentFragment_to_studentDetailsFragment;
+      return R.id.action_editPostFragment_to_postDetailsFragment;
     }
 
     @SuppressWarnings("unchecked")
     @NonNull
-    public String getStudentId() {
-      return (String) arguments.get("student_id");
+    public String getPostId() {
+      return (String) arguments.get("post_id");
     }
 
     @Override
@@ -80,11 +79,11 @@ public class EditPostFragmentDirections {
       if (object == null || getClass() != object.getClass()) {
           return false;
       }
-      ActionEditStudentFragmentToStudentDetailsFragment that = (ActionEditStudentFragmentToStudentDetailsFragment) object;
-      if (arguments.containsKey("student_id") != that.arguments.containsKey("student_id")) {
+      ActionEditPostFragmentToPostDetailsFragment that = (ActionEditPostFragmentToPostDetailsFragment) object;
+      if (arguments.containsKey("post_id") != that.arguments.containsKey("post_id")) {
         return false;
       }
-      if (getStudentId() != null ? !getStudentId().equals(that.getStudentId()) : that.getStudentId() != null) {
+      if (getPostId() != null ? !getPostId().equals(that.getPostId()) : that.getPostId() != null) {
         return false;
       }
       if (getActionId() != that.getActionId()) {
@@ -96,15 +95,15 @@ public class EditPostFragmentDirections {
     @Override
     public int hashCode() {
       int result = 1;
-      result = 31 * result + (getStudentId() != null ? getStudentId().hashCode() : 0);
+      result = 31 * result + (getPostId() != null ? getPostId().hashCode() : 0);
       result = 31 * result + getActionId();
       return result;
     }
 
     @Override
     public String toString() {
-      return "ActionEditStudentFragmentToStudentDetailsFragment(actionId=" + getActionId() + "){"
-          + "studentId=" + getStudentId()
+      return "ActionEditPostFragmentToPostDetailsFragment(actionId=" + getActionId() + "){"
+          + "postId=" + getPostId()
           + "}";
     }
   }

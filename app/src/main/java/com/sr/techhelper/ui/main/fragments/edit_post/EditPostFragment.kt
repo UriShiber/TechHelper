@@ -75,7 +75,7 @@ class EditPostFragment : Fragment() {
             }
 
             cancelButton.setOnClickListener {
-                val action = EditPostFragmentDirections.actionEditPostFragmentToPostsListFragment()
+                val action = EditPostFragmentDirections.actionEditPostFragmentToPostListFragment()
                 Navigation.findNavController(it).navigate(action)
             }
 
@@ -83,7 +83,7 @@ class EditPostFragment : Fragment() {
                 postId?.let { id ->
                     viewModel.deletePostById(id)
                 }
-                val action = EditPostFragmentDirections.actionEditPostFragmentToPostsListFragment()
+                val action = EditPostFragmentDirections.actionEditPostFragmentToPostListFragment()
                 Navigation.findNavController(it).navigate(action)
             }
 

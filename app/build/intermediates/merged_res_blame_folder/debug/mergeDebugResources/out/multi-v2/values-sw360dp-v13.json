@@ -4,7 +4,7 @@
             "outputFile": "com.sr.techhelper.app-mergeDebugResources-85:/values-sw360dp-v13/values-sw360dp-v13.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Admin\\.gradle\\caches\\8.10.2\\transforms\\b145869819345437c70d50b16462e1fa\\transformed\\firebase-ui-auth-7.2.0\\res\\values-sw360dp-v13\\values-sw360dp-v13.xml",
+                    "source": "C:\\Users\\Admin\\.gradle\\caches\\8.10.2\\transforms\\cc2993b2ed21202ce618d4b4a770d801\\transformed\\firebase-ui-auth-7.2.0\\res\\values-sw360dp-v13\\values-sw360dp-v13.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8",
                         "startColumns": "4,4,4,4,4,4,4",

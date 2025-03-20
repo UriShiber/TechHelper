@@ -29,13 +29,13 @@
                       </LayoutPositions>
                     </value>
                   </entry>
-                  <entry key="editStudentFragment">
+                  <entry key="editPostFragment">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-182" />
-                            <option name="y" value="199" />
+                            <option name="x" value="431" />
+                            <option name="y" value="-251" />
                           </Point>
                         </option>
                         <option name="myPositions">
@@ -60,8 +60,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="12" />
-                            <option name="y" value="12" />
+                            <option name="x" value="-353" />
+                            <option name="y" value="-63" />
                           </Point>
                         </option>
                       </LayoutPositions>

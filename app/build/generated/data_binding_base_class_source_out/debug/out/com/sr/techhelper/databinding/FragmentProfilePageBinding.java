@@ -26,7 +26,7 @@ public final class FragmentProfilePageBinding implements ViewBinding {
   public final Button profilePageLogoutButton;
 
   @NonNull
-  public final RecyclerView profilePageStudentsList;
+  public final RecyclerView profilePagePostsList;
 
   @NonNull
   public final ImageView profilePicture;
@@ -38,12 +38,12 @@ public final class FragmentProfilePageBinding implements ViewBinding {
   public final EditText usernameEditText;
 
   private FragmentProfilePageBinding(@NonNull LinearLayout rootView,
-      @NonNull Button profilePageLogoutButton, @NonNull RecyclerView profilePageStudentsList,
+      @NonNull Button profilePageLogoutButton, @NonNull RecyclerView profilePagePostsList,
       @NonNull ImageView profilePicture, @NonNull Button saveChangesButton,
       @NonNull EditText usernameEditText) {
     this.rootView = rootView;
     this.profilePageLogoutButton = profilePageLogoutButton;
-    this.profilePageStudentsList = profilePageStudentsList;
+    this.profilePagePostsList = profilePagePostsList;
     this.profilePicture = profilePicture;
     this.saveChangesButton = saveChangesButton;
     this.usernameEditText = usernameEditText;
@@ -82,9 +82,9 @@ public final class FragmentProfilePageBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.profile_page_students_list;
-      RecyclerView profilePageStudentsList = ViewBindings.findChildViewById(rootView, id);
-      if (profilePageStudentsList == null) {
+      id = R.id.profile_page_posts_list;
+      RecyclerView profilePagePostsList = ViewBindings.findChildViewById(rootView, id);
+      if (profilePagePostsList == null) {
         break missingId;
       }
 
@@ -107,7 +107,7 @@ public final class FragmentProfilePageBinding implements ViewBinding {
       }
 
       return new FragmentProfilePageBinding((LinearLayout) rootView, profilePageLogoutButton,
-          profilePageStudentsList, profilePicture, saveChangesButton, usernameEditText);
+          profilePagePostsList, profilePicture, saveChangesButton, usernameEditText);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));
