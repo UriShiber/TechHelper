@@ -4,7 +4,6 @@ package com.sr.techhelper.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -26,16 +25,11 @@ public final class FragmentStudentsListBinding implements ViewBinding {
   @NonNull
   public final RecyclerView studentsList;
 
-  @NonNull
-  public final Button studentsListAddStudentButton;
-
   private FragmentStudentsListBinding(@NonNull ConstraintLayout rootView,
-      @NonNull ConstraintLayout studentListView, @NonNull RecyclerView studentsList,
-      @NonNull Button studentsListAddStudentButton) {
+      @NonNull ConstraintLayout studentListView, @NonNull RecyclerView studentsList) {
     this.rootView = rootView;
     this.studentListView = studentListView;
     this.studentsList = studentsList;
-    this.studentsListAddStudentButton = studentsListAddStudentButton;
   }
 
   @Override
@@ -73,14 +67,8 @@ public final class FragmentStudentsListBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.students_list_add_student_button;
-      Button studentsListAddStudentButton = ViewBindings.findChildViewById(rootView, id);
-      if (studentsListAddStudentButton == null) {
-        break missingId;
-      }
-
       return new FragmentStudentsListBinding((ConstraintLayout) rootView, studentListView,
-          studentsList, studentsListAddStudentButton);
+          studentsList);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

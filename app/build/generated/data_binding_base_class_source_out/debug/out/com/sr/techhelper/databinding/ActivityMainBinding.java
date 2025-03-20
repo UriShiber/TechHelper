@@ -4,12 +4,13 @@ package com.sr.techhelper.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.FragmentContainerView;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.sr.techhelper.R;
 import java.lang.NullPointerException;
 import java.lang.Override;
@@ -17,20 +18,29 @@ import java.lang.String;
 
 public final class ActivityMainBinding implements ViewBinding {
   @NonNull
-  private final ConstraintLayout rootView;
+  private final RelativeLayout rootView;
+
+  @NonNull
+  public final BottomNavigationView bottomNavigationView;
+
+  @NonNull
+  public final RelativeLayout main;
 
   @NonNull
   public final FragmentContainerView navHostFragment;
 
-  private ActivityMainBinding(@NonNull ConstraintLayout rootView,
+  private ActivityMainBinding(@NonNull RelativeLayout rootView,
+      @NonNull BottomNavigationView bottomNavigationView, @NonNull RelativeLayout main,
       @NonNull FragmentContainerView navHostFragment) {
     this.rootView = rootView;
+    this.bottomNavigationView = bottomNavigationView;
+    this.main = main;
     this.navHostFragment = navHostFragment;
   }
 
   @Override
   @NonNull
-  public ConstraintLayout getRoot() {
+  public RelativeLayout getRoot() {
     return rootView;
   }
 
@@ -55,13 +65,22 @@ public final class ActivityMainBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
+      id = R.id.bottomNavigationView;
+      BottomNavigationView bottomNavigationView = ViewBindings.findChildViewById(rootView, id);
+      if (bottomNavigationView == null) {
+        break missingId;
+      }
+
+      RelativeLayout main = (RelativeLayout) rootView;
+
       id = R.id.nav_host_fragment;
       FragmentContainerView navHostFragment = ViewBindings.findChildViewById(rootView, id);
       if (navHostFragment == null) {
         break missingId;
       }
 
-      return new ActivityMainBinding((ConstraintLayout) rootView, navHostFragment);
+      return new ActivityMainBinding((RelativeLayout) rootView, bottomNavigationView, main,
+          navHostFragment);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

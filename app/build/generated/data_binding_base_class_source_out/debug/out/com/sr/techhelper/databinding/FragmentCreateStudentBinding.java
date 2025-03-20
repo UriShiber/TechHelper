@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -54,6 +55,9 @@ public final class FragmentCreateStudentBinding implements ViewBinding {
   public final Button cancelButton;
 
   @NonNull
+  public final LinearLayout createStudentForm;
+
+  @NonNull
   public final ImageView createStudentImage;
 
   @NonNull
@@ -78,9 +82,9 @@ public final class FragmentCreateStudentBinding implements ViewBinding {
       @NonNull TextView addStudentActivityNameTextView,
       @NonNull EditText addStudentActivityPhoneEditText,
       @NonNull TextView addStudentActivityPhoneTextView, @NonNull Button cancelButton,
-      @NonNull ImageView createStudentImage, @NonNull ConstraintLayout main,
-      @NonNull Button saveButton, @NonNull TextView studentRowCheckBoxLabelTextView,
-      @NonNull TextView titleTextView) {
+      @NonNull LinearLayout createStudentForm, @NonNull ImageView createStudentImage,
+      @NonNull ConstraintLayout main, @NonNull Button saveButton,
+      @NonNull TextView studentRowCheckBoxLabelTextView, @NonNull TextView titleTextView) {
     this.rootView = rootView;
     this.addStudentActivityAddressEditText = addStudentActivityAddressEditText;
     this.addStudentActivityAddressTextView = addStudentActivityAddressTextView;
@@ -92,6 +96,7 @@ public final class FragmentCreateStudentBinding implements ViewBinding {
     this.addStudentActivityPhoneEditText = addStudentActivityPhoneEditText;
     this.addStudentActivityPhoneTextView = addStudentActivityPhoneTextView;
     this.cancelButton = cancelButton;
+    this.createStudentForm = createStudentForm;
     this.createStudentImage = createStudentImage;
     this.main = main;
     this.saveButton = saveButton;
@@ -186,6 +191,12 @@ public final class FragmentCreateStudentBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.create_student_form;
+      LinearLayout createStudentForm = ViewBindings.findChildViewById(rootView, id);
+      if (createStudentForm == null) {
+        break missingId;
+      }
+
       id = R.id.create_student_image;
       ImageView createStudentImage = ViewBindings.findChildViewById(rootView, id);
       if (createStudentImage == null) {
@@ -217,8 +228,8 @@ public final class FragmentCreateStudentBinding implements ViewBinding {
           addStudentActivityCheckedCheckBox, addStudentActivityIdEditText,
           addStudentActivityIdTextView, addStudentActivityNameEditText,
           addStudentActivityNameTextView, addStudentActivityPhoneEditText,
-          addStudentActivityPhoneTextView, cancelButton, createStudentImage, main, saveButton,
-          studentRowCheckBoxLabelTextView, titleTextView);
+          addStudentActivityPhoneTextView, cancelButton, createStudentForm, createStudentImage,
+          main, saveButton, studentRowCheckBoxLabelTextView, titleTextView);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));
