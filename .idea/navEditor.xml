@@ -40,12 +40,12 @@
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="action_editStudentFragment_to_studentDetailsFragment">
+                            <entry key="action_editPostFragment_to_postDetailsFragment">
                               <value>
                                 <LayoutPositions />
                               </value>
                             </entry>
-                            <entry key="action_editStudentFragment_to_studentsListFragment">
+                            <entry key="action_editPostFragment_to_postListFragment">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -67,6 +67,53 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="postDetailsFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="12" />
+                            <option name="y" value="12" />
+                          </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_postDetailsFragment_to_editPostFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_postDetailsFragment_to_postsListFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="postsListFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="256" />
+                            <option name="y" value="12" />
+                          </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_postsListFragment_to_postDetailsFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="profilePageFragment">
                     <value>
                       <LayoutPositions>
@@ -78,54 +125,7 @@
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="action_profilePageFragment_to_studentDetailsFragment">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
-                          </map>
-                        </option>
-                      </LayoutPositions>
-                    </value>
-                  </entry>
-                  <entry key="studentDetailsFragment">
-                    <value>
-                      <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="-155" />
-                            <option name="y" value="-188" />
-                          </Point>
-                        </option>
-                        <option name="myPositions">
-                          <map>
-                            <entry key="action_studentDetailsFragment_to_editStudentFragment">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
-                            <entry key="action_studentDetailsFragment_to_studentsListFragment">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
-                          </map>
-                        </option>
-                      </LayoutPositions>
-                    </value>
-                  </entry>
-                  <entry key="studentsListFragment">
-                    <value>
-                      <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="113" />
-                            <option name="y" value="-259" />
-                          </Point>
-                        </option>
-                        <option name="myPositions">
-                          <map>
-                            <entry key="action_studentsListFragment_to_studentDetailsFragment">
+                            <entry key="action_profilePageFragment_to_postDetailsFragment">
                               <value>
                                 <LayoutPositions />
                               </value>

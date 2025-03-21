@@ -8,6 +8,7 @@ import android.content.Intent
 import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -56,7 +57,18 @@ class ProfilePageFragment : Fragment() {
             user?.let {
                 mainUser = it
                 usernameEditText.text = it.name
-                imageView.setImageBitmap(ImageUtils.decodeBase64ToImage(it.profile_picture))
+                Log.d("ProfilePageFragment", "Populating fields with: $it")
+                if (!it.profile_picture.isNullOrEmpty()) {
+                    val bitmap = ImageUtils.decodeBase64ToImage(it.profile_picture)
+                    imageView.setImageBitmap(bitmap)
+                } else {
+                    imageView.setImageResource(R.drawable.empty_profile_picture)
+                }
+//                if(it.profile_picture != "") {
+//                    imageView.setImageBitmap(ImageUtils.decodeBase64ToImage(it.profile_picture))
+//                } else {
+//                    imageView.setImageResource(R.drawable.empty_profile_picture)
+//                }
 
                 imageView.setOnClickListener {
                     pickImageFromGallery()
@@ -105,7 +117,7 @@ class ProfilePageFragment : Fragment() {
 
         postsList = view.findViewById(R.id.profile_page_posts_list)
         context?.let { initPostsList(it) }
-        viewModel.getAllPosts().observe(viewLifecycleOwner, {
+        viewModel.getPostsByUserId(userId).observe(viewLifecycleOwner, {
             it?.let {
                 if(it.isEmpty()) viewModel.invalidatePosts()
                 (postsList.adapter as? PostsAdapter)?.updatePosts(it)
