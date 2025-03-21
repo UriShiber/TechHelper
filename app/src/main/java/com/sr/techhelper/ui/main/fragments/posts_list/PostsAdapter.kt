@@ -49,6 +49,7 @@ class PostsAdapter(
     inner class PostViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private var currentUserUid: String = FirebaseAuth.getInstance().currentUser!!.uid
 
+        val collapseCommentsButton = itemView.findViewById<Button>(R.id.collapse_comments_list_button)
         private val commentsRecyclerView: RecyclerView = itemView.findViewById(R.id.comments_recycler_view)
         val addCommentEditText = itemView.findViewById<EditText>(R.id.add_comment_edit_text)
         val addCommentsubmitButton = itemView.findViewById<Button>(R.id.submit_comment_button)
@@ -85,6 +86,7 @@ class PostsAdapter(
 
             postLocationLat.text = "Lat: ${post.post.locationLat}"
             postLocationLng.text = "Lng: ${post.post.locationLng}"
+            collapseCommentsButton.text = "see " + postComments.size + " comments"
 
             itemView.setOnClickListener {
                 onPostClick(post)
@@ -111,6 +113,16 @@ class PostsAdapter(
             // Set up the event listener for the "Submit" button
             addCommentsubmitButton.setOnClickListener {
                 submitComment(post)
+            }
+
+            collapseCommentsButton.setOnClickListener {
+                if (commentsRecyclerView.visibility == View.VISIBLE) {
+                    commentsRecyclerView.visibility = View.GONE
+                    collapseCommentsButton.text = "see " + postComments.size + " comments"
+                } else {
+                    commentsRecyclerView.visibility = View.VISIBLE
+                    collapseCommentsButton.text = "hide comments"
+                }
             }
         }
 

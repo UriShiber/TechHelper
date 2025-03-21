@@ -31,6 +31,7 @@ id app_navigation
 id back_button
 id bottomNavigationView
 id cancel_button
+id collapse_comments_list_button
 id comment_content
 id comment_user_image
 id comment_user_name

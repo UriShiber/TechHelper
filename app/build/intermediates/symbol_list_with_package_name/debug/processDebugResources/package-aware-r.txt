@@ -3422,6 +3422,7 @@ id clip_vertical
 id clockwise
 id closest
 id collapseActionView
+id collapse_comments_list_button
 id comment_content
 id comment_user_image
 id comment_user_name

@@ -3421,6 +3421,7 @@ int id clip_vertical 0x7f08009b
 int id clockwise 0x7f08009c
 int id closest 0x7f08009d
 int id collapseActionView 0x7f08009e
+int id collapse_comments_list_button 0x7f080294
 int id comment_content 0x7f08009f
 int id comment_user_image 0x7f0800a0
 int id comment_user_name 0x7f0800a1
