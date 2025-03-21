@@ -15,7 +15,6 @@
 .externalNativeBuild
 .cxx
 local.properties
-.DS_Store
 .idea/shelf
 /confluence/target
 /dependencies/repo
@@ -76,3 +75,5 @@ kotlin-ide/
 .kotlin/
 .teamcity/
 .npmrc
+**/build/**
+

@@ -5,10 +5,10 @@ import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
 import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
@@ -16,12 +16,14 @@ import com.google.firebase.auth.FirebaseAuth
 import com.sr.techhelper.R
 import com.sr.techhelper.ui.main.MainActivity
 import com.sr.techhelper.utils.ImageUtils
-
+import kotlinx.coroutines.launch
 
 class AuthActivity : AppCompatActivity() {
     private val signInLauncher by lazy {
-        registerForActivityResult(FirebaseAuthUIActivityResultContract()) {
-            this.onSignInResult(it)
+        registerForActivityResult(FirebaseAuthUIActivityResultContract()) { result ->
+            lifecycleScope.launch {
+                onSignInResult(result)
+            }
         }
     }
 
@@ -49,7 +51,7 @@ class AuthActivity : AppCompatActivity() {
                 createSignInIntentBuilder()
                     .setAvailableProviders(supportedAuth)
                     .setIsSmartLockEnabled(false)
-                    .setLogo(R.drawable.default_user)
+                    .setLogo(R.drawable.tech_helper)
                     .setTheme(R.style.Base_Theme_techhelper)
                     .build().apply {
                         signInLauncher.launch(this)
@@ -59,22 +61,25 @@ class AuthActivity : AppCompatActivity() {
 
     }
 
-    private fun getUserImage(): String {
+    private suspend fun getUserImage(): String {
         val user = FirebaseAuth.getInstance().currentUser
         val photoUrl = user?.photoUrl
 
         // Convert photoUrl to Base64 string if available
         return if (photoUrl != null) {
-            ImageUtils.convertPhotoUrlToBase64(photoUrl.toString())
+            val test = ImageUtils.convertPhotoUrlToBase64(photoUrl.toString())
+            test
         } else {
-            ImageUtils.convertDrawableToBase64(this, R.drawable.default_user)
+            val drawableImage = ImageUtils.convertDrawableToBase64(this, R.drawable.empty_profile_picture)
+            drawableImage
         }
     }
 
 
-    private fun onSignInResult(result: FirebaseAuthUIAuthenticationResult) {
+    private suspend fun onSignInResult(result: FirebaseAuthUIAuthenticationResult) {
         if (result.resultCode == RESULT_OK) {
-            viewModel.register(::toApp, getUserImage())
+            val userImage = getUserImage()
+            viewModel.register(::toApp,userImage )
         }
     }
 
