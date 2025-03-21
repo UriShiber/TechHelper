@@ -18,16 +18,14 @@ import android.widget.EditText
 import android.widget.ImageView
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
-import com.google.firebase.auth.FirebaseAuth
 import com.sr.techhelper.R
-import com.sr.techhelper.data.posts.PostModel
+import com.sr.techhelper.data.posts.PostWithSender
 import com.sr.techhelper.ui.main.PostsViewModel
-import com.sr.techhelper.utils.decodeBase64ToImage
+import com.sr.techhelper.utils.ImageUtils
 import java.io.ByteArrayOutputStream
 
 class EditPostFragment : Fragment() {
     private val viewModel: PostsViewModel by activityViewModels()
-    private var userUid: String = FirebaseAuth.getInstance().currentUser!!.uid
 
     private lateinit var imageView: ImageView
     private var base64Image: String? = null
@@ -41,14 +39,14 @@ class EditPostFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        var currentPost: PostModel? = null
+        var currentPost: PostWithSender? = null
         val postId = arguments?.getString("post_id")
 
         viewModel.getAllPosts().observe(viewLifecycleOwner) { postsList ->
             if (postsList.isEmpty()) viewModel.invalidatePosts()
 
             postId?.let {
-                currentPost = postsList.find { post -> post.id == it }
+                currentPost = postsList.find { post -> post.post.id == it }
             }
 
             val cancelButton: Button = view.findViewById(R.id.cancel_button)
@@ -59,8 +57,8 @@ class EditPostFragment : Fragment() {
             val descriptionText: EditText = view.findViewById(R.id.add_post_description_edit_text)
             imageView = view.findViewById(R.id.edit_post_image)
 
-            currentPost?.image?.let {
-                val bitmap = decodeBase64ToImage(it)
+            currentPost?.post?.image?.let {
+                val bitmap = ImageUtils.decodeBase64ToImage(it)
                 imageView.setImageBitmap(bitmap)
             }
 
@@ -70,8 +68,8 @@ class EditPostFragment : Fragment() {
 
             currentPost?.let {
                 Log.d("EditPostFragment", "Populating fields with: $it")
-                titleText.setText(it.title)
-                descriptionText.setText(it.description)
+                titleText.setText(it.post.title)
+                descriptionText.setText(it.post.description)
             }
 
             cancelButton.setOnClickListener {
@@ -88,10 +86,10 @@ class EditPostFragment : Fragment() {
             }
 
             saveButton.setOnClickListener {
-                val updatedPost = currentPost?.copy(
-                    title = titleText.text.toString(),
-                    description = descriptionText.text.toString(),
-                    image = base64Image ?: currentPost?.image
+                val updatedPost = currentPost?.post?.copy(
+                        title = titleText.text.toString(),
+                        description = descriptionText.text.toString(),
+                        image = base64Image ?: currentPost?.post?.image
                 )
 
                 updatedPost?.let { post ->
@@ -115,21 +113,9 @@ class EditPostFragment : Fragment() {
             val uri: Uri? = data?.data
             uri?.let {
                 imageView.setImageURI(uri)
-                base64Image = convertImageToBase64(uri)
+                base64Image = ImageUtils.convertImageToBase64(uri, requireContext())
             }
         }
-    }
-
-    private fun convertImageToBase64(uri: Uri): String {
-        val inputStream = requireContext().contentResolver.openInputStream(uri)
-        val originalBitmap = BitmapFactory.decodeStream(inputStream)
-        val scaledBitmap = Bitmap.createScaledBitmap(originalBitmap, 480, 480, true)
-
-        val compressedStream = ByteArrayOutputStream()
-        scaledBitmap.compress(Bitmap.CompressFormat.JPEG, 70, compressedStream)
-        val compressedByteArray = compressedStream.toByteArray()
-
-        return Base64.encodeToString(compressedByteArray, Base64.DEFAULT)
     }
 
     companion object {

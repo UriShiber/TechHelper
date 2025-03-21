@@ -3,6 +3,7 @@ package com.sr.techhelper.data.posts;
 import android.database.Cursor;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.collection.ArrayMap;
 import androidx.lifecycle.LiveData;
 import androidx.room.EntityDeletionOrUpdateAdapter;
 import androidx.room.EntityInsertionAdapter;
@@ -12,17 +13,23 @@ import androidx.room.RoomSQLiteQuery;
 import androidx.room.SharedSQLiteStatement;
 import androidx.room.util.CursorUtil;
 import androidx.room.util.DBUtil;
+import androidx.room.util.RelationUtil;
+import androidx.room.util.StringUtil;
 import androidx.sqlite.db.SupportSQLiteStatement;
+import com.sr.techhelper.data.users.UserModel;
 import java.lang.Class;
 import java.lang.Exception;
 import java.lang.Override;
 import java.lang.String;
+import java.lang.StringBuilder;
 import java.lang.SuppressWarnings;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.Callable;
 import javax.annotation.processing.Generated;
+import kotlin.Unit;
 
 @Generated("androidx.room.RoomProcessor")
 @SuppressWarnings({"unchecked", "deprecation"})
@@ -225,14 +232,15 @@ public final class PostDao_Impl implements PostDao {
   }
 
   @Override
-  public LiveData<List<PostModel>> getAllPosts() {
+  public LiveData<List<PostWithSender>> getAllPosts() {
     final String _sql = "SELECT * FROM posts";
     final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 0);
-    return __db.getInvalidationTracker().createLiveData(new String[] {"posts"}, false, new Callable<List<PostModel>>() {
+    return __db.getInvalidationTracker().createLiveData(new String[] {"users",
+        "posts"}, false, new Callable<List<PostWithSender>>() {
       @Override
       @Nullable
-      public List<PostModel> call() throws Exception {
-        final Cursor _cursor = DBUtil.query(__db, _statement, false, null);
+      public List<PostWithSender> call() throws Exception {
+        final Cursor _cursor = DBUtil.query(__db, _statement, true, null);
         try {
           final int _cursorIndexOfId = CursorUtil.getColumnIndexOrThrow(_cursor, "id");
           final int _cursorIndexOfTitle = CursorUtil.getColumnIndexOrThrow(_cursor, "title");
@@ -241,9 +249,18 @@ public final class PostDao_Impl implements PostDao {
           final int _cursorIndexOfLocationLng = CursorUtil.getColumnIndexOrThrow(_cursor, "locationLng");
           final int _cursorIndexOfLocationLat = CursorUtil.getColumnIndexOrThrow(_cursor, "locationLat");
           final int _cursorIndexOfImage = CursorUtil.getColumnIndexOrThrow(_cursor, "image");
-          final List<PostModel> _result = new ArrayList<PostModel>(_cursor.getCount());
+          final ArrayMap<String, UserModel> _collectionSender = new ArrayMap<String, UserModel>();
           while (_cursor.moveToNext()) {
-            final PostModel _item;
+            final String _tmpKey;
+            _tmpKey = _cursor.getString(_cursorIndexOfUserId);
+            _collectionSender.put(_tmpKey, null);
+          }
+          _cursor.moveToPosition(-1);
+          __fetchRelationshipusersAscomSrTechhelperDataUsersUserModel(_collectionSender);
+          final List<PostWithSender> _result = new ArrayList<PostWithSender>(_cursor.getCount());
+          while (_cursor.moveToNext()) {
+            final PostWithSender _item;
+            final PostModel _tmpPost;
             final String _tmpId;
             _tmpId = _cursor.getString(_cursorIndexOfId);
             final String _tmpTitle;
@@ -262,7 +279,12 @@ public final class PostDao_Impl implements PostDao {
             } else {
               _tmpImage = _cursor.getString(_cursorIndexOfImage);
             }
-            _item = new PostModel(_tmpId,_tmpTitle,_tmpDescription,_tmpUserId,_tmpLocationLng,_tmpLocationLat,_tmpImage);
+            _tmpPost = new PostModel(_tmpId,_tmpTitle,_tmpDescription,_tmpUserId,_tmpLocationLng,_tmpLocationLat,_tmpImage);
+            final UserModel _tmpSender;
+            final String _tmpKey_1;
+            _tmpKey_1 = _cursor.getString(_cursorIndexOfUserId);
+            _tmpSender = _collectionSender.get(_tmpKey_1);
+            _item = new PostWithSender(_tmpPost,_tmpSender);
             _result.add(_item);
           }
           return _result;
@@ -279,16 +301,17 @@ public final class PostDao_Impl implements PostDao {
   }
 
   @Override
-  public LiveData<PostModel> getById(final String id) {
+  public LiveData<PostWithSender> getById(final String id) {
     final String _sql = "SELECT * FROM posts WHERE id = ?";
     final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 1);
     int _argIndex = 1;
     _statement.bindString(_argIndex, id);
-    return __db.getInvalidationTracker().createLiveData(new String[] {"posts"}, false, new Callable<PostModel>() {
+    return __db.getInvalidationTracker().createLiveData(new String[] {"users",
+        "posts"}, false, new Callable<PostWithSender>() {
       @Override
       @Nullable
-      public PostModel call() throws Exception {
-        final Cursor _cursor = DBUtil.query(__db, _statement, false, null);
+      public PostWithSender call() throws Exception {
+        final Cursor _cursor = DBUtil.query(__db, _statement, true, null);
         try {
           final int _cursorIndexOfId = CursorUtil.getColumnIndexOrThrow(_cursor, "id");
           final int _cursorIndexOfTitle = CursorUtil.getColumnIndexOrThrow(_cursor, "title");
@@ -297,8 +320,17 @@ public final class PostDao_Impl implements PostDao {
           final int _cursorIndexOfLocationLng = CursorUtil.getColumnIndexOrThrow(_cursor, "locationLng");
           final int _cursorIndexOfLocationLat = CursorUtil.getColumnIndexOrThrow(_cursor, "locationLat");
           final int _cursorIndexOfImage = CursorUtil.getColumnIndexOrThrow(_cursor, "image");
-          final PostModel _result;
+          final ArrayMap<String, UserModel> _collectionSender = new ArrayMap<String, UserModel>();
+          while (_cursor.moveToNext()) {
+            final String _tmpKey;
+            _tmpKey = _cursor.getString(_cursorIndexOfUserId);
+            _collectionSender.put(_tmpKey, null);
+          }
+          _cursor.moveToPosition(-1);
+          __fetchRelationshipusersAscomSrTechhelperDataUsersUserModel(_collectionSender);
+          final PostWithSender _result;
           if (_cursor.moveToFirst()) {
+            final PostModel _tmpPost;
             final String _tmpId;
             _tmpId = _cursor.getString(_cursorIndexOfId);
             final String _tmpTitle;
@@ -317,7 +349,12 @@ public final class PostDao_Impl implements PostDao {
             } else {
               _tmpImage = _cursor.getString(_cursorIndexOfImage);
             }
-            _result = new PostModel(_tmpId,_tmpTitle,_tmpDescription,_tmpUserId,_tmpLocationLng,_tmpLocationLat,_tmpImage);
+            _tmpPost = new PostModel(_tmpId,_tmpTitle,_tmpDescription,_tmpUserId,_tmpLocationLng,_tmpLocationLat,_tmpImage);
+            final UserModel _tmpSender;
+            final String _tmpKey_1;
+            _tmpKey_1 = _cursor.getString(_cursorIndexOfUserId);
+            _tmpSender = _collectionSender.get(_tmpKey_1);
+            _result = new PostWithSender(_tmpPost,_tmpSender);
           } else {
             _result = null;
           }
@@ -335,16 +372,17 @@ public final class PostDao_Impl implements PostDao {
   }
 
   @Override
-  public LiveData<List<PostModel>> getPostsByUserId(final String userId) {
+  public LiveData<List<PostWithSender>> getPostsByUserId(final String userId) {
     final String _sql = "SELECT * FROM posts WHERE userId = ?";
     final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 1);
     int _argIndex = 1;
     _statement.bindString(_argIndex, userId);
-    return __db.getInvalidationTracker().createLiveData(new String[] {"posts"}, false, new Callable<List<PostModel>>() {
+    return __db.getInvalidationTracker().createLiveData(new String[] {"users",
+        "posts"}, false, new Callable<List<PostWithSender>>() {
       @Override
       @Nullable
-      public List<PostModel> call() throws Exception {
-        final Cursor _cursor = DBUtil.query(__db, _statement, false, null);
+      public List<PostWithSender> call() throws Exception {
+        final Cursor _cursor = DBUtil.query(__db, _statement, true, null);
         try {
           final int _cursorIndexOfId = CursorUtil.getColumnIndexOrThrow(_cursor, "id");
           final int _cursorIndexOfTitle = CursorUtil.getColumnIndexOrThrow(_cursor, "title");
@@ -353,9 +391,18 @@ public final class PostDao_Impl implements PostDao {
           final int _cursorIndexOfLocationLng = CursorUtil.getColumnIndexOrThrow(_cursor, "locationLng");
           final int _cursorIndexOfLocationLat = CursorUtil.getColumnIndexOrThrow(_cursor, "locationLat");
           final int _cursorIndexOfImage = CursorUtil.getColumnIndexOrThrow(_cursor, "image");
-          final List<PostModel> _result = new ArrayList<PostModel>(_cursor.getCount());
+          final ArrayMap<String, UserModel> _collectionSender = new ArrayMap<String, UserModel>();
           while (_cursor.moveToNext()) {
-            final PostModel _item;
+            final String _tmpKey;
+            _tmpKey = _cursor.getString(_cursorIndexOfUserId);
+            _collectionSender.put(_tmpKey, null);
+          }
+          _cursor.moveToPosition(-1);
+          __fetchRelationshipusersAscomSrTechhelperDataUsersUserModel(_collectionSender);
+          final List<PostWithSender> _result = new ArrayList<PostWithSender>(_cursor.getCount());
+          while (_cursor.moveToNext()) {
+            final PostWithSender _item;
+            final PostModel _tmpPost;
             final String _tmpId;
             _tmpId = _cursor.getString(_cursorIndexOfId);
             final String _tmpTitle;
@@ -374,7 +421,12 @@ public final class PostDao_Impl implements PostDao {
             } else {
               _tmpImage = _cursor.getString(_cursorIndexOfImage);
             }
-            _item = new PostModel(_tmpId,_tmpTitle,_tmpDescription,_tmpUserId,_tmpLocationLng,_tmpLocationLat,_tmpImage);
+            _tmpPost = new PostModel(_tmpId,_tmpTitle,_tmpDescription,_tmpUserId,_tmpLocationLng,_tmpLocationLat,_tmpImage);
+            final UserModel _tmpSender;
+            final String _tmpKey_1;
+            _tmpKey_1 = _cursor.getString(_cursorIndexOfUserId);
+            _tmpSender = _collectionSender.get(_tmpKey_1);
+            _item = new PostWithSender(_tmpPost,_tmpSender);
             _result.add(_item);
           }
           return _result;
@@ -393,5 +445,63 @@ public final class PostDao_Impl implements PostDao {
   @NonNull
   public static List<Class<?>> getRequiredConverters() {
     return Collections.emptyList();
+  }
+
+  private void __fetchRelationshipusersAscomSrTechhelperDataUsersUserModel(
+      @NonNull final ArrayMap<String, UserModel> _map) {
+    final Set<String> __mapKeySet = _map.keySet();
+    if (__mapKeySet.isEmpty()) {
+      return;
+    }
+    if (_map.size() > RoomDatabase.MAX_BIND_PARAMETER_CNT) {
+      RelationUtil.recursiveFetchArrayMap(_map, false, (map) -> {
+        __fetchRelationshipusersAscomSrTechhelperDataUsersUserModel(map);
+        return Unit.INSTANCE;
+      });
+      return;
+    }
+    final StringBuilder _stringBuilder = StringUtil.newStringBuilder();
+    _stringBuilder.append("SELECT `id`,`name`,`email`,`profile_picture` FROM `users` WHERE `id` IN (");
+    final int _inputSize = __mapKeySet.size();
+    StringUtil.appendPlaceholders(_stringBuilder, _inputSize);
+    _stringBuilder.append(")");
+    final String _sql = _stringBuilder.toString();
+    final int _argCount = 0 + _inputSize;
+    final RoomSQLiteQuery _stmt = RoomSQLiteQuery.acquire(_sql, _argCount);
+    int _argIndex = 1;
+    for (String _item : __mapKeySet) {
+      _stmt.bindString(_argIndex, _item);
+      _argIndex++;
+    }
+    final Cursor _cursor = DBUtil.query(__db, _stmt, false, null);
+    try {
+      final int _itemKeyIndex = CursorUtil.getColumnIndex(_cursor, "id");
+      if (_itemKeyIndex == -1) {
+        return;
+      }
+      final int _cursorIndexOfId = 0;
+      final int _cursorIndexOfName = 1;
+      final int _cursorIndexOfEmail = 2;
+      final int _cursorIndexOfProfilePicture = 3;
+      while (_cursor.moveToNext()) {
+        final String _tmpKey;
+        _tmpKey = _cursor.getString(_itemKeyIndex);
+        if (_map.containsKey(_tmpKey)) {
+          final UserModel _item_1;
+          final String _tmpId;
+          _tmpId = _cursor.getString(_cursorIndexOfId);
+          final String _tmpName;
+          _tmpName = _cursor.getString(_cursorIndexOfName);
+          final String _tmpEmail;
+          _tmpEmail = _cursor.getString(_cursorIndexOfEmail);
+          final String _tmpProfile_picture;
+          _tmpProfile_picture = _cursor.getString(_cursorIndexOfProfilePicture);
+          _item_1 = new UserModel(_tmpId,_tmpName,_tmpEmail,_tmpProfile_picture);
+          _map.put(_tmpKey, _item_1);
+        }
+      }
+    } finally {
+      _cursor.close();
+    }
   }
 }

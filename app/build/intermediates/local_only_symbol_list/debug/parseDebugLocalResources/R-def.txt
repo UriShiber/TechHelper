@@ -6,6 +6,7 @@ color gray
 color light_gray
 color white
 drawable add_image_icon
+drawable default_user
 drawable empty_profile_picture
 drawable ic_add_black_24dp
 drawable ic_back
@@ -13,7 +14,6 @@ drawable ic_launcher_background
 drawable ic_launcher_foreground
 drawable ic_map
 drawable info_window_background
-drawable post
 id action_createPostFragment_to_postListFragment
 id action_editPostFragment_to_postDetailsFragment
 id action_editPostFragment_to_postListFragment

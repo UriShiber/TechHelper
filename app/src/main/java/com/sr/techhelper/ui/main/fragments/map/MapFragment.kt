@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.compose.ui.semantics.text
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -17,12 +16,9 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.sr.techhelper.R
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.sr.techhelper.data.posts.PostDTO
+import com.sr.techhelper.data.posts.PostWithSender
 import com.sr.techhelper.ui.main.PostsViewModel
-import com.sr.techhelper.ui.main.fragments.posts_list.PostsAdapter
-import com.sr.techhelper.utils.decodeBase64ToImage
+import com.sr.techhelper.utils.ImageUtils
 
 
 class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener, GoogleMap.InfoWindowAdapter {
@@ -45,27 +41,25 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
         googleMap = map
         googleMap.setOnMarkerClickListener(this)
         googleMap.setInfoWindowAdapter(this)
-
-        viewModel.getAllPosts().observe(viewLifecycleOwner, {
-            if(it.isEmpty()) viewModel.invalidatePosts()
-            it.forEach { post ->
-                var postDTO = post.toPostDto()
-                val latLng = LatLng(postDTO.locationLat, postDTO.locationLng)
+        viewModel.getAllPosts().observe(viewLifecycleOwner) { postsList ->
+            if(postsList.isEmpty()) viewModel.invalidatePosts()
+            postsList.forEach { post ->
+                val latLng = LatLng(post.post.locationLat, post.post.locationLng)
                 googleMap.addMarker(
                     MarkerOptions()
                         .position(latLng)
-                        .title(postDTO.title)
-                        .snippet(postDTO.description)
-                )?.tag = postDTO // Set the postDTO as a tag
+                        .title(post.post.title)
+                        .snippet(post.post.description)
+                )?.tag = post // Set the postDTO as a tag
             }
 
             // Move the camera to show all markers
-            if (it.isNotEmpty()) {
-                val firstLocation = it.first()
-                val firstLatLng = LatLng(firstLocation.locationLat, firstLocation.locationLng)
+            if (postsList.isNotEmpty()) {
+                val firstLocation = postsList.first()
+                val firstLatLng = LatLng(firstLocation.post.locationLat, firstLocation.post.locationLng)
                 googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(firstLatLng, 2f))
             }
-        })
+        }
     }
 
     override fun onMarkerClick(marker: Marker): Boolean {
@@ -97,7 +91,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
 
     override fun getInfoContents(marker: Marker): View? {
         // Get the LocationData from the marker's tag
-        val post = marker.tag as? PostDTO ?: return null
+        val post = marker.tag as? PostWithSender ?: return null
 
         // Inflate the custom layout
         val infoWindowView = layoutInflater.inflate(R.layout.custom_info_window, null)
@@ -106,15 +100,16 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
         val titleTextView = infoWindowView.findViewById<TextView>(R.id.titleTextView)
         val descriptionTextView = infoWindowView.findViewById<TextView>(R.id.descriptionTextView)
         val imageView = infoWindowView.findViewById<ImageView>(R.id.imageView)
-        val userIdTextView = infoWindowView.findViewById<TextView>(R.id.userIdTextView)
+        val userNameTextView = infoWindowView.findViewById<TextView>(R.id.userIdTextView)
 
 
-        titleTextView.text = post.title
-        descriptionTextView.text = post.description
-        userIdTextView.text = "By: ${post.userId}"
 
-        post.image?.let {
-            val bitmap = decodeBase64ToImage(it)
+        titleTextView.text = post.post.title
+        descriptionTextView.text = post.post.description
+        userNameTextView.text = "By: ${post.sender.name}"
+
+        post.post.image?.let {
+            val bitmap = ImageUtils.decodeBase64ToImage(it)
             imageView.setImageBitmap(bitmap)
         }
 

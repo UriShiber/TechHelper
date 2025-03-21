@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sr.techhelper.data.posts.PostModel
+import com.sr.techhelper.data.posts.PostWithSender
 import com.sr.techhelper.data.posts.PostsRepository
 import com.sr.techhelper.data.users.UserModel
 import com.sr.techhelper.data.users.UsersRepository
@@ -24,7 +25,7 @@ class PostsViewModel : ViewModel() {
         }
     }
 
-    fun getAllPosts(): LiveData<List<PostModel>> {
+    fun getAllPosts(): LiveData<List<PostWithSender>> {
         return this.repository.getAllPosts() // Fetch all posts from repository
     }
 

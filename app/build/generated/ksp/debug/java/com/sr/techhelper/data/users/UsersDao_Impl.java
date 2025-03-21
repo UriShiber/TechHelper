@@ -55,11 +55,7 @@ public final class UsersDao_Impl implements UsersDao {
         statement.bindString(1, entity.getId());
         statement.bindString(2, entity.getName());
         statement.bindString(3, entity.getEmail());
-        if (entity.getProfile_picture() == null) {
-          statement.bindNull(4);
-        } else {
-          statement.bindString(4, entity.getProfile_picture());
-        }
+        statement.bindString(4, entity.getProfile_picture());
         statement.bindString(5, entity.getId());
       }
     };
@@ -84,11 +80,7 @@ public final class UsersDao_Impl implements UsersDao {
         statement.bindString(1, entity.getId());
         statement.bindString(2, entity.getName());
         statement.bindString(3, entity.getEmail());
-        if (entity.getProfile_picture() == null) {
-          statement.bindNull(4);
-        } else {
-          statement.bindString(4, entity.getProfile_picture());
-        }
+        statement.bindString(4, entity.getProfile_picture());
       }
     }, new EntityDeletionOrUpdateAdapter<UserModel>(__db) {
       @Override
@@ -103,11 +95,7 @@ public final class UsersDao_Impl implements UsersDao {
         statement.bindString(1, entity.getId());
         statement.bindString(2, entity.getName());
         statement.bindString(3, entity.getEmail());
-        if (entity.getProfile_picture() == null) {
-          statement.bindNull(4);
-        } else {
-          statement.bindString(4, entity.getProfile_picture());
-        }
+        statement.bindString(4, entity.getProfile_picture());
         statement.bindString(5, entity.getId());
       }
     });
@@ -182,11 +170,7 @@ public final class UsersDao_Impl implements UsersDao {
             final String _tmpEmail;
             _tmpEmail = _cursor.getString(_cursorIndexOfEmail);
             final String _tmpProfile_picture;
-            if (_cursor.isNull(_cursorIndexOfProfilePicture)) {
-              _tmpProfile_picture = null;
-            } else {
-              _tmpProfile_picture = _cursor.getString(_cursorIndexOfProfilePicture);
-            }
+            _tmpProfile_picture = _cursor.getString(_cursorIndexOfProfilePicture);
             _result = new UserModel(_tmpId,_tmpName,_tmpEmail,_tmpProfile_picture);
           } else {
             _result = null;

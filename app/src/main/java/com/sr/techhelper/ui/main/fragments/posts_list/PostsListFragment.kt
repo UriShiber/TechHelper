@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.auth.FirebaseAuth
 import com.sr.techhelper.R
 import com.sr.techhelper.ui.main.PostsViewModel
 
@@ -31,17 +32,17 @@ class PostsListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         postsList = view.findViewById(R.id.posts_list)
         context?.let { initPostsList(it) }
-        viewModel.getAllPosts().observe(viewLifecycleOwner, {
-            if(it.isEmpty()) viewModel.invalidatePosts()
-            (postsList.adapter as? PostsAdapter)?.updatePosts(it)
-        })
+        viewModel.getAllPosts().observe(viewLifecycleOwner) { postsListData ->
+            if(postsListData.isEmpty()) viewModel.invalidatePosts()
+            (postsList.adapter as? PostsAdapter)?.updatePosts(postsListData)
+        }
     }
 
     private fun initPostsList(context: Context) {
         postsList.run {
             layoutManager = LinearLayoutManager(context)
             adapter = PostsAdapter{ post ->
-               val action = PostsListFragmentDirections.actionPostsListFragmentToPostDetailsFragment(post.id)
+               val action = PostsListFragmentDirections.actionPostsListFragmentToPostDetailsFragment(post.post.id)
                 findNavController().navigate(action)
             }
             addItemDecoration(

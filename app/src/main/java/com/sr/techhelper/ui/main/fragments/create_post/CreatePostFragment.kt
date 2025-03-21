@@ -30,6 +30,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.sr.techhelper.R
 import com.sr.techhelper.data.posts.PostModel
 import com.sr.techhelper.ui.main.PostsViewModel
+import com.sr.techhelper.utils.ImageUtils
 import java.io.ByteArrayOutputStream
 
 class CreatePostFragment : Fragment() {
@@ -161,26 +162,11 @@ class CreatePostFragment : Fragment() {
                 imageView.setImageURI(uri)
 
                 // Convert image to Base64
-                base64Image = convertImageToBase64(uri)
+                base64Image = ImageUtils.convertImageToBase64(uri, requireContext())
             }
         }
     }
 
-    private fun convertImageToBase64(uri: Uri): String {
-        val inputStream = requireContext().contentResolver.openInputStream(uri)
-        val originalBitmap = BitmapFactory.decodeStream(inputStream)
-
-        // Reduce the dimensions of the image
-        val scaledBitmap = Bitmap.createScaledBitmap(originalBitmap, 480, 480, true) // Adjust width/height
-
-        // Compress the Bitmap
-        val compressedStream = ByteArrayOutputStream()
-        scaledBitmap.compress(Bitmap.CompressFormat.JPEG, 70, compressedStream) // Lower quality to 70%
-        val compressedByteArray = compressedStream.toByteArray()
-
-        // Convert to Base64
-        return Base64.encodeToString(compressedByteArray, Base64.DEFAULT)
-    }
 
     companion object {
         private const val REQUEST_IMAGE_PICK = 1001

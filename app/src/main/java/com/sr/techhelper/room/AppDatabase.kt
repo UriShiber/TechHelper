@@ -8,7 +8,7 @@ import com.sr.techhelper.data.users.UserModel
 import com.sr.techhelper.data.users.UsersDao
 
 @Database(
-    entities = [PostModel::class, UserModel::class], version = 2, exportSchema = false
+    entities = [PostModel::class, UserModel::class], version = 4, exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
     abstract fun usersDao(): UsersDao

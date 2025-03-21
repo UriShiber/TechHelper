@@ -11,11 +11,6 @@ class UsersRepository {
     private val usersDao = DatabaseHolder.getDatabase().usersDao()
     private val firestoreHandle = Firebase.firestore.collection("users")
 
-    suspend fun insertUsers(vararg users: UserModel) = withContext(Dispatchers.IO) {
-        firestoreHandle.add(users).await()
-        usersDao.upsertAll(*users)
-    }
-
     suspend fun upsertUser(user: UserModel) = withContext(Dispatchers.IO) {
         firestoreHandle.document(user.id).set(user).await()
         usersDao.upsertAll(user)

@@ -7,13 +7,13 @@ import androidx.room.*
 interface PostDao {
 
     @Query("SELECT * FROM posts")
-    fun getAllPosts(): LiveData<List<PostModel>>
+    fun getAllPosts(): LiveData<List<PostWithSender>>
 
     @Query("SELECT * FROM posts WHERE id = :id")
-    fun getById(id: String): LiveData<PostModel>
+    fun getById(id: String): LiveData<PostWithSender?>
 
     @Query("SELECT * FROM posts WHERE userId = :userId")
-    fun getPostsByUserId(userId: String): LiveData<List<PostModel>>
+    fun getPostsByUserId(userId: String): LiveData<List<PostWithSender>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun add(vararg post: PostModel)

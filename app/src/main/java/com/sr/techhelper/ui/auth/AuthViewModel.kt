@@ -9,9 +9,9 @@ import kotlinx.coroutines.launch
 
 class AuthViewModel: ViewModel() {
     private val usersRepository = UsersRepository()
-    fun register(onFinishUi: () -> Unit) {
+    fun register(onFinishUi: () -> Unit, userImage: String) {
         viewModelScope.launch(Dispatchers.Main) {
-            usersRepository.upsertUser(UserModel.fromFirebaseAuth())
+            usersRepository.upsertUser(UserModel.fromFirebaseAuth(userImage))
             onFinishUi()
         }
     }

@@ -2,15 +2,12 @@ package com.sr.techhelper.ui.main.fragments.profile_page
 
 import android.app.Activity
 import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.content.Intent
 import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Base64
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -25,15 +22,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 
 
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.sr.techhelper.R
 import com.sr.techhelper.ui.main.fragments.posts_list.PostsAdapter
 import com.sr.techhelper.data.users.UserModel
 import com.sr.techhelper.ui.auth.AuthActivity
 import com.sr.techhelper.ui.main.PostsViewModel
-import com.sr.techhelper.utils.decodeBase64ToImage
-import java.io.ByteArrayOutputStream
+import com.sr.techhelper.utils.ImageUtils
 
 
 class ProfilePageFragment : Fragment() {
@@ -60,20 +55,8 @@ class ProfilePageFragment : Fragment() {
         viewModel.getUserById(userId).observe(viewLifecycleOwner) { user ->
             user?.let {
                 mainUser = it
-                usernameEditText.text = it.name ?: "Guest"
-
-                if(it.profile_picture != "") {
-                    imageView.setImageBitmap(decodeBase64ToImage(it.profile_picture ?: ""))
-                } else {
-                    val googleImage = FirebaseAuth.getInstance().currentUser?.photoUrl
-                    if(googleImage !== null) {
-                        Glide.with(this) // 'this' can be a Fragment or Activity context
-                            .load(googleImage)
-                            .into(imageView)
-                        imageView.setImageURI(googleImage)
-                    }
-                }
-
+                usernameEditText.text = it.name
+                imageView.setImageBitmap(ImageUtils.decodeBase64ToImage(it.profile_picture))
 
                 imageView.setOnClickListener {
                     pickImageFromGallery()
@@ -136,7 +119,7 @@ class ProfilePageFragment : Fragment() {
         postsList.run {
             layoutManager = LinearLayoutManager(context)
             adapter = PostsAdapter{ post ->
-                val action = ProfilePageFragmentDirections.actionProfilePageFragmentToPostDetailsFragment(post.id)
+                val action = ProfilePageFragmentDirections.actionProfilePageFragmentToPostDetailsFragment(post.post.id)
                 findNavController().navigate(action)
             }
             addItemDecoration(
@@ -163,7 +146,7 @@ class ProfilePageFragment : Fragment() {
                 imageView.setImageURI(uri)
 
                 // Convert image to Base64
-                base64Image = convertImageToBase64(uri)
+                base64Image = ImageUtils.convertImageToBase64(uri, requireContext())
 
 
 
@@ -175,22 +158,6 @@ class ProfilePageFragment : Fragment() {
 
             }
         }
-    }
-
-    private fun convertImageToBase64(uri: Uri): String {
-        val inputStream = requireContext().contentResolver.openInputStream(uri)
-        val originalBitmap = BitmapFactory.decodeStream(inputStream)
-
-        // Reduce the dimensions of the image
-        val scaledBitmap = Bitmap.createScaledBitmap(originalBitmap, 480, 480, true) // Adjust width/height
-
-        // Compress the Bitmap
-        val compressedStream = ByteArrayOutputStream()
-        scaledBitmap.compress(Bitmap.CompressFormat.JPEG, 70, compressedStream) // Lower quality to 30%
-        val compressedByteArray = compressedStream.toByteArray()
-
-        // Convert to Base64
-        return Base64.encodeToString(compressedByteArray, Base64.DEFAULT)
     }
 
     companion object {

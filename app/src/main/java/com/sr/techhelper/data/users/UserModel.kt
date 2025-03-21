@@ -3,13 +3,15 @@ package com.sr.techhelper.data.users
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.firebase.auth.FirebaseAuth
+import com.sr.techhelper.R
+import com.sr.techhelper.utils.ImageUtils
 
 @Entity(tableName = "users")
 data class UserModel(
     @PrimaryKey val id: String = "",
     val name: String,
     val email: String,
-    val profile_picture: String?
+    val profile_picture: String
 ) {
     fun toUserDto() : UserDTO {
         return UserDTO(
@@ -20,14 +22,14 @@ data class UserModel(
         )
     }
     companion object {
-        fun fromFirebaseAuth(): UserModel {
+        fun fromFirebaseAuth(userImage: String): UserModel {
             val user = FirebaseAuth.getInstance().currentUser
 
             return UserModel(
                 id = user?.uid!!,
                 email = user.email!!,
                 name = user.displayName!!,
-                profile_picture = ""
+                profile_picture = userImage
             )
         }
     }

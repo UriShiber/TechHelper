@@ -8,16 +8,14 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageButton
-import androidx.compose.ui.semantics.text
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
-import com.bumptech.glide.Glide
-import com.google.firebase.auth.FirebaseAuth
 import com.sr.techhelper.R
 import com.sr.techhelper.data.posts.PostModel
+import com.sr.techhelper.data.posts.PostWithSender
 import com.sr.techhelper.ui.main.PostsViewModel
-import com.sr.techhelper.utils.decodeBase64ToImage
+import com.sr.techhelper.utils.ImageUtils
 
 class PostDetailsFragment : Fragment() {
     private val viewModel: PostsViewModel by activityViewModels()
@@ -25,7 +23,7 @@ class PostDetailsFragment : Fragment() {
     private lateinit var postImageView: ImageView
     private lateinit var postTitleTextView: TextView
     private lateinit var postDescriptionTextView: TextView
-    private lateinit var postUserIdTextView: TextView
+    private lateinit var postUserNameTextView: TextView
     private lateinit var postLocationLngTextView: TextView
     private lateinit var postLocationLatTextView: TextView
     private lateinit var editButton: Button
@@ -46,7 +44,7 @@ class PostDetailsFragment : Fragment() {
         postImageView = view.findViewById(R.id.post_image_view)
         postTitleTextView = view.findViewById(R.id.post_title_text_view)
         postDescriptionTextView = view.findViewById(R.id.post_description_text_view)
-        postUserIdTextView = view.findViewById(R.id.post_user_id_text_view)
+        postUserNameTextView = view.findViewById(R.id.post_user_id_text_view)
         postLocationLngTextView = view.findViewById(R.id.post_location_lng_text_view)
         postLocationLatTextView = view.findViewById(R.id.post_location_lat_text_view)
         editButton = view.findViewById(R.id.edit_button)
@@ -60,7 +58,7 @@ class PostDetailsFragment : Fragment() {
             if (posts.isEmpty()) viewModel.invalidatePosts()
 
             // Find the current post
-            val currentPost = posts.find { post -> post.id == postId }
+            val currentPost = posts.find { post -> post.post.id == postId }
 
             // Update the UI with the post data
             currentPost?.let { post ->
@@ -80,15 +78,15 @@ class PostDetailsFragment : Fragment() {
         }
     }
 
-    private fun updateUI(post: PostModel) {
-        postTitleTextView.text = post.title
-        postDescriptionTextView.text = post.description
-        postUserIdTextView.text = post.userId
-        postLocationLngTextView.text = post.locationLng.toString()
-        postLocationLatTextView.text = post.locationLat.toString()
+    private fun updateUI(post: PostWithSender) {
+        postTitleTextView.text = post.post.title
+        postDescriptionTextView.text = post.post.description
+        postUserNameTextView.text = post.sender.name
+        postLocationLngTextView.text = post.post.locationLng.toString()
+        postLocationLatTextView.text = post.post.locationLat.toString()
 
-        post.image?.let {
-            val bitmap = decodeBase64ToImage(it)
+        post.post.image?.let {
+            val bitmap = ImageUtils.decodeBase64ToImage(it)
             postImageView.setImageBitmap(bitmap)
         }
     }

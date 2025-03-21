@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
@@ -14,7 +15,7 @@ import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
 import com.google.firebase.auth.FirebaseAuth
 import com.sr.techhelper.R
 import com.sr.techhelper.ui.main.MainActivity
-
+import com.sr.techhelper.utils.ImageUtils
 
 
 class AuthActivity : AppCompatActivity() {
@@ -48,7 +49,7 @@ class AuthActivity : AppCompatActivity() {
                 createSignInIntentBuilder()
                     .setAvailableProviders(supportedAuth)
                     .setIsSmartLockEnabled(false)
-                    .setLogo(R.drawable.post)
+                    .setLogo(R.drawable.default_user)
                     .setTheme(R.style.Base_Theme_techhelper)
                     .build().apply {
                         signInLauncher.launch(this)
@@ -58,9 +59,22 @@ class AuthActivity : AppCompatActivity() {
 
     }
 
+    private fun getUserImage(): String {
+        val user = FirebaseAuth.getInstance().currentUser
+        val photoUrl = user?.photoUrl
+
+        // Convert photoUrl to Base64 string if available
+        return if (photoUrl != null) {
+            ImageUtils.convertPhotoUrlToBase64(photoUrl.toString())
+        } else {
+            ImageUtils.convertDrawableToBase64(this, R.drawable.default_user)
+        }
+    }
+
+
     private fun onSignInResult(result: FirebaseAuthUIAuthenticationResult) {
         if (result.resultCode == RESULT_OK) {
-            viewModel.register(::toApp)
+            viewModel.register(::toApp, getUserImage())
         }
     }
 

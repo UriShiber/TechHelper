@@ -1,21 +1,21 @@
 package com.sr.techhelper.ui.main.fragments.posts_list
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.auth.FirebaseAuth
 import com.sr.techhelper.R
-import com.sr.techhelper.data.posts.PostModel
-import com.sr.techhelper.utils.decodeBase64ToImage
+import com.sr.techhelper.data.posts.PostWithSender
+import com.sr.techhelper.utils.ImageUtils
+
 
 class PostsAdapter(
-    private val onPostClick: (PostModel) -> Unit
+    private val onPostClick: (PostWithSender) -> Unit,
 ) : RecyclerView.Adapter<PostsAdapter.PostViewHolder>() {
-    private var posts: List<PostModel> = emptyList()
-    private var user = FirebaseAuth.getInstance().currentUser!!
+    private var posts: List<PostWithSender> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
         val inflator = LayoutInflater.from(parent.context)
@@ -39,26 +39,25 @@ class PostsAdapter(
         private val postLocationLat: TextView = itemView.findViewById(R.id.post_row_location_lat_text_view)
         private val postLocationLng: TextView = itemView.findViewById(R.id.post_row_location_lng_text_view)
 
-        fun bind(post: PostModel) {
-            // Set user details
-            userName.text = user.displayName
-//            post.userImage?.let {
-//                val bitmap = decodeBase64ToImage(it)
-//                userImage.setImageBitmap(bitmap)
-//            }
+        fun bind(post: PostWithSender) {
+            userName.text = post.sender.name
+            Log.d("PostsAdapter", "Binding post with  profile picture: ${post.sender.profile_picture}")
+            if (post.sender.profile_picture != null) {
+                Log.d("PostsAdapter", "profile picture is not null")
+                userImage.setImageBitmap(ImageUtils.decodeBase64ToImage(post.sender.profile_picture))
+            }
 
-            // Set post details
-            postTitle.text = post.title
-            postContent.text = post.description
 
-            post.image?.let {
-                val bitmap = decodeBase64ToImage(it)
+            postTitle.text = post.post.title
+            postContent.text = post.post.description
+
+            post.post.image?.let {
+                val bitmap = ImageUtils.decodeBase64ToImage(it)
                 postImage.setImageBitmap(bitmap)
             }
 
-            // Set location details
-            postLocationLat.text = "Lat: ${post.locationLat}"
-            postLocationLng.text = "Lng: ${post.locationLng}"
+            postLocationLat.text = "Lat: ${post.post.locationLat}"
+            postLocationLng.text = "Lng: ${post.post.locationLng}"
 
             itemView.setOnClickListener {
                 onPostClick(post)
@@ -66,7 +65,7 @@ class PostsAdapter(
         }
     }
 
-    fun updatePosts(newPosts: List<PostModel>) {
+    fun updatePosts(newPosts: List<PostWithSender>) {
         this.posts = newPosts
         notifyDataSetChanged()
     }
