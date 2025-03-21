@@ -4,6 +4,7 @@ package com.sr.techhelper.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,16 +24,20 @@ public final class CommentListItemBinding implements ViewBinding {
   public final TextView commentContent;
 
   @NonNull
+  public final ImageView commentUserImage;
+
+  @NonNull
   public final TextView commentUserName;
 
   @NonNull
   public final TextView timestamp;
 
   private CommentListItemBinding(@NonNull ConstraintLayout rootView,
-      @NonNull TextView commentContent, @NonNull TextView commentUserName,
-      @NonNull TextView timestamp) {
+      @NonNull TextView commentContent, @NonNull ImageView commentUserImage,
+      @NonNull TextView commentUserName, @NonNull TextView timestamp) {
     this.rootView = rootView;
     this.commentContent = commentContent;
+    this.commentUserImage = commentUserImage;
     this.commentUserName = commentUserName;
     this.timestamp = timestamp;
   }
@@ -70,6 +75,12 @@ public final class CommentListItemBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.comment_user_image;
+      ImageView commentUserImage = ViewBindings.findChildViewById(rootView, id);
+      if (commentUserImage == null) {
+        break missingId;
+      }
+
       id = R.id.comment_user_name;
       TextView commentUserName = ViewBindings.findChildViewById(rootView, id);
       if (commentUserName == null) {
@@ -83,7 +94,7 @@ public final class CommentListItemBinding implements ViewBinding {
       }
 
       return new CommentListItemBinding((ConstraintLayout) rootView, commentContent,
-          commentUserName, timestamp);
+          commentUserImage, commentUserName, timestamp);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

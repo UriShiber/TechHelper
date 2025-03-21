@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.sr.techhelper.R
 import com.sr.techhelper.data.comments.CommentModel
+import com.sr.techhelper.data.comments.CommentWithSender
 import com.sr.techhelper.data.posts.PostWithSender
 import com.sr.techhelper.ui.main.CommentsViewModel
 import com.sr.techhelper.ui.main.PostsViewModel
@@ -23,7 +24,7 @@ class PostsListFragment : Fragment() {
     private val postsViewModel: PostsViewModel by activityViewModels()
     private val commentsViewModel: CommentsViewModel by activityViewModels()
     private lateinit var postsAdapter: PostsAdapter
-    private var comments = listOf<CommentModel>()
+    private var comments = listOf<CommentWithSender>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,7 +52,7 @@ class PostsListFragment : Fragment() {
         posts.forEach { post ->
             commentsViewModel.getCommentsForPost(post.post.id).observe(viewLifecycleOwner) { commentsList ->
                 Log.d("PostsAdapter", "Fetching comments: $commentsList")
-                comments = commentsList.map { it.comment } // todo: this is due to commentwithsender
+                comments = commentsList.map { it } // todo: this is due to commentwithsender
                 postsAdapter.updateComments(comments)  // Update comments for all posts
             }
         }

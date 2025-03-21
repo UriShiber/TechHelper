@@ -67,11 +67,6 @@ class ProfilePageFragment : Fragment() {
                 } else {
                     imageView.setImageResource(R.drawable.empty_profile_picture)
                 }
-//                if(it.profile_picture != "") {
-//                    imageView.setImageBitmap(ImageUtils.decodeBase64ToImage(it.profile_picture))
-//                } else {
-//                    imageView.setImageResource(R.drawable.empty_profile_picture)
-//                }
 
                 imageView.setOnClickListener {
                     pickImageFromGallery()

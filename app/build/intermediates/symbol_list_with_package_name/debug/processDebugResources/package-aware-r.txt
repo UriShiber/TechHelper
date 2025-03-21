@@ -3423,6 +3423,7 @@ id clockwise
 id closest
 id collapseActionView
 id comment_content
+id comment_user_image
 id comment_user_name
 id comments_recycler_view
 id comments_recycler_view_container

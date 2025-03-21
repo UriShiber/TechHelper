@@ -1,146 +1,150 @@
 [
     {
-        "merged": "com.sr.techhelper.app-debug-87:/layout_fragment_edit_post.xml.flat",
-        "source": "com.sr.techhelper.app-main-89:/layout/fragment_edit_post.xml"
+        "merged": "C:\\Users\\sagie\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-debug-87:\\layout_fragment_profile_page.xml.flat",
+        "source": "C:\\Users\\sagie\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-main-89:\\layout\\fragment_profile_page.xml"
     },
     {
-        "merged": "com.sr.techhelper.app-debug-87:/mipmap-xxhdpi_ic_launcher.webp.flat",
-        "source": "com.sr.techhelper.app-main-89:/mipmap-xxhdpi/ic_launcher.webp"
+        "merged": "C:\\Users\\sagie\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-debug-87:\\drawable_ic_back.xml.flat",
+        "source": "C:\\Users\\sagie\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-main-89:\\drawable\\ic_back.xml"
     },
     {
-        "merged": "com.sr.techhelper.app-debug-87:/mipmap-xxxhdpi_ic_launcher.webp.flat",
-        "source": "com.sr.techhelper.app-main-89:/mipmap-xxxhdpi/ic_launcher.webp"
+        "merged": "C:\\Users\\sagie\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-debug-87:\\mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\sagie\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-main-89:\\mipmap-xhdpi\\ic_launcher.webp"
     },
     {
-        "merged": "com.sr.techhelper.app-debug-87:/layout_activity_main.xml.flat",
-        "source": "com.sr.techhelper.app-main-89:/layout/activity_main.xml"
+        "merged": "C:\\Users\\sagie\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-debug-87:\\drawable_add_image_icon.xml.flat",
+        "source": "C:\\Users\\sagie\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-main-89:\\drawable\\add_image_icon.xml"
     },
     {
-        "merged": "com.sr.techhelper.app-debug-87:/drawable_ic_add_black_24dp.xml.flat",
-        "source": "com.sr.techhelper.app-main-89:/drawable/ic_add_black_24dp.xml"
+        "merged": "C:\\Users\\sagie\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-debug-87:\\mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\sagie\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-main-89:\\mipmap-xxhdpi\\ic_launcher_round.webp"
     },
     {
-        "merged": "com.sr.techhelper.app-debug-87:/menu_app_menu.xml.flat",
-        "source": "com.sr.techhelper.app-main-89:/menu/app_menu.xml"
+        "merged": "C:\\Users\\sagie\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-debug-87:\\navigation_app_navigation.xml.flat",
+        "source": "C:\\Users\\sagie\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-main-89:\\navigation\\app_navigation.xml"
     },
     {
-        "merged": "com.sr.techhelper.app-debug-87:/layout_fragment_posts_list.xml.flat",
-        "source": "com.sr.techhelper.app-main-89:/layout/fragment_posts_list.xml"
+        "merged": "C:\\Users\\sagie\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-debug-87:\\mipmap-anydpi_ic_launcher_round.xml.flat",
+        "source": "C:\\Users\\sagie\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-main-89:\\mipmap-anydpi\\ic_launcher_round.xml"
     },
     {
-        "merged": "com.sr.techhelper.app-debug-87:/drawable_ic_back.xml.flat",
-        "source": "com.sr.techhelper.app-main-89:/drawable/ic_back.xml"
+        "merged": "C:\\Users\\sagie\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-debug-87:\\layout_fragment_edit_post.xml.flat",
+        "source": "C:\\Users\\sagie\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-main-89:\\layout\\fragment_edit_post.xml"
     },
     {
-        "merged": "com.sr.techhelper.app-debug-87:/mipmap-hdpi_ic_launcher.webp.flat",
-        "source": "com.sr.techhelper.app-main-89:/mipmap-hdpi/ic_launcher.webp"
+        "merged": "C:\\Users\\sagie\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-debug-87:\\layout_activity_main.xml.flat",
+        "source": "C:\\Users\\sagie\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-main-89:\\layout\\activity_main.xml"
     },
     {
-        "merged": "com.sr.techhelper.app-debug-87:/layout_fragment_post_details.xml.flat",
-        "source": "com.sr.techhelper.app-main-89:/layout/fragment_post_details.xml"
+        "merged": "C:\\Users\\sagie\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-debug-87:\\drawable_ic_launcher_background.xml.flat",
+        "source": "C:\\Users\\sagie\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-main-89:\\drawable\\ic_launcher_background.xml"
     },
     {
-        "merged": "com.sr.techhelper.app-debug-87:/mipmap-xhdpi_ic_launcher_round.webp.flat",
-        "source": "com.sr.techhelper.app-main-89:/mipmap-xhdpi/ic_launcher_round.webp"
+        "merged": "C:\\Users\\sagie\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-debug-87:\\mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\sagie\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-main-89:\\mipmap-xxxhdpi\\ic_launcher_round.webp"
     },
     {
-        "merged": "com.sr.techhelper.app-debug-87:/mipmap-xxhdpi_ic_launcher_round.webp.flat",
-        "source": "com.sr.techhelper.app-main-89:/mipmap-xxhdpi/ic_launcher_round.webp"
+        "merged": "C:\\Users\\sagie\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-debug-87:\\mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\sagie\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-main-89:\\mipmap-hdpi\\ic_launcher.webp"
     },
     {
-        "merged": "com.sr.techhelper.app-debug-87:/drawable_ic_launcher_background.xml.flat",
-        "source": "com.sr.techhelper.app-main-89:/drawable/ic_launcher_background.xml"
+        "merged": "C:\\Users\\sagie\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-debug-87:\\mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\sagie\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-main-89:\\mipmap-mdpi\\ic_launcher_round.webp"
     },
     {
-        "merged": "com.sr.techhelper.app-debug-87:/drawable_info_window_background.xml.flat",
-        "source": "com.sr.techhelper.app-main-89:/drawable/info_window_background.xml"
+        "merged": "C:\\Users\\sagie\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-debug-87:\\drawable_ic_add_black_24dp.xml.flat",
+        "source": "C:\\Users\\sagie\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-main-89:\\drawable\\ic_add_black_24dp.xml"
     },
     {
-        "merged": "com.sr.techhelper.app-debug-87:/layout_fragment_create_post.xml.flat",
-        "source": "com.sr.techhelper.app-main-89:/layout/fragment_create_post.xml"
+        "merged": "C:\\Users\\sagie\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-debug-87:\\drawable_empty_profile_picture.xml.flat",
+        "source": "C:\\Users\\sagie\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-main-89:\\drawable\\empty_profile_picture.xml"
     },
     {
-        "merged": "com.sr.techhelper.app-debug-87:/drawable_ic_map.xml.flat",
-        "source": "com.sr.techhelper.app-main-89:/drawable/ic_map.xml"
+        "merged": "C:\\Users\\sagie\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-debug-87:\\mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\sagie\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-main-89:\\mipmap-hdpi\\ic_launcher_round.webp"
     },
     {
-        "merged": "com.sr.techhelper.app-debug-87:/mipmap-hdpi_ic_launcher_round.webp.flat",
-        "source": "com.sr.techhelper.app-main-89:/mipmap-hdpi/ic_launcher_round.webp"
+        "merged": "C:\\Users\\sagie\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-debug-87:\\layout_fragment_post_details.xml.flat",
+        "source": "C:\\Users\\sagie\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-main-89:\\layout\\fragment_post_details.xml"
     },
     {
-        "merged": "com.sr.techhelper.app-debug-87:/drawable_default_user.jpg.flat",
-        "source": "com.sr.techhelper.app-main-89:/drawable/default_user.jpg"
+        "merged": "C:\\Users\\sagie\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-debug-87:\\xml_backup_rules.xml.flat",
+        "source": "C:\\Users\\sagie\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-main-89:\\xml\\backup_rules.xml"
     },
     {
-        "merged": "com.sr.techhelper.app-debug-87:/mipmap-anydpi_ic_launcher.xml.flat",
-        "source": "com.sr.techhelper.app-main-89:/mipmap-anydpi/ic_launcher.xml"
+        "merged": "C:\\Users\\sagie\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-debug-87:\\mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\sagie\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-main-89:\\mipmap-mdpi\\ic_launcher.webp"
     },
     {
-        "merged": "com.sr.techhelper.app-debug-87:/layout_post_list_item.xml.flat",
-        "source": "com.sr.techhelper.app-main-89:/layout/post_list_item.xml"
+        "merged": "C:\\Users\\sagie\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-debug-87:\\xml_data_extraction_rules.xml.flat",
+        "source": "C:\\Users\\sagie\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-main-89:\\xml\\data_extraction_rules.xml"
     },
     {
-        "merged": "com.sr.techhelper.app-debug-87:/drawable_ic_launcher_foreground.xml.flat",
-        "source": "com.sr.techhelper.app-main-89:/drawable/ic_launcher_foreground.xml"
+        "merged": "C:\\Users\\sagie\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-debug-87:\\mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\sagie\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-main-89:\\mipmap-xhdpi\\ic_launcher_round.webp"
     },
     {
-        "merged": "com.sr.techhelper.app-debug-87:/layout_activity_auth.xml.flat",
-        "source": "com.sr.techhelper.app-main-89:/layout/activity_auth.xml"
+        "merged": "C:\\Users\\sagie\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-debug-87:\\layout_custom_info_window.xml.flat",
+        "source": "C:\\Users\\sagie\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-main-89:\\layout\\custom_info_window.xml"
     },
     {
-        "merged": "com.sr.techhelper.app-debug-87:/mipmap-mdpi_ic_launcher.webp.flat",
-        "source": "com.sr.techhelper.app-main-89:/mipmap-mdpi/ic_launcher.webp"
+        "merged": "C:\\Users\\sagie\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-debug-87:\\drawable_ic_launcher_foreground.xml.flat",
+        "source": "C:\\Users\\sagie\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-main-89:\\drawable\\ic_launcher_foreground.xml"
     },
     {
-        "merged": "com.sr.techhelper.app-debug-87:/mipmap-xxxhdpi_ic_launcher_round.webp.flat",
-        "source": "com.sr.techhelper.app-main-89:/mipmap-xxxhdpi/ic_launcher_round.webp"
+        "merged": "C:\\Users\\sagie\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-debug-87:\\menu_app_menu.xml.flat",
+        "source": "C:\\Users\\sagie\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-main-89:\\menu\\app_menu.xml"
+    },
+    {
+        "merged": "C:\\Users\\sagie\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-debug-87:\\drawable_info_window_background.xml.flat",
+        "source": "C:\\Users\\sagie\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-main-89:\\drawable\\info_window_background.xml"
+    },
+    {
+        "merged": "C:\\Users\\sagie\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-debug-87:\\layout_fragment_create_post.xml.flat",
+        "source": "C:\\Users\\sagie\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-main-89:\\layout\\fragment_create_post.xml"
+    },
+    {
+        "merged": "C:\\Users\\sagie\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-debug-87:\\drawable_default_user.jpg.flat",
+        "source": "C:\\Users\\sagie\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-main-89:\\drawable\\default_user.jpg"
+    },
+    {
+        "merged": "C:\\Users\\sagie\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-debug-87:\\layout_activity_auth.xml.flat",
+        "source": "C:\\Users\\sagie\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-main-89:\\layout\\activity_auth.xml"
+    },
+    {
+        "merged": "C:\\Users\\sagie\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-debug-87:\\layout_comment_list_item.xml.flat",
+        "source": "C:\\Users\\sagie\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-main-89:\\layout\\comment_list_item.xml"
+    },
+    {
+        "merged": "C:\\Users\\sagie\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-debug-87:\\mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\sagie\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-main-89:\\mipmap-xxhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\sagie\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-debug-87:\\mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\sagie\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-main-89:\\mipmap-xxxhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\sagie\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-debug-87:\\drawable_ic_map.xml.flat",
+        "source": "C:\\Users\\sagie\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-main-89:\\drawable\\ic_map.xml"
     },
     {
         "merged": "com.sr.techhelper.app-debug-87:/layout_comment_list_item.xml.flat",
         "source": "com.sr.techhelper.app-main-89:/layout/comment_list_item.xml"
     },
     {
-        "merged": "com.sr.techhelper.app-debug-87:/layout_custom_info_window.xml.flat",
-        "source": "com.sr.techhelper.app-main-89:/layout/custom_info_window.xml"
+        "merged": "C:\\Users\\sagie\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-debug-87:\\mipmap-anydpi_ic_launcher.xml.flat",
+        "source": "C:\\Users\\sagie\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-main-89:\\mipmap-anydpi\\ic_launcher.xml"
     },
     {
-        "merged": "com.sr.techhelper.app-debug-87:/drawable_empty_profile_picture.xml.flat",
-        "source": "com.sr.techhelper.app-main-89:/drawable/empty_profile_picture.xml"
+        "merged": "C:\\Users\\sagie\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-debug-87:\\layout_fragment_map.xml.flat",
+        "source": "C:\\Users\\sagie\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-main-89:\\layout\\fragment_map.xml"
     },
     {
-        "merged": "com.sr.techhelper.app-debug-87:/mipmap-xhdpi_ic_launcher.webp.flat",
-        "source": "com.sr.techhelper.app-main-89:/mipmap-xhdpi/ic_launcher.webp"
+        "merged": "C:\\Users\\sagie\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-debug-87:\\layout_fragment_posts_list.xml.flat",
+        "source": "C:\\Users\\sagie\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-main-89:\\layout\\fragment_posts_list.xml"
     },
     {
-        "merged": "com.sr.techhelper.app-debug-87:/drawable_add_image_icon.xml.flat",
-        "source": "com.sr.techhelper.app-main-89:/drawable/add_image_icon.xml"
-    },
-    {
-        "merged": "com.sr.techhelper.app-debug-87:/mipmap-mdpi_ic_launcher_round.webp.flat",
-        "source": "com.sr.techhelper.app-main-89:/mipmap-mdpi/ic_launcher_round.webp"
-    },
-    {
-        "merged": "com.sr.techhelper.app-debug-87:/layout_fragment_profile_page.xml.flat",
-        "source": "com.sr.techhelper.app-main-89:/layout/fragment_profile_page.xml"
-    },
-    {
-        "merged": "com.sr.techhelper.app-debug-87:/xml_data_extraction_rules.xml.flat",
-        "source": "com.sr.techhelper.app-main-89:/xml/data_extraction_rules.xml"
-    },
-    {
-        "merged": "com.sr.techhelper.app-debug-87:/mipmap-anydpi_ic_launcher_round.xml.flat",
-        "source": "com.sr.techhelper.app-main-89:/mipmap-anydpi/ic_launcher_round.xml"
-    },
-    {
-        "merged": "com.sr.techhelper.app-debug-87:/xml_backup_rules.xml.flat",
-        "source": "com.sr.techhelper.app-main-89:/xml/backup_rules.xml"
-    },
-    {
-        "merged": "com.sr.techhelper.app-debug-87:/layout_fragment_map.xml.flat",
-        "source": "com.sr.techhelper.app-main-89:/layout/fragment_map.xml"
-    },
-    {
-        "merged": "com.sr.techhelper.app-debug-87:/navigation_app_navigation.xml.flat",
-        "source": "com.sr.techhelper.app-main-89:/navigation/app_navigation.xml"
+        "merged": "C:\\Users\\sagie\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-debug-87:\\layout_post_list_item.xml.flat",
+        "source": "C:\\Users\\sagie\\.gradle\\daemon\\8.10.2\\com.sr.techhelper.app-main-89:\\layout\\post_list_item.xml"
     }
 ]

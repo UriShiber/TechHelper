@@ -18,6 +18,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.sr.techhelper.R
 import com.sr.techhelper.data.comments.CommentModel
 import androidx.fragment.app.activityViewModels
+import com.sr.techhelper.data.comments.CommentWithSender
 import com.sr.techhelper.data.posts.PostWithSender
 import com.sr.techhelper.ui.main.CommentsViewModel
 import com.sr.techhelper.utils.ImageUtils
@@ -29,7 +30,7 @@ class PostsAdapter(
     private val onCommentSubmit: (CommentModel) -> Unit  // Callback for comment submission
 ) : RecyclerView.Adapter<PostsAdapter.PostViewHolder>() {
     private var posts: List<PostWithSender> = emptyList()
-    private var comments = listOf<CommentModel>()
+    private var comments = listOf<CommentWithSender>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
         val inflator = LayoutInflater.from(parent.context)
@@ -39,7 +40,7 @@ class PostsAdapter(
 
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
         val post = posts[position]
-        val postComments = comments.filter { it.postId == post.post.id }  // Filter comments by postId
+        val postComments = comments.filter { it.comment.postId == post.post.id }  // Filter comments by postId
         holder.bind(post, postComments)
     }
 
@@ -60,7 +61,7 @@ class PostsAdapter(
         private val postLocationLat: TextView = itemView.findViewById(R.id.post_row_location_lat_text_view)
         private val postLocationLng: TextView = itemView.findViewById(R.id.post_row_location_lng_text_view)
 
-        fun bind(post: PostWithSender, postComments: List<CommentModel>) {
+        fun bind(post: PostWithSender, postComments: List<CommentWithSender>) {
             userName.text = post.sender.name
             Log.d("PostsAdapter", "Binding post with  profile picture: ${post.sender}")
 
@@ -127,12 +128,6 @@ class PostsAdapter(
 
                 // Call the ViewModel's addComment function to insert the comment into the database
                 onCommentSubmit(newComment)
-//
-//                // Optionally, update the UI or refresh comments
-//                commentsViewModel.getCommentsForPost(post.post.id).observeForever { updatedComments ->
-//                    // Update the comment list with new data
-//                    updateComments(updatedComments.map { it.comment })
-//                }
 
                 // Clear the input field after submission
                 addCommentEditText.text.clear()
@@ -145,7 +140,7 @@ class PostsAdapter(
         notifyDataSetChanged()
     }
 
-    fun updateComments(newComments: List<CommentModel>) {
+    fun updateComments(newComments: List<CommentWithSender>) {
         this.comments = newComments
         Log.d("PostsAdapter", "Updating comments: $comments")
         notifyDataSetChanged()
