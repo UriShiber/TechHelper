@@ -14,8 +14,8 @@ class CommentsRepository {
     private val usersRepository = UsersRepository()
     private val firestoreHandle = Firebase.firestore.collection("comments")
 
-    fun getCommentsForPost(postId: String): LiveData<List<CommentWithSender>> {
-        return commentDao.getCommentsForPost(postId)
+    fun getAllComments(): LiveData<List<CommentWithSender>> {
+        return commentDao.getAllComments()
     }
 
     suspend fun add(comment: CommentModel) = withContext(Dispatchers.IO) {

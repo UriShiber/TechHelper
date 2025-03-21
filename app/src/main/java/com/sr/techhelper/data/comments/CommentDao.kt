@@ -5,8 +5,8 @@ import androidx.room.*
 
 @Dao
 interface CommentDao {
-    @Query("SELECT * FROM comments WHERE postId = :postId")
-    fun getCommentsForPost(postId: String): LiveData<List<CommentWithSender>>
+    @Query("SELECT * FROM comments")
+    fun getAllComments(): LiveData<List<CommentWithSender>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun add(vararg comment: CommentModel)

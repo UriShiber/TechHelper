@@ -10,8 +10,8 @@ import kotlinx.coroutines.launch
 
 class CommentsViewModel() : ViewModel() {
     private val repository = CommentsRepository() // Adjusted repository for posts
-    fun getCommentsForPost(postId: String): LiveData<List<CommentWithSender>> {
-        return repository.getCommentsForPost(postId)
+    fun getAllComments(): LiveData<List<CommentWithSender>> {
+        return repository.getAllComments()
     }
 
     fun addComment(comment: CommentModel) = viewModelScope.launch {

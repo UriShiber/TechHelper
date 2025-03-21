@@ -48,13 +48,10 @@ class PostsListFragment : Fragment() {
     }
 
     private fun fetchCommentsForPosts(posts: List<PostWithSender>) {
-        // For each post, get the comments using CommentsViewModel
-        posts.forEach { post ->
-            commentsViewModel.getCommentsForPost(post.post.id).observe(viewLifecycleOwner) { commentsList ->
-                Log.d("PostsAdapter", "Fetching comments: $commentsList")
-                comments = commentsList.map { it } // todo: this is due to commentwithsender
-                postsAdapter.updateComments(comments)  // Update comments for all posts
-            }
+        commentsViewModel.getAllComments().observe(viewLifecycleOwner) { commentsList ->
+            Log.d("PostsAdapter", "Fetching comments: $commentsList")
+            comments = commentsList.map { it }
+            postsAdapter.updateComments(comments)
         }
     }
 

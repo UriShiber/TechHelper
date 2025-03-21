@@ -97,11 +97,9 @@ public final class CommentDao_Impl implements CommentDao {
   }
 
   @Override
-  public LiveData<List<CommentWithSender>> getCommentsForPost(final String postId) {
-    final String _sql = "SELECT * FROM comments WHERE postId = ?";
-    final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 1);
-    int _argIndex = 1;
-    _statement.bindString(_argIndex, postId);
+  public LiveData<List<CommentWithSender>> getAllComments() {
+    final String _sql = "SELECT * FROM comments";
+    final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 0);
     return __db.getInvalidationTracker().createLiveData(new String[] {"users",
         "comments"}, false, new Callable<List<CommentWithSender>>() {
       @Override
