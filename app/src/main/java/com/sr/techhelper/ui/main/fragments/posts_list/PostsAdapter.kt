@@ -121,14 +121,19 @@ class PostsAdapter(
                     userId = currentUserUid // Replace with actual current user ID
                 )
 
-                // Call the ViewModel's addComment function to insert the comment into the database
-                commentsViewModel.addComment(newComment)
+                // Example of adding the comment, you may want to update a data source
+                // and refresh the comments list after submitting the comment.
+                comments = comments + newComment
+                updateComments(comments)
 
-                // Optionally, update the UI or refresh comments
-                commentsViewModel.getCommentsForPost(post.post.id).observeForever { updatedComments ->
-                    // Update the comment list with new data
-                    updateComments(updatedComments.map { it.comment })
-                }
+//                // Call the ViewModel's addComment function to insert the comment into the database
+//                commentsViewModel.addComment(newComment)
+//
+//                // Optionally, update the UI or refresh comments
+//                commentsViewModel.getCommentsForPost(post.post.id).observeForever { updatedComments ->
+//                    // Update the comment list with new data
+//                    updateComments(updatedComments.map { it.comment })
+//                }
 
                 // Clear the input field after submission
                 addCommentEditText.text.clear()
