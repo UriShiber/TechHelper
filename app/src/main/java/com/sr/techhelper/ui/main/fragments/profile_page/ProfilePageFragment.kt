@@ -8,6 +8,7 @@ import android.content.Intent
 import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -27,11 +28,14 @@ import com.sr.techhelper.R
 import com.sr.techhelper.ui.main.fragments.posts_list.PostsAdapter
 import com.sr.techhelper.data.users.UserModel
 import com.sr.techhelper.ui.auth.AuthActivity
+import com.sr.techhelper.ui.main.CommentsViewModel
 import com.sr.techhelper.ui.main.PostsViewModel
+import com.sr.techhelper.ui.main.fragments.posts_list.PostsListFragmentDirections
 import com.sr.techhelper.utils.ImageUtils
 
 
 class ProfilePageFragment : Fragment() {
+    private val commentsViewModel: CommentsViewModel by activityViewModels()
     private lateinit var postsList: RecyclerView
     private val viewModel: PostsViewModel by activityViewModels()
     private var userId: String = FirebaseAuth.getInstance().currentUser!!.uid
@@ -56,7 +60,13 @@ class ProfilePageFragment : Fragment() {
             user?.let {
                 mainUser = it
                 usernameEditText.text = it.name
-                imageView.setImageBitmap(ImageUtils.decodeBase64ToImage(it.profile_picture))
+                Log.d("ProfilePageFragment", "Populating fields with: $it")
+                if (!it.profile_picture.isNullOrEmpty()) {
+                    val bitmap = ImageUtils.decodeBase64ToImage(it.profile_picture)
+                    imageView.setImageBitmap(bitmap)
+                } else {
+                    imageView.setImageResource(R.drawable.empty_profile_picture)
+                }
 
                 imageView.setOnClickListener {
                     pickImageFromGallery()
@@ -105,7 +115,7 @@ class ProfilePageFragment : Fragment() {
 
         postsList = view.findViewById(R.id.profile_page_posts_list)
         context?.let { initPostsList(it) }
-        viewModel.getAllPosts().observe(viewLifecycleOwner, {
+        viewModel.getPostsByUserId(userId).observe(viewLifecycleOwner, {
             it?.let {
                 if(it.isEmpty()) viewModel.invalidatePosts()
                 (postsList.adapter as? PostsAdapter)?.updatePosts(it)
@@ -114,14 +124,17 @@ class ProfilePageFragment : Fragment() {
         })
     }
 
-
     private fun initPostsList(context: Context) {
         postsList.run {
             layoutManager = LinearLayoutManager(context)
-            adapter = PostsAdapter{ post ->
-                val action = ProfilePageFragmentDirections.actionProfilePageFragmentToPostDetailsFragment(post.post.id)
-                findNavController().navigate(action)
-            }
+            adapter = PostsAdapter(
+                onPostClick =  { post ->
+                    val action = ProfilePageFragmentDirections.actionProfilePageFragmentToPostDetailsFragment(post.post.id)
+                    findNavController().navigate(action)
+                },
+                onCommentSubmit = { comment ->
+                    commentsViewModel.addComment(comment)  // Use the ViewModel to add the comment
+                })
             addItemDecoration(
                 DividerItemDecoration(
                     context,

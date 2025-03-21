@@ -112,6 +112,7 @@ class EditPostFragment : Fragment() {
         if (requestCode == REQUEST_IMAGE_PICK && resultCode == Activity.RESULT_OK) {
             val uri: Uri? = data?.data
             uri?.let {
+                Log.d("EditPostFragment", "Selected image URI: $uri")
                 imageView.setImageURI(uri)
                 base64Image = ImageUtils.convertImageToBase64(uri, requireContext())
             }

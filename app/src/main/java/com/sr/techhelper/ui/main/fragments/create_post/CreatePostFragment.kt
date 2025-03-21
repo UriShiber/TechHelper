@@ -72,6 +72,10 @@ class CreatePostFragment : Fragment() {
         }
 
         saveButton.setOnClickListener {
+            // If no image is selected, set base64Image to empty string
+            if (!::base64Image.isInitialized) {
+                base64Image = "" // Default to empty string if no image
+            }
             val newPost = PostModel(
                 userId = userUid,
                 title = titleEditText.text.toString(),

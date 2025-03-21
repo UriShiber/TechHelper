@@ -3342,6 +3342,7 @@ id action_text
 id actions
 id activity_chooser_view_content
 id add
+id add_comment_edit_text
 id add_post_description_edit_text
 id add_post_description_text_view
 id add_post_title_edit_text
@@ -3421,6 +3422,12 @@ id clip_vertical
 id clockwise
 id closest
 id collapseActionView
+id collapse_comments_list_button
+id comment_content
+id comment_user_image
+id comment_user_name
+id comments_recycler_view
+id comments_recycler_view_container
 id compose_view_saveable_id_tag
 id compress
 id confirm_button
@@ -3824,6 +3831,7 @@ id stop
 id stretch
 id submenuarrow
 id submit_area
+id submit_comment_button
 id supportScrollUp
 id tabMode
 id tag_accessibility_actions
@@ -3858,6 +3866,7 @@ id textinput_prefix_text
 id textinput_suffix_text
 id ticker
 id time
+id timestamp
 id title
 id titleDividerNoCustom
 id titleTextView
@@ -4036,6 +4045,7 @@ layout activity_auth
 layout activity_main
 layout browser_actions_context_menu_page
 layout browser_actions_context_menu_row
+layout comment_list_item
 layout custom_dialog
 layout custom_info_window
 layout design_bottom_navigation_item

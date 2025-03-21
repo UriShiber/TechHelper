@@ -4,7 +4,7 @@
             "outputFile": "com.sr.techhelper.app-mergeDebugResources-85:/values-w320dp-land-v13/values-w320dp-land-v13.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Admin\\.gradle\\caches\\8.10.2\\transforms\\cb5a4af47345968061777a2ec0c9adb6\\transformed\\material-1.10.0\\res\\values-w320dp-land-v13\\values-w320dp-land-v13.xml",
+                    "source": "C:\\Users\\sagie\\.gradle\\caches\\8.10.2\\transforms\\cb5a4af47345968061777a2ec0c9adb6\\transformed\\material-1.10.0\\res\\values-w320dp-land-v13\\values-w320dp-land-v13.xml",
                     "from": {
                         "startLines": "2,3",
                         "startColumns": "4,4",

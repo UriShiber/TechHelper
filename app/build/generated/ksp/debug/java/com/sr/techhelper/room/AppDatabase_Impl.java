@@ -11,6 +11,8 @@ import androidx.room.util.DBUtil;
 import androidx.room.util.TableInfo;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 import androidx.sqlite.db.SupportSQLiteOpenHelper;
+import com.sr.techhelper.data.comments.CommentDao;
+import com.sr.techhelper.data.comments.CommentDao_Impl;
 import com.sr.techhelper.data.posts.PostDao;
 import com.sr.techhelper.data.posts.PostDao_Impl;
 import com.sr.techhelper.data.users.UsersDao;
@@ -35,22 +37,26 @@ public final class AppDatabase_Impl extends AppDatabase {
 
   private volatile PostDao _postDao;
 
+  private volatile CommentDao _commentDao;
+
   @Override
   @NonNull
   protected SupportSQLiteOpenHelper createOpenHelper(@NonNull final DatabaseConfiguration config) {
-    final SupportSQLiteOpenHelper.Callback _openCallback = new RoomOpenHelper(config, new RoomOpenHelper.Delegate(4) {
+    final SupportSQLiteOpenHelper.Callback _openCallback = new RoomOpenHelper(config, new RoomOpenHelper.Delegate(6) {
       @Override
       public void createAllTables(@NonNull final SupportSQLiteDatabase db) {
         db.execSQL("CREATE TABLE IF NOT EXISTS `posts` (`id` TEXT NOT NULL, `title` TEXT NOT NULL, `description` TEXT NOT NULL, `userId` TEXT NOT NULL, `locationLng` REAL NOT NULL, `locationLat` REAL NOT NULL, `image` TEXT, PRIMARY KEY(`id`), FOREIGN KEY(`userId`) REFERENCES `users`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION )");
         db.execSQL("CREATE TABLE IF NOT EXISTS `users` (`id` TEXT NOT NULL, `name` TEXT NOT NULL, `email` TEXT NOT NULL, `profile_picture` TEXT NOT NULL, PRIMARY KEY(`id`))");
+        db.execSQL("CREATE TABLE IF NOT EXISTS `comments` (`id` TEXT NOT NULL, `postId` TEXT NOT NULL, `userId` TEXT NOT NULL, `content` TEXT NOT NULL, `timestamp` INTEGER NOT NULL, PRIMARY KEY(`id`), FOREIGN KEY(`postId`) REFERENCES `posts`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION )");
         db.execSQL("CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)");
-        db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '7359cb357ba487ed4c9180ce719acd30')");
+        db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '0ed18b2c3dc397425f9345b862b41e03')");
       }
 
       @Override
       public void dropAllTables(@NonNull final SupportSQLiteDatabase db) {
         db.execSQL("DROP TABLE IF EXISTS `posts`");
         db.execSQL("DROP TABLE IF EXISTS `users`");
+        db.execSQL("DROP TABLE IF EXISTS `comments`");
         final List<? extends RoomDatabase.Callback> _callbacks = mCallbacks;
         if (_callbacks != null) {
           for (RoomDatabase.Callback _callback : _callbacks) {
@@ -127,9 +133,25 @@ public final class AppDatabase_Impl extends AppDatabase {
                   + " Expected:\n" + _infoUsers + "\n"
                   + " Found:\n" + _existingUsers);
         }
+        final HashMap<String, TableInfo.Column> _columnsComments = new HashMap<String, TableInfo.Column>(5);
+        _columnsComments.put("id", new TableInfo.Column("id", "TEXT", true, 1, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsComments.put("postId", new TableInfo.Column("postId", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsComments.put("userId", new TableInfo.Column("userId", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsComments.put("content", new TableInfo.Column("content", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsComments.put("timestamp", new TableInfo.Column("timestamp", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        final HashSet<TableInfo.ForeignKey> _foreignKeysComments = new HashSet<TableInfo.ForeignKey>(1);
+        _foreignKeysComments.add(new TableInfo.ForeignKey("posts", "NO ACTION", "NO ACTION", Arrays.asList("postId"), Arrays.asList("id")));
+        final HashSet<TableInfo.Index> _indicesComments = new HashSet<TableInfo.Index>(0);
+        final TableInfo _infoComments = new TableInfo("comments", _columnsComments, _foreignKeysComments, _indicesComments);
+        final TableInfo _existingComments = TableInfo.read(db, "comments");
+        if (!_infoComments.equals(_existingComments)) {
+          return new RoomOpenHelper.ValidationResult(false, "comments(com.sr.techhelper.data.comments.CommentModel).\n"
+                  + " Expected:\n" + _infoComments + "\n"
+                  + " Found:\n" + _existingComments);
+        }
         return new RoomOpenHelper.ValidationResult(true, null);
       }
-    }, "7359cb357ba487ed4c9180ce719acd30", "996837ea4e3705fde6b62cfa16b4b819");
+    }, "0ed18b2c3dc397425f9345b862b41e03", "7ce0979b6efe31825e2427430e13356f");
     final SupportSQLiteOpenHelper.Configuration _sqliteConfig = SupportSQLiteOpenHelper.Configuration.builder(config.context).name(config.name).callback(_openCallback).build();
     final SupportSQLiteOpenHelper _helper = config.sqliteOpenHelperFactory.create(_sqliteConfig);
     return _helper;
@@ -140,7 +162,7 @@ public final class AppDatabase_Impl extends AppDatabase {
   protected InvalidationTracker createInvalidationTracker() {
     final HashMap<String, String> _shadowTablesMap = new HashMap<String, String>(0);
     final HashMap<String, Set<String>> _viewTables = new HashMap<String, Set<String>>(0);
-    return new InvalidationTracker(this, _shadowTablesMap, _viewTables, "posts","users");
+    return new InvalidationTracker(this, _shadowTablesMap, _viewTables, "posts","users","comments");
   }
 
   @Override
@@ -158,6 +180,7 @@ public final class AppDatabase_Impl extends AppDatabase {
       }
       _db.execSQL("DELETE FROM `posts`");
       _db.execSQL("DELETE FROM `users`");
+      _db.execSQL("DELETE FROM `comments`");
       super.setTransactionSuccessful();
     } finally {
       super.endTransaction();
@@ -177,6 +200,7 @@ public final class AppDatabase_Impl extends AppDatabase {
     final HashMap<Class<?>, List<Class<?>>> _typeConvertersMap = new HashMap<Class<?>, List<Class<?>>>();
     _typeConvertersMap.put(UsersDao.class, UsersDao_Impl.getRequiredConverters());
     _typeConvertersMap.put(PostDao.class, PostDao_Impl.getRequiredConverters());
+    _typeConvertersMap.put(CommentDao.class, CommentDao_Impl.getRequiredConverters());
     return _typeConvertersMap;
   }
 
@@ -219,6 +243,20 @@ public final class AppDatabase_Impl extends AppDatabase {
           _postDao = new PostDao_Impl(this);
         }
         return _postDao;
+      }
+    }
+  }
+
+  @Override
+  public CommentDao commentDao() {
+    if (_commentDao != null) {
+      return _commentDao;
+    } else {
+      synchronized(this) {
+        if(_commentDao == null) {
+          _commentDao = new CommentDao_Impl(this);
+        }
+        return _commentDao;
       }
     }
   }

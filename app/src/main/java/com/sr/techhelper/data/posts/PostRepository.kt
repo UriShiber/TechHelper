@@ -18,6 +18,10 @@ class PostsRepository {
         return postDao.getAllPosts()
     }
 
+    fun getPostsByUserId(userId: String): LiveData<List<PostWithSender>> {
+        return postDao.getPostsByUserId(userId)
+    }
+
     suspend fun add(post: PostModel) = withContext(Dispatchers.IO) {
         firestoreHandle.add(post).await()
         postDao.add(post)

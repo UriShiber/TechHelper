@@ -29,6 +29,10 @@ class PostsViewModel : ViewModel() {
         return this.repository.getAllPosts() // Fetch all posts from repository
     }
 
+    fun getPostsByUserId(userId: String): LiveData<List<PostWithSender>> {
+        return this.repository.getPostsByUserId(userId) // Fetch all posts from repository
+    }
+
     fun getUserById(id: String): LiveData<UserModel?> {
         val userLiveData = MutableLiveData<UserModel?>()
         viewModelScope.launch {

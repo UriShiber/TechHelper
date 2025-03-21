@@ -11,6 +11,7 @@ import androidx.appcompat.widget.AppCompatImageButton
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
+import com.google.firebase.auth.FirebaseAuth
 import com.sr.techhelper.R
 import com.sr.techhelper.data.posts.PostModel
 import com.sr.techhelper.data.posts.PostWithSender
@@ -19,6 +20,7 @@ import com.sr.techhelper.utils.ImageUtils
 
 class PostDetailsFragment : Fragment() {
     private val viewModel: PostsViewModel by activityViewModels()
+    private var userId: String = FirebaseAuth.getInstance().currentUser!!.uid
 
     private lateinit var postImageView: ImageView
     private lateinit var postTitleTextView: TextView
@@ -84,6 +86,10 @@ class PostDetailsFragment : Fragment() {
         postUserNameTextView.text = post.sender.name
         postLocationLngTextView.text = post.post.locationLng.toString()
         postLocationLatTextView.text = post.post.locationLat.toString()
+
+        if(post.sender.id == userId) {
+            editButton.visibility = View.VISIBLE
+        }
 
         post.post.image?.let {
             val bitmap = ImageUtils.decodeBase64ToImage(it)

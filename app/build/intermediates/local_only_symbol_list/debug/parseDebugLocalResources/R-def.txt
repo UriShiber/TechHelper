@@ -22,6 +22,7 @@ id action_postDetailsFragment_to_postsListFragment
 id action_postsListFragment_to_postDetailsFragment
 id action_profilePageFragment_to_postDetailsFragment
 id add
+id add_comment_edit_text
 id add_post_description_edit_text
 id add_post_description_text_view
 id add_post_title_edit_text
@@ -30,6 +31,12 @@ id app_navigation
 id back_button
 id bottomNavigationView
 id cancel_button
+id collapse_comments_list_button
+id comment_content
+id comment_user_image
+id comment_user_name
+id comments_recycler_view
+id comments_recycler_view_container
 id createPostFragment
 id create_post_form
 id create_post_image
@@ -69,6 +76,8 @@ id profile_page_posts_list
 id profile_picture
 id save_button
 id save_changes_button
+id submit_comment_button
+id timestamp
 id titleTextView
 id title_text_view
 id userIdTextView
@@ -78,6 +87,7 @@ id user_name_text_view
 id username_edit_text
 layout activity_auth
 layout activity_main
+layout comment_list_item
 layout custom_info_window
 layout fragment_create_post
 layout fragment_edit_post
