@@ -10,19 +10,23 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.sr.techhelper.R
 import com.sr.techhelper.data.comments.CommentModel
+import androidx.fragment.app.activityViewModels
 import com.sr.techhelper.data.posts.PostWithSender
+import com.sr.techhelper.ui.main.CommentsViewModel
 import com.sr.techhelper.utils.ImageUtils
 import java.util.Date
 
 
 class PostsAdapter(
     private val onPostClick: (PostWithSender) -> Unit,
+    private val onCommentSubmit: (CommentModel) -> Unit  // Callback for comment submission
 ) : RecyclerView.Adapter<PostsAdapter.PostViewHolder>() {
     private var posts: List<PostWithSender> = emptyList()
     private var comments = listOf<CommentModel>()
@@ -123,11 +127,11 @@ class PostsAdapter(
 
                 // Example of adding the comment, you may want to update a data source
                 // and refresh the comments list after submitting the comment.
-                comments = comments + newComment
-                updateComments(comments)
+//                comments = comments + newComment
+//                updateComments(comments)
 
-//                // Call the ViewModel's addComment function to insert the comment into the database
-//                commentsViewModel.addComment(newComment)
+                // Call the ViewModel's addComment function to insert the comment into the database
+                onCommentSubmit(newComment)
 //
 //                // Optionally, update the UI or refresh comments
 //                commentsViewModel.getCommentsForPost(post.post.id).observeForever { updatedComments ->

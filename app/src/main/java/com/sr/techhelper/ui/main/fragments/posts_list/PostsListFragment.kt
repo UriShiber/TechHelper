@@ -58,10 +58,14 @@ class PostsListFragment : Fragment() {
     }
 
     private fun initPostsList(context: Context) {
-        postsAdapter = PostsAdapter { post ->
+        postsAdapter = PostsAdapter(
+            onPostClick =  { post ->
             val action = PostsListFragmentDirections.actionPostsListFragmentToPostDetailsFragment(post.post.id)
             findNavController().navigate(action)
-        }
+        },
+        onCommentSubmit = { comment ->
+            commentsViewModel.addComment(comment)  // Use the ViewModel to add the comment
+        })
 
         postsList.apply {
             layoutManager = LinearLayoutManager(context)
