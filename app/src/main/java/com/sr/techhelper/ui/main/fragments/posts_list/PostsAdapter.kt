@@ -125,11 +125,6 @@ class PostsAdapter(
                     userId = currentUserUid // Replace with actual current user ID
                 )
 
-                // Example of adding the comment, you may want to update a data source
-                // and refresh the comments list after submitting the comment.
-//                comments = comments + newComment
-//                updateComments(comments)
-
                 // Call the ViewModel's addComment function to insert the comment into the database
                 onCommentSubmit(newComment)
 //
