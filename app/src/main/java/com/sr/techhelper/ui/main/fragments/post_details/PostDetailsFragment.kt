@@ -89,7 +89,7 @@ class PostDetailsFragment : Fragment() {
         postDescriptionTextView.text = post.post.description
         postUserNameTextView.text = post.sender.name
         val separator = " #"
-        postTagsTextView.text = "#${post.post.tags?.joinToString(separator)}"
+        postTagsTextView.text = if (post.post.tags.isNullOrEmpty()) "" else "#${post.post.tags?.joinToString(separator)}"
         postLocationLngTextView.text = post.post.locationLng.toString()
         postLocationLatTextView.text = post.post.locationLat.toString()
 
