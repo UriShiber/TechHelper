@@ -11,4 +11,5 @@ data class CommentWithSender(
         parentColumn = "userId",
         entityColumn = "id"
     ) val sender: UserModel
-)
+) {
+}
