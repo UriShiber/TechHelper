@@ -1,11 +1,15 @@
 package com.sr.techhelper.data.comments
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.launch
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.sr.techhelper.data.users.UsersRepository
 import com.sr.techhelper.room.DatabaseHolder
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 
@@ -26,5 +30,20 @@ class CommentsRepository {
     suspend fun delete(comment: CommentModel) = withContext(Dispatchers.IO) {
         firestoreHandle.document(comment.id).delete().await()
         commentDao.delete(comment)
+    }
+
+    suspend fun deleteCommentsByPostId(postId: String) = withContext(Dispatchers.IO){
+        coroutineScope {
+            val comments = commentDao.getCommentsByPostId(postId)
+            launch {
+                comments.forEach{ comment ->
+                    firestoreHandle.document(comment.id).delete().await()
+                }
+            }
+
+            launch {
+                commentDao.deleteByPostId(postId)
+            }
+        }
     }
 }
