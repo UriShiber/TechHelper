@@ -17,7 +17,6 @@ import kotlinx.coroutines.withContext
 
 class CommentsRepository {
     private val commentDao = DatabaseHolder.getDatabase().commentDao()
-    private val usersRepository = UsersRepository()
     private val firestoreHandle = Firebase.firestore.collection("comments")
 
     fun getAllComments(): LiveData<List<CommentWithSender>> {
@@ -51,7 +50,7 @@ class CommentsRepository {
     }
 
     suspend fun add(comment: CommentModel) = withContext(Dispatchers.IO) {
-        firestoreHandle.add(comment).await()
+        firestoreHandle.document(comment.id).set(comment).await()
         commentDao.add(comment)
     }
 
