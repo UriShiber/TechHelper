@@ -25,7 +25,8 @@ data class PostModel(
     @ColumnInfo(name = "locationLng") val locationLng: Double,
     @ColumnInfo(name = "locationLat") val locationLat: Double,
     @ColumnInfo(name = "image") val image: String? = null,
-    @ColumnInfo(name = "tags") val tags: List<String>? = null
+    @ColumnInfo(name = "tags") val tags: List<String>? = null,
+    @ColumnInfo(name= "timestamp") val timestamp: Long = System.currentTimeMillis()
 ) {
     fun toPostDto(): PostDTO {
         return PostDTO(
@@ -36,6 +37,7 @@ data class PostModel(
             locationLng = locationLng,
             locationLat = locationLat,
             image = image,
+            timestamp = timestamp
 //            tags = tags
         )
     }
