@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.sr.techhelper.data.comments.CommentsRepository
 import com.sr.techhelper.data.posts.PostModel
 import com.sr.techhelper.data.posts.PostWithSender
 import com.sr.techhelper.data.posts.PostsRepository
@@ -18,6 +19,7 @@ data class PostsUiState(val reviewId: String = "")
 class PostsViewModel : ViewModel() {
     private val repository = PostsRepository() // Adjusted repository for posts
     private val usersRepository = UsersRepository()
+    private val commentsRepository = CommentsRepository()
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
@@ -78,6 +80,7 @@ class PostsViewModel : ViewModel() {
         postId: String,
     ) {
         viewModelScope.launch(Dispatchers.Main) {
+            commentsRepository.deleteCommentsByPostId(postId) // Delete comments associated with the post
             repository.deleteById(postId) // Delete a post by ID from the repository
         }
     }
