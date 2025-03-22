@@ -74,16 +74,14 @@ class EditPostFragment : Fragment() {
             }
 
             cancelButton.setOnClickListener {
-                val action = EditPostFragmentDirections.actionEditPostFragmentToPostListFragment()
-                Navigation.findNavController(it).navigate(action)
+                Navigation.findNavController(it).popBackStack()
             }
 
             deleteButton.setOnClickListener {
                 postId?.let { id ->
                     viewModel.deletePostById(id)
                 }
-                val action = EditPostFragmentDirections.actionEditPostFragmentToPostListFragment()
-                Navigation.findNavController(it).navigate(action)
+                Navigation.findNavController(it).popBackStack()
             }
 
             saveButton.setOnClickListener {
@@ -94,8 +92,7 @@ class EditPostFragment : Fragment() {
                 )
                 if (updatedPost != null && viewModel.isPostValid(updatedPost.title, updatedPost.image, updatedPost.description)) {
                     viewModel.editPost(updatedPost)
-                    val action = EditPostFragmentDirections.actionEditPostFragmentToPostDetailsFragment(postId ?: "")
-                    Navigation.findNavController(it).navigate(action)
+                    Navigation.findNavController(it).popBackStack()
                 } else {
                     Toast.makeText(requireContext(), "Please fill in all fields", Toast.LENGTH_SHORT).show()
                 }
