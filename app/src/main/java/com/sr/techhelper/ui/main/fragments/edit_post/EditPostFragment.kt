@@ -67,7 +67,7 @@ class EditPostFragment : Fragment() {
             }
 
             currentPost?.let {
-                Log.d("EditPostFragment", "Populating fields with: $it")
+                Log.d("EditPostFragment", "Populating fields with: ${it.post.title}")
                 titleText.setText(it.post.title)
                 descriptionText.setText(it.post.description)
             }

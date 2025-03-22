@@ -60,7 +60,7 @@ class ProfilePageFragment : Fragment() {
             user?.let {
                 mainUser = it
                 usernameEditText.text = it.name
-                Log.d("ProfilePageFragment", "Populating fields with: $it")
+                Log.d("ProfilePageFragment", "Populating fields with: ${it.name}")
                 if (!it.profile_picture.isNullOrEmpty()) {
                     val bitmap = ImageUtils.decodeBase64ToImage(it.profile_picture)
                     imageView.setImageBitmap(bitmap)

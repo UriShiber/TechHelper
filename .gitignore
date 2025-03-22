@@ -76,5 +76,4 @@ kotlin-ide/
 .teamcity/
 .npmrc
 **/build/**
-# Local configuration file (contains SDK path, etc)
-local.properties
+

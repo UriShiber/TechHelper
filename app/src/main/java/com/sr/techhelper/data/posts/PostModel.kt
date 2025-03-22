@@ -4,6 +4,9 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
+import androidx.room.TypeConverter
+import androidx.room.TypeConverters
+import com.sr.techhelper.data.StringListConverters
 import com.sr.techhelper.data.users.UserModel
 import java.util.UUID
 
@@ -13,6 +16,7 @@ import java.util.UUID
         parentColumns = ["id"],
         childColumns = ["userId"]
     )])
+@TypeConverters(StringListConverters::class)
 data class PostModel(
     @PrimaryKey val id: String = UUID.randomUUID().toString(),
     @ColumnInfo(name = "title") val title: String,
@@ -21,6 +25,7 @@ data class PostModel(
     @ColumnInfo(name = "locationLng") val locationLng: Double,
     @ColumnInfo(name = "locationLat") val locationLat: Double,
     @ColumnInfo(name = "image") val image: String? = null,
+    @ColumnInfo(name = "tags") val tags: List<String>? = null
 ) {
     fun toPostDto(): PostDTO {
         return PostDTO(
@@ -30,7 +35,8 @@ data class PostModel(
             userId = userId,
             locationLng = locationLng,
             locationLat = locationLat,
-            image = image
+            image = image,
+//            tags = tags
         )
     }
 }

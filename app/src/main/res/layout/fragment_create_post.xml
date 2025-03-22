@@ -103,6 +103,18 @@
                 android:layout_height="wrap_content"
                 android:text=""
                 android:layout_gravity="center_horizontal"/>
+            <Button
+                android:id="@+id/generate_tags_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Generate Tags" />
+
+            <TextView
+                android:id="@+id/generated_tags_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Generated Tags will appear here"
+                android:layout_marginTop="8dp"/>
         </LinearLayout>
 
         <LinearLayout
