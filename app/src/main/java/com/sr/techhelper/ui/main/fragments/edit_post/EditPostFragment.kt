@@ -16,6 +16,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import com.sr.techhelper.R
@@ -91,11 +92,12 @@ class EditPostFragment : Fragment() {
                         description = descriptionText.text.toString(),
                         image = base64Image ?: currentPost?.post?.image
                 )
-
-                updatedPost?.let { post ->
-                    viewModel.editPost(post)
+                if (updatedPost != null && viewModel.isPostValid(updatedPost.title, updatedPost.image, updatedPost.description)) {
+                    viewModel.editPost(updatedPost)
                     val action = EditPostFragmentDirections.actionEditPostFragmentToPostDetailsFragment(postId ?: "")
                     Navigation.findNavController(it).navigate(action)
+                } else {
+                    Toast.makeText(requireContext(), "Please fill in all fields", Toast.LENGTH_SHORT).show()
                 }
             }
         }

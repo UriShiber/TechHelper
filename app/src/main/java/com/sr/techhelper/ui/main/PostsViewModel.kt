@@ -97,4 +97,8 @@ class PostsViewModel : ViewModel() {
             repository.deleteById(postId) // Delete a post by ID from the repository
         }
     }
+
+    fun isPostValid(title: String, image: String?, description: String): Boolean {
+        return title.isNotBlank() && image != null && image != "" && description.isNotBlank()
+    }
 }
