@@ -78,6 +78,8 @@ dependencies {
     implementation(libs.androidx.ui.android)
     implementation(libs.androidx.foundation.layout.android)
     implementation(libs.play.services.location)
+    implementation(libs.navigation.fragment.ktx)
+    implementation(libs.navigation.ui.ktx)
     ksp(libs.androidx.room.compiler)
     implementation(libs.androidx.room.runtime)
     implementation(platform(libs.firebase.bom))

@@ -84,7 +84,7 @@ class PostsAdapter(
                 postImage.setImageResource(R.drawable.empty_profile_picture)
             }
             val separator = " #"
-            postTags.text = "#${post.post.tags?.joinToString(separator)}"
+            postTags.text = if (post.post.tags.isNullOrEmpty()) "" else "#${post.post.tags?.joinToString(separator)}"
 
             postLocationLat.text = "Lat: ${post.post.locationLat}"
             postLocationLng.text = "Lng: ${post.post.locationLng}"
