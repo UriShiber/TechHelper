@@ -10,8 +10,7 @@ class StringListConverters {
     private val listType: Type = object : TypeToken<List<String>>() {}.type
 
     @TypeConverter
-    fun fromStringList(value: String?): List<String>? {
-        println("herrreee")
+    fun toStringList(value: String?): List<String>? {
         return if (value == null) {
             null
         } else {
@@ -20,8 +19,7 @@ class StringListConverters {
     }
 
     @TypeConverter
-    fun toStringList(list: List<String>?): String? {
-        println("Not hereee")
+    fun fromStringList(list: List<String>?): String? {
         return if(list == null){
             null
         } else{
