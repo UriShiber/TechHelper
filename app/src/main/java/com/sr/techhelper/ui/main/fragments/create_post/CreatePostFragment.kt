@@ -16,7 +16,9 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.ui.semantics.error
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -33,6 +35,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import kotlin.text.isBlank
+import kotlin.text.isNullOrEmpty
 
 class CreatePostFragment : Fragment() {
     private val viewModel: PostsViewModel by activityViewModels()
@@ -41,7 +45,7 @@ class CreatePostFragment : Fragment() {
     private lateinit var geminiApiClient: GeminiApiClient
 
     private lateinit var imageView: ImageView
-    private lateinit var base64Image: String
+    private var base64Image: String? = null
     private var currentLatitude: Double = 0.0
     private var currentLongitude: Double = 0.0
     private var generatedTags = listOf<String>()
@@ -91,25 +95,26 @@ class CreatePostFragment : Fragment() {
         }
 
         saveButton.setOnClickListener {
-            // If no image is selected, set base64Image to empty string
-            if (!::base64Image.isInitialized) {
-                base64Image = "" // Default to empty string if no image
+            if (viewModel.isPostValid(titleEditText.text.toString(), base64Image, descriptionEditText.text.toString())) {
+                val newPost = PostModel(
+                    userId = userUid,
+                    title = titleEditText.text.toString(),
+                    description = descriptionEditText.text.toString(),
+                    locationLat = currentLatitude,
+                    locationLng = currentLongitude,
+                    image = base64Image,
+                    tags = generatedTags
+                )
+                viewModel.addPost(newPost)
+                val action = CreatePostFragmentDirections.actionCreatePostFragmentToPostListFragment()
+                Navigation.findNavController(it).navigate(action)
+            } else {
+                Toast.makeText(requireContext(), "Please fill in all fields", Toast.LENGTH_SHORT).show()
             }
-            val newPost = PostModel(
-                userId = userUid,
-                title = titleEditText.text.toString(),
-                description = descriptionEditText.text.toString(),
-                locationLat = currentLatitude,
-                locationLng = currentLongitude,
-                image = base64Image,
-                tags = generatedTags
-            )
-            viewModel.addPost(newPost)
-            val action = CreatePostFragmentDirections.actionCreatePostFragmentToPostListFragment()
-            Navigation.findNavController(it).navigate(action)
         }
-        getCurrentLocation()
     }
+
+
 
     private fun getCurrentLocation() {
         if (ActivityCompat.checkSelfPermission(

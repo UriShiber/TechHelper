@@ -78,8 +78,7 @@ class PostDetailsFragment : Fragment() {
         }
 
         backButton.setOnClickListener {
-            val action = PostDetailsFragmentDirections.actionPostDetailsFragmentToPostsListFragment()
-            Navigation.findNavController(it).navigate(action)
+            Navigation.findNavController(it).popBackStack()
         }
     }
 
