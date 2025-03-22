@@ -18,4 +18,17 @@ data class CommentModel(
     val userId: String,
     val content: String,
     val timestamp: Long
-)
+) {
+    companion object {
+        @JvmStatic
+        fun fromMap(map: Map<String, Any>): CommentModel {
+            return CommentModel(
+                id = map["id"] as String,
+                content = map["content"] as String,
+                postId = map["postId"] as String,
+                userId = map["userId"] as String,
+                timestamp = (map["timestamp"] as Number).toLong()
+            )
+        }
+    }
+}
