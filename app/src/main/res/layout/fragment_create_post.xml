@@ -113,6 +113,18 @@
                     android:inputType="textMultiLine"
                     android:minLines="3" />
             </com.google.android.material.textfield.TextInputLayout>
+            <Button
+                android:id="@+id/generate_tags_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorPrimary"
+                android:text="Generate Tags" />
+            <TextView
+                android:id="@+id/generated_tags_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Generated Tags will appear here"
+                android:layout_marginTop="8dp"/>
 
         </LinearLayout>
 
