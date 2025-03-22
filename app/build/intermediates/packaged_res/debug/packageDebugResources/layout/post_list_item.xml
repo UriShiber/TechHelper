@@ -163,7 +163,7 @@
                 android:background="@drawable/rounded_edit_text_background"
                 android:hint="Add a comment..."
                 android:inputType="text"
-                android:padding="12dp" />
+                android:padding="8dp" />
 
             <!-- Submit Comment Button -->
             <Button

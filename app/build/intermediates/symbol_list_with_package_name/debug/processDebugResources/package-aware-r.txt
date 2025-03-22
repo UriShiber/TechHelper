@@ -3435,6 +3435,7 @@ id closest
 id collapseActionView
 id collapse_comments_list_button
 id comment_content
+id comment_content_container
 id comment_user_image
 id comment_user_name
 id comments_recycler_view
