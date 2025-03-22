@@ -1,9 +1,11 @@
 package com.sr.techhelper.ui.main
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.firebase.auth.FirebaseUser
 import com.sr.techhelper.data.posts.PostModel
 import com.sr.techhelper.data.posts.PostWithSender
 import com.sr.techhelper.data.posts.PostsRepository
@@ -38,6 +40,17 @@ class PostsViewModel : ViewModel() {
         viewModelScope.launch {
             val user = withContext(Dispatchers.IO) {
                 usersRepository.getUserByUid(id) // Get user by ID for post details
+            }
+            userLiveData.postValue(user)
+        }
+        return userLiveData
+    }
+
+    fun doUserExist(fireBaseUser: FirebaseUser): LiveData<UserModel?> {
+        val userLiveData = MutableLiveData<UserModel?>()
+        viewModelScope.launch {
+            val user = withContext(Dispatchers.IO) {
+                usersRepository.getUserByEmail(fireBaseUser.email!!) // Get user by email to check if exists
             }
             userLiveData.postValue(user)
         }

@@ -1,5 +1,6 @@
 package com.sr.techhelper.data.users
 
+import android.util.Log
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.sr.techhelper.room.DatabaseHolder
@@ -41,10 +42,28 @@ class UsersRepository {
         return@withContext this@UsersRepository.getUserFromRemoteSource(uid)
     }
 
+    suspend fun getUserByEmail(email: String): UserModel? = withContext(Dispatchers.IO) {
+        val cachedResult = usersDao.getUserByEmail(email)
+        if (cachedResult != null) return@withContext cachedResult
+
+        return@withContext this@UsersRepository.getUserFromRemoteSourceByEmail(email)
+    }
+
     private suspend fun getUserFromRemoteSource(uid: String): UserModel? =
         withContext(Dispatchers.IO) {
             val user =
                 firestoreHandle.document(uid).get().await().toObject(UserDTO::class.java)?.toUserModel()
+            if (user != null) {
+                usersDao.upsertAll(user)
+            }
+            return@withContext user
+        }
+
+    private suspend fun getUserFromRemoteSourceByEmail(email: String): UserModel? =
+        withContext(Dispatchers.IO) {
+            val query = firestoreHandle.whereEqualTo("email", email).limit(1)
+            val result = query.get().await()
+            val user = result.toObjects(UserDTO::class.java).firstOrNull()?.toUserModel()
             if (user != null) {
                 usersDao.upsertAll(user)
             }

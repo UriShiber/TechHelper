@@ -14,9 +14,13 @@ import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
 import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
 import com.google.firebase.auth.FirebaseAuth
 import com.sr.techhelper.R
+import com.sr.techhelper.data.users.UserModel
 import com.sr.techhelper.ui.main.MainActivity
+import com.sr.techhelper.ui.main.PostsViewModel
 import com.sr.techhelper.utils.ImageUtils
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.suspendCancellableCoroutine
+import kotlin.coroutines.resume
 
 class AuthActivity : AppCompatActivity() {
     private val signInLauncher by lazy {
@@ -33,6 +37,7 @@ class AuthActivity : AppCompatActivity() {
     )
 
     private val viewModel: AuthViewModel by viewModels<AuthViewModel> { ViewModelProvider.NewInstanceFactory() }
+    private val userModel: PostsViewModel by viewModels<PostsViewModel> { ViewModelProvider.NewInstanceFactory() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,14 +79,28 @@ class AuthActivity : AppCompatActivity() {
             drawableImage
         }
     }
-
-
     private suspend fun onSignInResult(result: FirebaseAuthUIAuthenticationResult) {
         if (result.resultCode == RESULT_OK) {
-            val userImage = getUserImage()
-            viewModel.register(::toApp,userImage )
+            val user = FirebaseAuth.getInstance().currentUser
+            val oldUser = awaitLiveData(userModel.doUserExist(user!!))
+            if (oldUser != null) {
+
+                // User exists, sign in directly
+                toApp()
+            } else {
+                    // User doesn't exist, register
+                    val userImage = getUserImage()
+                    viewModel.register(::toApp, userImage)
+                }
+            }
         }
-    }
+
+    private suspend fun awaitLiveData(liveData: androidx.lifecycle.LiveData<UserModel?>): UserModel? =
+        suspendCancellableCoroutine { continuation ->
+            liveData.observe(this) { data ->
+                continuation.resume(data)
+            }
+        }
 
     private fun toApp() {
         startActivity(Intent(this, MainActivity::class.java))
