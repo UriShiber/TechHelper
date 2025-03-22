@@ -40,12 +40,10 @@ object ImageUtils {
 
 
     private fun internalConvertImageToBase64(inputStream: InputStream?): String {
-        println("inputStream: $inputStream")
         if (inputStream == null) {
             return ""
         }
         val originalBitmap = BitmapFactory.decodeStream(inputStream)
-        println("originalBitmap: $originalBitmap")
         // Reduce the dimensions of the image
         val scaledBitmap = Bitmap.createScaledBitmap(originalBitmap, 480, 480, true) // Adjust width/height
 
@@ -53,7 +51,6 @@ object ImageUtils {
         val compressedStream = ByteArrayOutputStream()
         scaledBitmap.compress(Bitmap.CompressFormat.JPEG, 70, compressedStream) // Lower quality to 30%
         val compressedByteArray = compressedStream.toByteArray()
-        println("compressedByteArray: $compressedByteArray")
 
         // Convert to Base64
         return Base64.encodeToString(compressedByteArray, Base64.DEFAULT)
@@ -67,9 +64,7 @@ object ImageUtils {
     suspend fun convertPhotoUrlToBase64(photoUrl: String): String = withContext(Dispatchers.IO) {
         try {
             // Load the image from the URL in background thread
-            println("photoUrl: $photoUrl")
             val inputStream = java.net.URL(photoUrl).openStream()
-            println("inputStream: $inputStream")
             internalConvertImageToBase64(inputStream)
         } catch (e: Exception) {
             e.printStackTrace()

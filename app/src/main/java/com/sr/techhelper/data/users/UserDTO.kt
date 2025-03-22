@@ -4,7 +4,7 @@ data class UserDTO(
 
     val email: String = "",
     val name: String = "",
-    val profilePicture : String = "",
+    val profile_picture : String = "",
     val id: String? = null
 ) {
     fun toUserModel(): UserModel {
@@ -12,7 +12,7 @@ data class UserDTO(
             id=id ?: "",
             email = email,
             name = name,
-            profile_picture = profilePicture
+            profile_picture = profile_picture
         )
     }
 }
