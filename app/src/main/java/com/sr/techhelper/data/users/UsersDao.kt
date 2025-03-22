@@ -10,6 +10,9 @@ interface UsersDao {
     @Query("SELECT * FROM users WHERE id LIKE :id LIMIT 1")
     suspend fun getUserByUid(id: String): UserModel?
 
+    @Query("SELECT * FROM users WHERE email LIKE :email LIMIT 1")
+    suspend fun getUserByEmail(email: String): UserModel?
+
     @Query("SELECT id FROM users WHERE id IN (:ids)")
     suspend fun getExistingUserIds(ids: List<String>): List<String>
 
