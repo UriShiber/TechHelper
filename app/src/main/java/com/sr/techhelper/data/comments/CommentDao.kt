@@ -5,7 +5,7 @@ import androidx.room.*
 
 @Dao
 interface CommentDao {
-    @Query("SELECT * FROM comments")
+    @Query("SELECT * FROM comments ORDER BY timestamp ASC")
     fun getAllComments(): LiveData<List<CommentWithSender>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
