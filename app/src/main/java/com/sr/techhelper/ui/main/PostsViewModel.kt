@@ -30,10 +30,16 @@ class PostsViewModel : ViewModel() {
     }
 
     fun getAllPosts(): LiveData<List<PostWithSender>> {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.loadPostsFromRemoteSource(50, 0) // Fetch posts from remote source
+        }
         return this.repository.getAllPosts() // Fetch all posts from repository
     }
 
     fun getPostsByUserId(userId: String): LiveData<List<PostWithSender>> {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.loadPostsFromRemoteSource(50, 0) // Fetch posts from remote source
+        }
         return this.repository.getPostsByUserId(userId) // Fetch all posts from repository
     }
 
@@ -72,6 +78,7 @@ class PostsViewModel : ViewModel() {
     ) {
         viewModelScope.launch(Dispatchers.Main) {
             repository.add(post) // Add a new post to the repository
+            repository.loadPostsFromRemoteSource(50, 0)
         }
     }
 
@@ -80,6 +87,7 @@ class PostsViewModel : ViewModel() {
     ) {
         viewModelScope.launch(Dispatchers.Main) {
             repository.edit(post) // Edit an existing post in the repository
+            repository.loadPostsFromRemoteSource(50, 0)
         }
     }
 
