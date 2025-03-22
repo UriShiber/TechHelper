@@ -11,7 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
@@ -22,7 +22,7 @@ import java.lang.String;
 
 public final class PostListItemBinding implements ViewBinding {
   @NonNull
-  private final ConstraintLayout rootView;
+  private final CardView rootView;
 
   @NonNull
   public final EditText addCommentEditText;
@@ -37,10 +37,13 @@ public final class PostListItemBinding implements ViewBinding {
   public final LinearLayout commentsRecyclerViewContainer;
 
   @NonNull
+  public final LinearLayout postContentContainer;
+
+  @NonNull
   public final ImageView postImageView;
 
   @NonNull
-  public final ConstraintLayout postListItem;
+  public final CardView postListItem;
 
   @NonNull
   public final LinearLayout postLocationContainer;
@@ -69,11 +72,11 @@ public final class PostListItemBinding implements ViewBinding {
   @NonNull
   public final TextView userNameTextView;
 
-  private PostListItemBinding(@NonNull ConstraintLayout rootView,
-      @NonNull EditText addCommentEditText, @NonNull Button collapseCommentsListButton,
-      @NonNull RecyclerView commentsRecyclerView,
-      @NonNull LinearLayout commentsRecyclerViewContainer, @NonNull ImageView postImageView,
-      @NonNull ConstraintLayout postListItem, @NonNull LinearLayout postLocationContainer,
+  private PostListItemBinding(@NonNull CardView rootView, @NonNull EditText addCommentEditText,
+      @NonNull Button collapseCommentsListButton, @NonNull RecyclerView commentsRecyclerView,
+      @NonNull LinearLayout commentsRecyclerViewContainer,
+      @NonNull LinearLayout postContentContainer, @NonNull ImageView postImageView,
+      @NonNull CardView postListItem, @NonNull LinearLayout postLocationContainer,
       @NonNull TextView postRowContentTextView, @NonNull TextView postRowLocationLatTextView,
       @NonNull TextView postRowLocationLngTextView, @NonNull TextView postRowTitleTextView,
       @NonNull Button submitCommentButton, @NonNull ImageView userImageView,
@@ -83,6 +86,7 @@ public final class PostListItemBinding implements ViewBinding {
     this.collapseCommentsListButton = collapseCommentsListButton;
     this.commentsRecyclerView = commentsRecyclerView;
     this.commentsRecyclerViewContainer = commentsRecyclerViewContainer;
+    this.postContentContainer = postContentContainer;
     this.postImageView = postImageView;
     this.postListItem = postListItem;
     this.postLocationContainer = postLocationContainer;
@@ -98,7 +102,7 @@ public final class PostListItemBinding implements ViewBinding {
 
   @Override
   @NonNull
-  public ConstraintLayout getRoot() {
+  public CardView getRoot() {
     return rootView;
   }
 
@@ -147,13 +151,19 @@ public final class PostListItemBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.post_content_container;
+      LinearLayout postContentContainer = ViewBindings.findChildViewById(rootView, id);
+      if (postContentContainer == null) {
+        break missingId;
+      }
+
       id = R.id.post_image_view;
       ImageView postImageView = ViewBindings.findChildViewById(rootView, id);
       if (postImageView == null) {
         break missingId;
       }
 
-      ConstraintLayout postListItem = (ConstraintLayout) rootView;
+      CardView postListItem = (CardView) rootView;
 
       id = R.id.post_location_container;
       LinearLayout postLocationContainer = ViewBindings.findChildViewById(rootView, id);
@@ -209,11 +219,12 @@ public final class PostListItemBinding implements ViewBinding {
         break missingId;
       }
 
-      return new PostListItemBinding((ConstraintLayout) rootView, addCommentEditText,
+      return new PostListItemBinding((CardView) rootView, addCommentEditText,
           collapseCommentsListButton, commentsRecyclerView, commentsRecyclerViewContainer,
-          postImageView, postListItem, postLocationContainer, postRowContentTextView,
-          postRowLocationLatTextView, postRowLocationLngTextView, postRowTitleTextView,
-          submitCommentButton, userImageView, userInfoContainer, userNameTextView);
+          postContentContainer, postImageView, postListItem, postLocationContainer,
+          postRowContentTextView, postRowLocationLatTextView, postRowLocationLngTextView,
+          postRowTitleTextView, submitCommentButton, userImageView, userInfoContainer,
+          userNameTextView);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

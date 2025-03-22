@@ -30,7 +30,6 @@ import com.sr.techhelper.data.users.UserModel
 import com.sr.techhelper.ui.auth.AuthActivity
 import com.sr.techhelper.ui.main.CommentsViewModel
 import com.sr.techhelper.ui.main.PostsViewModel
-import com.sr.techhelper.ui.main.fragments.posts_list.PostsListFragmentDirections
 import com.sr.techhelper.utils.ImageUtils
 
 

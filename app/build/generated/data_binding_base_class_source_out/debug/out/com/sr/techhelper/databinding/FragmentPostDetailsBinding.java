@@ -6,11 +6,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageButton;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.sr.techhelper.R;
@@ -29,37 +31,56 @@ public final class FragmentPostDetailsBinding implements ViewBinding {
   public final Button editButton;
 
   @NonNull
-  public final TextView postDescriptionTextView;
+  public final ConstraintLayout main;
 
   @NonNull
-  public final ImageView postImageView;
+  public final TextView postDetailsDescriptionTextView;
 
   @NonNull
-  public final TextView postLocationLatTextView;
+  public final LinearLayout postDetailsForm;
 
   @NonNull
-  public final TextView postLocationLngTextView;
+  public final ImageView postDetailsImage;
 
   @NonNull
-  public final TextView postTitleTextView;
+  public final LinearLayout postDetailsLocationContainer;
 
   @NonNull
-  public final TextView postUserIdTextView;
+  public final TextView postDetailsLocationLatTextView;
+
+  @NonNull
+  public final TextView postDetailsLocationLngTextView;
+
+  @NonNull
+  public final TextView postDetailsTitleTextView;
+
+  @NonNull
+  public final TextView postDetailsUsernameTextView;
+
+  @NonNull
+  public final TextView titleTextView;
 
   private FragmentPostDetailsBinding(@NonNull ScrollView rootView,
       @NonNull AppCompatImageButton backButton, @NonNull Button editButton,
-      @NonNull TextView postDescriptionTextView, @NonNull ImageView postImageView,
-      @NonNull TextView postLocationLatTextView, @NonNull TextView postLocationLngTextView,
-      @NonNull TextView postTitleTextView, @NonNull TextView postUserIdTextView) {
+      @NonNull ConstraintLayout main, @NonNull TextView postDetailsDescriptionTextView,
+      @NonNull LinearLayout postDetailsForm, @NonNull ImageView postDetailsImage,
+      @NonNull LinearLayout postDetailsLocationContainer,
+      @NonNull TextView postDetailsLocationLatTextView,
+      @NonNull TextView postDetailsLocationLngTextView, @NonNull TextView postDetailsTitleTextView,
+      @NonNull TextView postDetailsUsernameTextView, @NonNull TextView titleTextView) {
     this.rootView = rootView;
     this.backButton = backButton;
     this.editButton = editButton;
-    this.postDescriptionTextView = postDescriptionTextView;
-    this.postImageView = postImageView;
-    this.postLocationLatTextView = postLocationLatTextView;
-    this.postLocationLngTextView = postLocationLngTextView;
-    this.postTitleTextView = postTitleTextView;
-    this.postUserIdTextView = postUserIdTextView;
+    this.main = main;
+    this.postDetailsDescriptionTextView = postDetailsDescriptionTextView;
+    this.postDetailsForm = postDetailsForm;
+    this.postDetailsImage = postDetailsImage;
+    this.postDetailsLocationContainer = postDetailsLocationContainer;
+    this.postDetailsLocationLatTextView = postDetailsLocationLatTextView;
+    this.postDetailsLocationLngTextView = postDetailsLocationLngTextView;
+    this.postDetailsTitleTextView = postDetailsTitleTextView;
+    this.postDetailsUsernameTextView = postDetailsUsernameTextView;
+    this.titleTextView = titleTextView;
   }
 
   @Override
@@ -101,45 +122,71 @@ public final class FragmentPostDetailsBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.post_description_text_view;
-      TextView postDescriptionTextView = ViewBindings.findChildViewById(rootView, id);
-      if (postDescriptionTextView == null) {
+      id = R.id.main;
+      ConstraintLayout main = ViewBindings.findChildViewById(rootView, id);
+      if (main == null) {
         break missingId;
       }
 
-      id = R.id.post_image_view;
-      ImageView postImageView = ViewBindings.findChildViewById(rootView, id);
-      if (postImageView == null) {
+      id = R.id.post_details_description_text_view;
+      TextView postDetailsDescriptionTextView = ViewBindings.findChildViewById(rootView, id);
+      if (postDetailsDescriptionTextView == null) {
         break missingId;
       }
 
-      id = R.id.post_location_lat_text_view;
-      TextView postLocationLatTextView = ViewBindings.findChildViewById(rootView, id);
-      if (postLocationLatTextView == null) {
+      id = R.id.post_details_form;
+      LinearLayout postDetailsForm = ViewBindings.findChildViewById(rootView, id);
+      if (postDetailsForm == null) {
         break missingId;
       }
 
-      id = R.id.post_location_lng_text_view;
-      TextView postLocationLngTextView = ViewBindings.findChildViewById(rootView, id);
-      if (postLocationLngTextView == null) {
+      id = R.id.post_details_image;
+      ImageView postDetailsImage = ViewBindings.findChildViewById(rootView, id);
+      if (postDetailsImage == null) {
         break missingId;
       }
 
-      id = R.id.post_title_text_view;
-      TextView postTitleTextView = ViewBindings.findChildViewById(rootView, id);
-      if (postTitleTextView == null) {
+      id = R.id.post_details_location_container;
+      LinearLayout postDetailsLocationContainer = ViewBindings.findChildViewById(rootView, id);
+      if (postDetailsLocationContainer == null) {
         break missingId;
       }
 
-      id = R.id.post_user_id_text_view;
-      TextView postUserIdTextView = ViewBindings.findChildViewById(rootView, id);
-      if (postUserIdTextView == null) {
+      id = R.id.post_details_location_lat_text_view;
+      TextView postDetailsLocationLatTextView = ViewBindings.findChildViewById(rootView, id);
+      if (postDetailsLocationLatTextView == null) {
         break missingId;
       }
 
-      return new FragmentPostDetailsBinding((ScrollView) rootView, backButton, editButton,
-          postDescriptionTextView, postImageView, postLocationLatTextView, postLocationLngTextView,
-          postTitleTextView, postUserIdTextView);
+      id = R.id.post_details_location_lng_text_view;
+      TextView postDetailsLocationLngTextView = ViewBindings.findChildViewById(rootView, id);
+      if (postDetailsLocationLngTextView == null) {
+        break missingId;
+      }
+
+      id = R.id.post_details_title_text_view;
+      TextView postDetailsTitleTextView = ViewBindings.findChildViewById(rootView, id);
+      if (postDetailsTitleTextView == null) {
+        break missingId;
+      }
+
+      id = R.id.post_details_username_text_view;
+      TextView postDetailsUsernameTextView = ViewBindings.findChildViewById(rootView, id);
+      if (postDetailsUsernameTextView == null) {
+        break missingId;
+      }
+
+      id = R.id.title_text_view;
+      TextView titleTextView = ViewBindings.findChildViewById(rootView, id);
+      if (titleTextView == null) {
+        break missingId;
+      }
+
+      return new FragmentPostDetailsBinding((ScrollView) rootView, backButton, editButton, main,
+          postDetailsDescriptionTextView, postDetailsForm, postDetailsImage,
+          postDetailsLocationContainer, postDetailsLocationLatTextView,
+          postDetailsLocationLngTextView, postDetailsTitleTextView, postDetailsUsernameTextView,
+          titleTextView);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

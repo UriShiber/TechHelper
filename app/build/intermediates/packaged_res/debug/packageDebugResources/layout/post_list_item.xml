@@ -1,172 +1,181 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/post_list_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="16dp"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    android:background="?attr/selectableItemBackground">
+    android:layout_margin="8dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="2dp">
 
-    <!-- User Image and Name -->
-    <LinearLayout
-        android:id="@+id/user_info_container"
-        android:orientation="horizontal"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:gravity="start"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="wrap_content">
 
-        <!-- User Image -->
+        <!-- User Info -->
+        <LinearLayout
+            android:id="@+id/user_info_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="8dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <ImageView
+                android:id="@+id/user_image_view"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/rounded_image_background"
+                android:scaleType="centerCrop"
+                tools:src="@drawable/empty_profile_picture" />
+
+            <TextView
+                android:id="@+id/user_name_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="User Name"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!-- Post Image -->
         <ImageView
-            android:id="@+id/user_image_view"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginEnd="8dp"
-            app:srcCompat="@drawable/default_user" />
-
-        <!-- User Name -->
-        <TextView
-            android:id="@+id/user_name_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="User Name"
-            android:textStyle="bold"
-            android:textSize="16sp" />
-    </LinearLayout>
-
-    <!-- Post Image -->
-    <ImageView
-        android:id="@+id/post_image_view"
-        android:layout_width="0dp"
-        android:layout_height="200dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/user_info_container"
-        app:srcCompat="@drawable/add_image_icon" />
-
-    <!-- Post Title -->
-    <TextView
-        android:id="@+id/post_row_title_text_view"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="Post Title"
-        android:textStyle="bold"
-        android:textSize="18sp"
-        app:layout_constraintTop_toBottomOf="@id/post_image_view"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <!-- Post Description -->
-    <TextView
-        android:id="@+id/post_row_content_text_view"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="Post Description"
-        app:layout_constraintTop_toBottomOf="@id/post_row_title_text_view"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <!-- Post Location (Latitude and Longitude) -->
-    <LinearLayout
-        android:id="@+id/post_location_container"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:gravity="start"
-        app:layout_constraintTop_toBottomOf="@id/post_row_content_text_view">
-
-        <!-- Location Lat -->
-        <TextView
-            android:id="@+id/post_row_location_lat_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="31"
-            android:layout_marginEnd="16dp" />
-
-        <!-- Location Lng -->
-        <TextView
-            android:id="@+id/post_row_location_lng_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="35" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/comments_recycler_view_container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp"
-        app:layout_constraintTop_toBottomOf="@id/post_location_container"
-        >
-
-        <!-- Collapse Comment Button -->
-        <Button
-            android:id="@+id/collapse_comments_list_button"
-            android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            android:text="see comments"
-            android:textColor="@android:color/white"
-            android:background="@color/black"
-            android:layout_marginStart="8dp" />
-
-    <!-- Comments List -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/comments_recycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:nestedScrollingEnabled="false"
-        android:visibility="gone"
-        android:background="@color/light_gray"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
-
-    </LinearLayout>
-
-    <!-- Add Comment Input Field -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="8dp"
-        app:layout_constraintTop_toBottomOf="@id/comments_recycler_view_container"
-        android:gravity="center_vertical">
-
-        <!-- EditText for comment input -->
-        <EditText
-            android:id="@+id/add_comment_edit_text"
+            android:id="@+id/post_image_view"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:hint="Add a comment..."
-            android:padding="12dp"
-            android:background="@color/light_gray"
-            android:inputType="text" />
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/user_info_container"
+            tools:src="@drawable/add_image_icon" />
 
-        <!-- Submit Comment Button -->
-        <Button
-            android:id="@+id/submit_comment_button"
-            android:layout_width="wrap_content"
+        <!-- Post Content -->
+        <LinearLayout
+            android:id="@+id/post_content_container"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Post"
-            android:textColor="@android:color/white"
-            android:background="@color/colorPrimary"
-            android:layout_marginStart="8dp" />
-    </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+            android:orientation="vertical"
+            android:padding="8dp"
+            app:layout_constraintTop_toBottomOf="@id/post_image_view"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <TextView
+                android:id="@+id/post_row_title_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Post Title"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/post_row_content_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Post Description"
+                android:textColor="@color/black" />
+
+            <!-- Post Location (Latitude and Longitude) -->
+            <LinearLayout
+                android:id="@+id/post_location_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="start"
+                android:orientation="horizontal">
+
+                <!-- Location Lat -->
+                <TextView
+                    android:id="@+id/post_row_location_lat_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:text="31" />
+
+                <!-- Location Lng -->
+                <TextView
+                    android:id="@+id/post_row_location_lng_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="35" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Comments Section -->
+        <LinearLayout
+            android:id="@+id/comments_recycler_view_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp"
+            app:layout_constraintTop_toBottomOf="@id/post_content_container"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <!-- Collapse Comment Button -->
+            <Button
+                android:id="@+id/collapse_comments_list_button"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="see comments"
+                android:textColor="@color/colorPrimary"
+                app:icon="@drawable/ic_arrow_down"
+                app:iconGravity="end"
+                app:iconTint="@color/colorPrimary" />
+
+            <!-- Comments List -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/comments_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxHeight="200dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+        </LinearLayout>
+
+        <!-- Add Comment Input Field -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="8dp"
+            app:layout_constraintTop_toBottomOf="@id/comments_recycler_view_container"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <!-- EditText for comment input -->
+            <EditText
+                android:id="@+id/add_comment_edit_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/rounded_edit_text_background"
+                android:hint="Add a comment..."
+                android:inputType="text"
+                android:padding="12dp" />
+
+            <!-- Submit Comment Button -->
+            <Button
+                android:id="@+id/submit_comment_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:backgroundTint="@color/colorPrimary"
+                android:text="Post"
+                android:textColor="@android:color/white"
+                app:cornerRadius="8dp" />
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

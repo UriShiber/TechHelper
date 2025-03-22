@@ -5,15 +5,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.sr.techhelper.R;
 import java.lang.NullPointerException;
 import java.lang.Override;
@@ -21,19 +23,19 @@ import java.lang.String;
 
 public final class FragmentCreatePostBinding implements ViewBinding {
   @NonNull
-  private final ConstraintLayout rootView;
+  private final ScrollView rootView;
 
   @NonNull
-  public final EditText addPostDescriptionEditText;
+  public final TextInputEditText addPostDescriptionEditText;
 
   @NonNull
-  public final TextView addPostDescriptionTextView;
+  public final TextInputLayout addPostDescriptionTextInputLayout;
 
   @NonNull
-  public final EditText addPostTitleEditText;
+  public final TextInputEditText addPostTitleEditText;
 
   @NonNull
-  public final TextView addPostTitleTextView;
+  public final TextInputLayout addPostTitleTextInputLayout;
 
   @NonNull
   public final Button cancelButton;
@@ -56,17 +58,19 @@ public final class FragmentCreatePostBinding implements ViewBinding {
   @NonNull
   public final TextView titleTextView;
 
-  private FragmentCreatePostBinding(@NonNull ConstraintLayout rootView,
-      @NonNull EditText addPostDescriptionEditText, @NonNull TextView addPostDescriptionTextView,
-      @NonNull EditText addPostTitleEditText, @NonNull TextView addPostTitleTextView,
-      @NonNull Button cancelButton, @NonNull LinearLayout createPostForm,
-      @NonNull ImageView createPostImage, @NonNull TextView descriptionTextView,
-      @NonNull ConstraintLayout main, @NonNull Button saveButton, @NonNull TextView titleTextView) {
+  private FragmentCreatePostBinding(@NonNull ScrollView rootView,
+      @NonNull TextInputEditText addPostDescriptionEditText,
+      @NonNull TextInputLayout addPostDescriptionTextInputLayout,
+      @NonNull TextInputEditText addPostTitleEditText,
+      @NonNull TextInputLayout addPostTitleTextInputLayout, @NonNull Button cancelButton,
+      @NonNull LinearLayout createPostForm, @NonNull ImageView createPostImage,
+      @NonNull TextView descriptionTextView, @NonNull ConstraintLayout main,
+      @NonNull Button saveButton, @NonNull TextView titleTextView) {
     this.rootView = rootView;
     this.addPostDescriptionEditText = addPostDescriptionEditText;
-    this.addPostDescriptionTextView = addPostDescriptionTextView;
+    this.addPostDescriptionTextInputLayout = addPostDescriptionTextInputLayout;
     this.addPostTitleEditText = addPostTitleEditText;
-    this.addPostTitleTextView = addPostTitleTextView;
+    this.addPostTitleTextInputLayout = addPostTitleTextInputLayout;
     this.cancelButton = cancelButton;
     this.createPostForm = createPostForm;
     this.createPostImage = createPostImage;
@@ -78,7 +82,7 @@ public final class FragmentCreatePostBinding implements ViewBinding {
 
   @Override
   @NonNull
-  public ConstraintLayout getRoot() {
+  public ScrollView getRoot() {
     return rootView;
   }
 
@@ -104,26 +108,26 @@ public final class FragmentCreatePostBinding implements ViewBinding {
     int id;
     missingId: {
       id = R.id.add_post_description_edit_text;
-      EditText addPostDescriptionEditText = ViewBindings.findChildViewById(rootView, id);
+      TextInputEditText addPostDescriptionEditText = ViewBindings.findChildViewById(rootView, id);
       if (addPostDescriptionEditText == null) {
         break missingId;
       }
 
-      id = R.id.add_post_description_text_view;
-      TextView addPostDescriptionTextView = ViewBindings.findChildViewById(rootView, id);
-      if (addPostDescriptionTextView == null) {
+      id = R.id.add_post_description_text_input_layout;
+      TextInputLayout addPostDescriptionTextInputLayout = ViewBindings.findChildViewById(rootView, id);
+      if (addPostDescriptionTextInputLayout == null) {
         break missingId;
       }
 
       id = R.id.add_post_title_edit_text;
-      EditText addPostTitleEditText = ViewBindings.findChildViewById(rootView, id);
+      TextInputEditText addPostTitleEditText = ViewBindings.findChildViewById(rootView, id);
       if (addPostTitleEditText == null) {
         break missingId;
       }
 
-      id = R.id.add_post_title_text_view;
-      TextView addPostTitleTextView = ViewBindings.findChildViewById(rootView, id);
-      if (addPostTitleTextView == null) {
+      id = R.id.add_post_title_text_input_layout;
+      TextInputLayout addPostTitleTextInputLayout = ViewBindings.findChildViewById(rootView, id);
+      if (addPostTitleTextInputLayout == null) {
         break missingId;
       }
 
@@ -151,7 +155,11 @@ public final class FragmentCreatePostBinding implements ViewBinding {
         break missingId;
       }
 
-      ConstraintLayout main = (ConstraintLayout) rootView;
+      id = R.id.main;
+      ConstraintLayout main = ViewBindings.findChildViewById(rootView, id);
+      if (main == null) {
+        break missingId;
+      }
 
       id = R.id.save_button;
       Button saveButton = ViewBindings.findChildViewById(rootView, id);
@@ -165,9 +173,10 @@ public final class FragmentCreatePostBinding implements ViewBinding {
         break missingId;
       }
 
-      return new FragmentCreatePostBinding((ConstraintLayout) rootView, addPostDescriptionEditText,
-          addPostDescriptionTextView, addPostTitleEditText, addPostTitleTextView, cancelButton,
-          createPostForm, createPostImage, descriptionTextView, main, saveButton, titleTextView);
+      return new FragmentCreatePostBinding((ScrollView) rootView, addPostDescriptionEditText,
+          addPostDescriptionTextInputLayout, addPostTitleEditText, addPostTitleTextInputLayout,
+          cancelButton, createPostForm, createPostImage, descriptionTextView, main, saveButton,
+          titleTextView);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

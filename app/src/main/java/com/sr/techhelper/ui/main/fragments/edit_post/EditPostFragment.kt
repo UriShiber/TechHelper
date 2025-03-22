@@ -53,8 +53,8 @@ class EditPostFragment : Fragment() {
             val deleteButton: Button = view.findViewById(R.id.delete_button)
             val saveButton: Button = view.findViewById(R.id.save_button)
 
-            val titleText: EditText = view.findViewById(R.id.add_post_title_edit_text)
-            val descriptionText: EditText = view.findViewById(R.id.add_post_description_edit_text)
+            val titleText: EditText = view.findViewById(R.id.edit_post_title_edit_text)
+            val descriptionText: EditText = view.findViewById(R.id.edit_post_description_edit_text)
             imageView = view.findViewById(R.id.edit_post_image)
 
             currentPost?.post?.image?.let {

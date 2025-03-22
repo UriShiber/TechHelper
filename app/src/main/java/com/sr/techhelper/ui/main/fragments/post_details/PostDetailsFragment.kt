@@ -43,12 +43,12 @@ class PostDetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Initialize views
-        postImageView = view.findViewById(R.id.post_image_view)
-        postTitleTextView = view.findViewById(R.id.post_title_text_view)
-        postDescriptionTextView = view.findViewById(R.id.post_description_text_view)
-        postUserNameTextView = view.findViewById(R.id.post_user_id_text_view)
-        postLocationLngTextView = view.findViewById(R.id.post_location_lng_text_view)
-        postLocationLatTextView = view.findViewById(R.id.post_location_lat_text_view)
+        postImageView = view.findViewById(R.id.post_details_image)
+        postTitleTextView = view.findViewById(R.id.post_details_title_text_view)
+        postDescriptionTextView = view.findViewById(R.id.post_details_description_text_view)
+        postUserNameTextView = view.findViewById(R.id.post_details_username_text_view)
+        postLocationLngTextView = view.findViewById(R.id.post_details_location_lng_text_view)
+        postLocationLatTextView = view.findViewById(R.id.post_details_location_lat_text_view)
         editButton = view.findViewById(R.id.edit_button)
         backButton = view.findViewById(R.id.back_button)
 

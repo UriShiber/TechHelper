@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="black">#FF000000</color>
+    <color name="colorError">#B00020</color>
+    <color name="colorOnPrimary">#FFFFFF</color>
+    <color name="colorOnSecondary">#000000</color>
+    <color name="colorPrimary">#D32F2F</color>
+    <color name="colorPrimaryVariant">#9A0007</color>
+    <color name="colorSecondary">#FFCDD2</color>
+    <color name="colorSecondaryVariant">#FFCDD2</color>
     <color name="dark_gray">#A9A9A9</color>
     <color name="gray">#808080</color>
     <color name="light_gray">#D3D3D3</color>
     <color name="white">#FFFFFFFF</color>
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
-    <string name="app_name">techhelper</string>
+    <string name="app_name">Tech Helper</string>
     <string name="default_web_client_id" translatable="false">330191144814-8vfu436a3sp5oevkoclc3red0j0sq7l4.apps.googleusercontent.com</string>
     <string name="gcm_defaultSenderId" translatable="false">330191144814</string>
     <string name="google_api_key" translatable="false">AIzaSyBzIhbEJpa1-_gPWnh-feJTHSf-qFhoXb4</string>
