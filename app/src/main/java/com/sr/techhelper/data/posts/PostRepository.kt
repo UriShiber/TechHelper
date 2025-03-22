@@ -1,6 +1,8 @@
 package com.sr.techhelper.data.posts
 
+import android.util.Log
 import androidx.lifecycle.LiveData
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.sr.techhelper.data.users.UsersRepository
@@ -23,13 +25,13 @@ class PostsRepository {
     }
 
     suspend fun add(post: PostModel) = withContext(Dispatchers.IO) {
-        firestoreHandle.add(post).await()
+        firestoreHandle.document(post.id).set(post).await()
         postDao.add(post)
     }
 
     suspend fun edit(post: PostModel) = withContext(Dispatchers.IO) {
         firestoreHandle.document(post.id).set(post).await()
-        postDao.update(post)
+        postDao.upsertAll(post)
     }
 
     suspend fun delete(post: PostModel) = withContext(Dispatchers.IO) {

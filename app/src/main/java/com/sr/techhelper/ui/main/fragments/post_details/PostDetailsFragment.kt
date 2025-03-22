@@ -78,7 +78,15 @@ class PostDetailsFragment : Fragment() {
         }
 
         backButton.setOnClickListener {
-            Navigation.findNavController(it).popBackStack()
+            var poppedBack: Boolean = false
+            while (Navigation.findNavController(it).previousBackStackEntry!!.destination.id == R.id.editPostFragment ||
+                Navigation.findNavController(it).previousBackStackEntry!!.destination.id == R.id.postDetailsFragment) {
+                poppedBack = true
+                Navigation.findNavController(it).popBackStack()
+
+            }
+            if (!poppedBack)  Navigation.findNavController(it).popBackStack()
+
         }
     }
 
