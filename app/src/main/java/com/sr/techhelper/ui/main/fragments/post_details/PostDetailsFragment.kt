@@ -1,5 +1,6 @@
 package com.sr.techhelper.ui.main.fragments.post_details
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -28,6 +29,7 @@ class PostDetailsFragment : Fragment() {
     private lateinit var postUserNameTextView: TextView
     private lateinit var postLocationLngTextView: TextView
     private lateinit var postLocationLatTextView: TextView
+    private lateinit var postTagsTextView: TextView
     private lateinit var editButton: Button
     private lateinit var backButton: AppCompatImageButton
 
@@ -47,6 +49,7 @@ class PostDetailsFragment : Fragment() {
         postTitleTextView = view.findViewById(R.id.post_details_title_text_view)
         postDescriptionTextView = view.findViewById(R.id.post_details_description_text_view)
         postUserNameTextView = view.findViewById(R.id.post_details_username_text_view)
+        postTagsTextView = view.findViewById(R.id.post_tags_row)
         postLocationLngTextView = view.findViewById(R.id.post_details_location_lng_text_view)
         postLocationLatTextView = view.findViewById(R.id.post_details_location_lat_text_view)
         editButton = view.findViewById(R.id.edit_button)
@@ -80,10 +83,13 @@ class PostDetailsFragment : Fragment() {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun updateUI(post: PostWithSender) {
         postTitleTextView.text = post.post.title
         postDescriptionTextView.text = post.post.description
         postUserNameTextView.text = post.sender.name
+        val separator = " #"
+        postTagsTextView.text = "#${post.post.tags?.joinToString(separator)}"
         postLocationLngTextView.text = post.post.locationLng.toString()
         postLocationLatTextView.text = post.post.locationLat.toString()
 

@@ -20,8 +20,8 @@ data class PostDTO(
             locationLng = locationLng,
             locationLat = locationLat,
             image = image,
-            timestamp = timestamp
-//            tags = tags
+            timestamp = timestamp,
+            tags = tags
         )
     }
 }

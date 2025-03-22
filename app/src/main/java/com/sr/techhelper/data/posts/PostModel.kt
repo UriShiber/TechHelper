@@ -37,8 +37,8 @@ data class PostModel(
             locationLng = locationLng,
             locationLat = locationLat,
             image = image,
-            timestamp = timestamp
-//            tags = tags
+            timestamp = timestamp,
+            tags = tags
         )
     }
 }
