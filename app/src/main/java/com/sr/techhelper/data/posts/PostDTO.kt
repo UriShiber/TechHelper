@@ -8,7 +8,8 @@ data class PostDTO(
     val locationLng: Double = 0.0,
     val locationLat: Double = 0.0,
     val image: String? = null,
-    val tags: List<String>? = null
+    val tags: List<String>? = null,
+    val timestamp: Long = System.currentTimeMillis()
 ) {
     fun toPostModel(): PostModel {
         return PostModel(
@@ -19,7 +20,8 @@ data class PostDTO(
             locationLng = locationLng,
             locationLat = locationLat,
             image = image,
-//            tags = tags
+            timestamp = timestamp,
+            tags = tags
         )
     }
 }

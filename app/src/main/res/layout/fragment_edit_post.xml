@@ -154,7 +154,7 @@
                 android:layout_height="wrap_content"
                 style="@style/Widget.MaterialComponents.Button"
                 android:text="Delete"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:backgroundTint="@color/colorPrimary"
                 app:cornerRadius="8dp" />
         </LinearLayout>

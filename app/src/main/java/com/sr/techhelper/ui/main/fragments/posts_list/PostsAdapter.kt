@@ -1,6 +1,7 @@
 package com.sr.techhelper.ui.main.fragments.posts_list
 
 import CommentsAdapter
+import android.annotation.SuppressLint
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -10,17 +11,14 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.sr.techhelper.R
 import com.sr.techhelper.data.comments.CommentModel
-import androidx.fragment.app.activityViewModels
 import com.sr.techhelper.data.comments.CommentWithSender
 import com.sr.techhelper.data.posts.PostWithSender
-import com.sr.techhelper.ui.main.CommentsViewModel
 import com.sr.techhelper.utils.ImageUtils
 import java.util.Date
 
@@ -59,9 +57,11 @@ class PostsAdapter(
         private val postTitle: TextView = itemView.findViewById(R.id.post_row_title_text_view)
         private val postContent: TextView = itemView.findViewById(R.id.post_row_content_text_view)
         private val postImage: ImageView = itemView.findViewById(R.id.post_image_view)
+        private val postTags: TextView = itemView.findViewById(R.id.post_tags_row)
         private val postLocationLat: TextView = itemView.findViewById(R.id.post_row_location_lat_text_view)
         private val postLocationLng: TextView = itemView.findViewById(R.id.post_row_location_lng_text_view)
 
+        @SuppressLint("SetTextI18n")
         fun bind(post: PostWithSender, postComments: List<CommentWithSender>) {
             userName.text = post.sender.name
             Log.d("PostsAdapter", "Binding post with  profile picture: ${post.post}")
@@ -83,6 +83,8 @@ class PostsAdapter(
             } else {
                 postImage.setImageResource(R.drawable.empty_profile_picture)
             }
+            val separator = " #"
+            postTags.text = "#${post.post.tags?.joinToString(separator)}"
 
             postLocationLat.text = "Lat: ${post.post.locationLat}"
             postLocationLng.text = "Lng: ${post.post.locationLng}"
