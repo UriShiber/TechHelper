@@ -3,9 +3,15 @@ package com.sr.techhelper.utils
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.util.Base64
 import android.util.Log
+import androidx.compose.ui.graphics.Canvas
+import androidx.core.content.ContextCompat
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import java.io.ByteArrayOutputStream
 import java.io.InputStream
 
@@ -38,7 +44,6 @@ object ImageUtils {
             return ""
         }
         val originalBitmap = BitmapFactory.decodeStream(inputStream)
-
         // Reduce the dimensions of the image
         val scaledBitmap = Bitmap.createScaledBitmap(originalBitmap, 480, 480, true) // Adjust width/height
 
@@ -56,9 +61,9 @@ object ImageUtils {
         return internalConvertImageToBase64(inputStream)
     }
 
-    fun convertPhotoUrlToBase64(photoUrl: String): String {
-        return try {
-            // Load the image from the URL
+    suspend fun convertPhotoUrlToBase64(photoUrl: String): String = withContext(Dispatchers.IO) {
+        try {
+            // Load the image from the URL in background thread
             val inputStream = java.net.URL(photoUrl).openStream()
             internalConvertImageToBase64(inputStream)
         } catch (e: Exception) {
@@ -66,9 +71,28 @@ object ImageUtils {
             "" // Return empty string in case of error
         }
     }
+
     fun convertDrawableToBase64(context: Context, drawableResId: Int): String {
-        val bitmap = BitmapFactory.decodeResource(context.resources, drawableResId)
+        val drawable = ContextCompat.getDrawable(context, drawableResId) ?: return ""
+        val bitmap = drawableToBitmap(drawable) ?: return ""
         return convertBitmapToBase64(bitmap)
+    }
+
+    private fun drawableToBitmap(drawable: Drawable): Bitmap? {
+        if (drawable is BitmapDrawable) {
+            return drawable.bitmap
+        }
+
+        // For other drawables (like vector drawables), create a new bitmap and draw the drawable on it.
+        val bitmap = Bitmap.createBitmap(
+            drawable.intrinsicWidth,
+            drawable.intrinsicHeight,
+            Bitmap.Config.ARGB_8888
+        )
+        val canvas = android.graphics.Canvas(bitmap)
+        drawable.setBounds(0, 0, canvas.width, canvas.height)
+        drawable.draw(canvas)
+        return bitmap
     }
 
     private fun convertBitmapToBase64(bitmap: Bitmap): String {

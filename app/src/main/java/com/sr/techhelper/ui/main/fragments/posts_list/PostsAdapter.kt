@@ -64,7 +64,7 @@ class PostsAdapter(
 
         fun bind(post: PostWithSender, postComments: List<CommentWithSender>) {
             userName.text = post.sender.name
-            Log.d("PostsAdapter", "Binding post with  profile picture: ${post.sender}")
+            Log.d("PostsAdapter", "Binding post with  profile picture: ${post.post}")
 
             if (!post.sender.profile_picture.isNullOrEmpty()) {
                 val bitmap = ImageUtils.decodeBase64ToImage(post.sender.profile_picture)

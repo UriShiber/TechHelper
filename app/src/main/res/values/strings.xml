@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">techhelper</string>
+    <string name="app_name">Tech Helper</string>
     <string name="title_activity_auth">AuthActivity</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
