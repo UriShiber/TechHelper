@@ -8,6 +8,7 @@ data class PostDTO(
     val locationLng: Double = 0.0,
     val locationLat: Double = 0.0,
     val image: String? = null,
+    val tags: List<String>? = null
 ) {
     fun toPostModel(): PostModel {
         return PostModel(
@@ -17,7 +18,8 @@ data class PostDTO(
             userId = userId,
             locationLng = locationLng,
             locationLat = locationLat,
-            image = image
+            image = image,
+//            tags = tags
         )
     }
 }

@@ -1,15 +1,13 @@
 package com.sr.techhelper.ui.main.fragments.create_post
 
+import GeminiApiClient
 import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Base64
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -17,9 +15,8 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.ui.input.key.type
-import androidx.compose.ui.semantics.text
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -27,21 +24,27 @@ import androidx.navigation.Navigation
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.firebase.auth.FirebaseAuth
+import com.sr.techhelper.BuildConfig
 import com.sr.techhelper.R
 import com.sr.techhelper.data.posts.PostModel
 import com.sr.techhelper.ui.main.PostsViewModel
 import com.sr.techhelper.utils.ImageUtils
-import java.io.ByteArrayOutputStream
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class CreatePostFragment : Fragment() {
     private val viewModel: PostsViewModel by activityViewModels()
     private var userUid: String = FirebaseAuth.getInstance().currentUser!!.uid
     private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private lateinit var geminiApiClient: GeminiApiClient
 
     private lateinit var imageView: ImageView
     private lateinit var base64Image: String
     private var currentLatitude: Double = 0.0
     private var currentLongitude: Double = 0.0
+    private var generatedTags = listOf<String>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -55,15 +58,31 @@ class CreatePostFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
+        val apiKey = BuildConfig.API_KEY
+        geminiApiClient = GeminiApiClient(apiKey)
 
         val saveButton: Button = view.findViewById(R.id.save_button)
         val cancelButton: Button = view.findViewById(R.id.cancel_button)
+        val generateTagsButton: Button = view.findViewById(R.id.generate_tags_button)
         val titleEditText = view.findViewById<EditText>(R.id.add_post_title_edit_text)
         val descriptionEditText = view.findViewById<EditText>(R.id.add_post_description_edit_text)
+        val generatedTagsTextView = view.findViewById<TextView>(R.id.generated_tags_text_view)
         imageView = view.findViewById<ImageView>(R.id.create_post_image)
 
         imageView.setOnClickListener {
             pickImageFromGallery()
+        }
+
+        generateTagsButton.setOnClickListener {
+            val title = titleEditText.text.toString()
+            val description = descriptionEditText.text.toString()
+
+            CoroutineScope(Dispatchers.IO).launch {
+                generatedTags = geminiApiClient.generateTags(title, description)
+                withContext(Dispatchers.Main) {
+                    generatedTagsTextView.text = generatedTags.joinToString(", ")
+                }
+            }
         }
 
         cancelButton.setOnClickListener {
@@ -82,7 +101,8 @@ class CreatePostFragment : Fragment() {
                 description = descriptionEditText.text.toString(),
                 locationLat = currentLatitude,
                 locationLng = currentLongitude,
-                image = base64Image
+                image = base64Image,
+                tags = generatedTags
             )
             viewModel.addPost(newPost)
             val action = CreatePostFragmentDirections.actionCreatePostFragmentToPostListFragment()
