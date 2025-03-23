@@ -19,4 +19,7 @@ interface CommentDao {
 
     @Query("DELETE FROM comments WHERE postId = :postId")
     suspend fun deleteByPostId(postId: String)
+
+    @Query("DELETE FROM comments")
+    fun deleteAll()
 }
