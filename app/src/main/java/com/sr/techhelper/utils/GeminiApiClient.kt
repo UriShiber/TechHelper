@@ -25,18 +25,22 @@ class GeminiApiClient(apiKey: String) {
     )
 
     suspend fun generateTags(title: String, description: String): List<String> {
-        val prompt = """
-            Extract relevant tags for a post with the following title and description:
+        try {
+            val prompt = """
+            Extract relevant tags for a post for tech social network to help to strangers with the following title and description:
             Title: $title
             Description: $description
             Provide only tags separated by commas.
         """.trimIndent()
 
-        val content = Content(parts = listOf(TextPart(prompt)))
+            val content = Content(parts = listOf(TextPart(prompt)))
 
-        val response = model.generateContent(content)
+            val response = model.generateContent(content)
 
-        val responseText = response.text
-        return responseText?.split(",")?.map { it.trim() } ?: emptyList()
+            val responseText = response.text
+            return responseText?.split(",")?.map { it.trim() } ?: emptyList()
+        } catch (e: Exception) {
+            return listOf("#help")
+        }
     }
 }

@@ -95,29 +95,40 @@ class CreatePostFragment : Fragment() {
         }
 
         saveButton.setOnClickListener {
-            if (viewModel.isPostValid(titleEditText.text.toString(), base64Image, descriptionEditText.text.toString())) {
-                val newPost = PostModel(
-                    userId = userUid,
-                    title = titleEditText.text.toString(),
-                    description = descriptionEditText.text.toString(),
-                    locationLat = currentLatitude,
-                    locationLng = currentLongitude,
-                    image = base64Image,
-                    tags = generatedTags
-                )
-                viewModel.addPost(newPost)
-                val action = CreatePostFragmentDirections.actionCreatePostFragmentToPostListFragment()
-                Navigation.findNavController(it).navigate(action)
-            } else {
-                Toast.makeText(requireContext(), "Please fill in all fields", Toast.LENGTH_SHORT).show()
+            getCurrentLocation() {
+                if (viewModel.isPostValid(
+                        titleEditText.text.toString(),
+                        base64Image,
+                        descriptionEditText.text.toString()
+                    )
+                ) {
+                    val newPost = PostModel(
+                        userId = userUid,
+                        title = titleEditText.text.toString(),
+                        description = descriptionEditText.text.toString(),
+                        locationLat = currentLatitude,
+                        locationLng = currentLongitude,
+                        image = base64Image,
+                        tags = generatedTags
+                    )
+                    viewModel.addPost(newPost)
+                    val action =
+                        CreatePostFragmentDirections.actionCreatePostFragmentToPostListFragment()
+                    Navigation.findNavController(it).navigate(action)
+                } else {
+                    Toast.makeText(
+                        requireContext(),
+                        "Please fill in all fields",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
             }
-            getCurrentLocation()
         }
     }
 
 
 
-    private fun getCurrentLocation() {
+    private fun getCurrentLocation(onFinish: () -> Unit = {}) {
         if (ActivityCompat.checkSelfPermission(
                 requireContext(),
                 Manifest.permission.ACCESS_FINE_LOCATION
@@ -140,6 +151,7 @@ class CreatePostFragment : Fragment() {
                 } else {
                     Log.e("CreatePostFragment", "Location is null")
                 }
+                onFinish()
             }
             .addOnFailureListener { e ->
                 Log.e("CreatePostFragment", "Error getting location: ${e.message}")
