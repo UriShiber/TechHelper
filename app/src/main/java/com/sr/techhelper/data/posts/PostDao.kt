@@ -12,6 +12,9 @@ interface PostDao {
     @Query("SELECT * FROM posts WHERE id = :id")
     fun getById(id: String): LiveData<PostWithSender?>
 
+    @Query("SELECT * FROM posts WHERE id = :id")
+    suspend fun getDataById(id: String): PostWithSender?
+
     @Query("SELECT * FROM posts WHERE userId = :userId ORDER BY timestamp DESC")
     fun getPostsByUserId(userId: String): LiveData<List<PostWithSender>>
 

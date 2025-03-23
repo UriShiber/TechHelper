@@ -17,7 +17,10 @@ import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 
 class CommentsRepository {
+    private val usersRepository = UsersRepository()
     private val commentDao = DatabaseHolder.getDatabase().commentDao()
+    private val postDao = DatabaseHolder.getDatabase().postDao()
+    private val userDao = DatabaseHolder.getDatabase().usersDao()
     private val firestoreHandle = Firebase.firestore.collection("comments")
 
     fun getAllComments(): LiveData<List<CommentWithSender>> {
@@ -38,7 +41,15 @@ class CommentsRepository {
                     Log.d("CommentsRepository", "Fetchedd comments: $comments")
                     comments.forEach { comment ->
                         CoroutineScope(Dispatchers.IO).launch {
-                            commentDao.add(comment)
+                            val existingUser = userDao.getUserByUid(comment.userId);
+                            val existingPost = postDao.getDataById(comment.postId);
+//                            Log.d("CommentsRepository", "Existing User: $existingUser, Existing Post: $existingPost")
+
+                            if (existingUser != null && existingPost != null) {
+                                Log.d("CommentsRepository", "adding a comment: ${comment.content}")
+
+                                commentDao.add(comment)
+                            }
                         }
                     }
                 }
@@ -81,6 +92,7 @@ class CommentsRepository {
                 .get().await().toObjects(CommentDTO::class.java).map { it.toCommentModel() }
 
             if (comments.isNotEmpty()) {
+                usersRepository.cacheUsersIfNotExisting(comments.map { it.userId })
                 commentDao.upsertAll(*comments.toTypedArray())
             }
         }
