@@ -25,6 +25,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.sr.techhelper.BuildConfig
 import com.sr.techhelper.R
@@ -92,6 +93,8 @@ class CreatePostFragment : Fragment() {
         cancelButton.setOnClickListener {
             val action = CreatePostFragmentDirections.actionCreatePostFragmentToPostListFragment()
             Navigation.findNavController(it).navigate(action)
+            val bottomNav = requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+            bottomNav.selectedItemId = R.id.home  // Set Home as selected
         }
 
         saveButton.setOnClickListener {
@@ -115,6 +118,8 @@ class CreatePostFragment : Fragment() {
                     val action =
                         CreatePostFragmentDirections.actionCreatePostFragmentToPostListFragment()
                     Navigation.findNavController(it).navigate(action)
+                    val bottomNav = requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+                    bottomNav.selectedItemId = R.id.home  // Set Home as selected
                 } else {
                     Toast.makeText(
                         requireContext(),
