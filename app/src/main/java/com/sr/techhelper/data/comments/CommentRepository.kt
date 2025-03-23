@@ -17,6 +17,7 @@ import kotlinx.coroutines.withContext
 
 class CommentsRepository {
     private val commentDao = DatabaseHolder.getDatabase().commentDao()
+    private val postDao = DatabaseHolder.getDatabase().postDao()
     private val firestoreHandle = Firebase.firestore.collection("comments")
 
     fun getAllComments(): LiveData<List<CommentWithSender>> {
@@ -36,9 +37,10 @@ class CommentsRepository {
                 CoroutineScope(Dispatchers.IO).launch {
                     Log.d("CommentsRepository", "Fetchedd comments: $comments")
                     comments.forEach { comment ->
-                        CoroutineScope(Dispatchers.IO).launch {
-                            commentDao.add(comment)
-                        }
+                        if (postDao.getById(comment.postId).value != null)
+                            CoroutineScope(Dispatchers.IO).launch {
+                                commentDao.add(comment)
+                            }
                     }
                 }
             }
