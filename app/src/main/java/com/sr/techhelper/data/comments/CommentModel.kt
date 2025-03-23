@@ -4,6 +4,7 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 import com.sr.techhelper.data.posts.PostModel
+import com.sr.techhelper.data.users.UserModel
 import java.util.UUID
 
 @Entity(tableName = "comments",
@@ -11,7 +12,13 @@ import java.util.UUID
         entity = PostModel::class,
         parentColumns = ["id"],
         childColumns = ["postId"]
-    )])
+    ),
+        ForeignKey(
+            entity = UserModel::class,
+            parentColumns = ["id"],  // Ensure this matches UserModel's primary key
+            childColumns = ["userId"], // Ensure this matches CommentModel's foreign key
+            onDelete = ForeignKey.CASCADE
+        )])
 data class CommentModel(
     @PrimaryKey val id: String = UUID.randomUUID().toString(),
     val postId: String,

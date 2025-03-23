@@ -64,7 +64,7 @@ class PostsAdapter(
         @SuppressLint("SetTextI18n")
         fun bind(post: PostWithSender, postComments: List<CommentWithSender>) {
             userName.text = post.sender.name
-            Log.d("PostsAdapter", "Binding post with  profile picture: ${post.post}")
+//            Log.d("PostsAdapter", "Binding post with  profile picture: ${post.post}")
 
             if (!post.sender.profile_picture.isNullOrEmpty()) {
                 val bitmap = ImageUtils.decodeBase64ToImage(post.sender.profile_picture)
@@ -156,7 +156,7 @@ class PostsAdapter(
 
     fun updateComments(newComments: List<CommentWithSender>) {
         this.comments = newComments
-        Log.d("PostsAdapter", "Updating comments: $comments")
+//        Log.d("PostsAdapter", "Updating comments: $comments")
         notifyDataSetChanged()
     }
 }
