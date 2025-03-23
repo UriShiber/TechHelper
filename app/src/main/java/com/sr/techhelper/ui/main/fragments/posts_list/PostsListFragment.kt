@@ -37,6 +37,7 @@ class PostsListFragment : Fragment() {
 
         swipeRefreshLayout.setOnRefreshListener {
             postsViewModel.getAllPosts()
+            fetchCommentsForPosts()
         }
 
         return view
