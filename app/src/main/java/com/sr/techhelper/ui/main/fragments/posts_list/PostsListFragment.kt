@@ -45,9 +45,9 @@ class PostsListFragment : Fragment() {
                 postsViewModel.invalidatePosts()
             } else {
                 postsAdapter.updatePosts(posts)
-                fetchCommentsForPosts()  // Fetch comments for these posts
             }
         }
+        fetchCommentsForPosts()  // Fetch comments for these posts
 
     }
 

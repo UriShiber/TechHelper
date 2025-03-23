@@ -25,38 +25,39 @@ class CommentsRepository {
 
     fun getAllComments(): LiveData<List<CommentWithSender>> {
         val liveData = commentDao.getAllComments()
+        return liveData
 
-        firestoreHandle.get()
-            .addOnSuccessListener { documents ->
-                Log.d("CommentsRepository", "Fetched comments from Firestore: ${documents.size()}")
-                val comments = mutableListOf<CommentModel>()
-                for (document in documents) {
-                    val comment = CommentModel.fromMap(document.data)
-                    comments.add(comment)
-                    Log.d("CommentsRepository", "Firestore comment: ${comment.content}, PostId: ${comment.postId}")
-                }
-
-                // Insert fetched comments into Room DB
-                CoroutineScope(Dispatchers.IO).launch {
-                    Log.d("CommentsRepository", "Fetchedd comments: $comments")
-                    comments.forEach { comment ->
-                        CoroutineScope(Dispatchers.IO).launch {
-                            val existingUser = userDao.getUserByUid(comment.userId);
-                            val existingPost = postDao.getDataById(comment.postId);
-//                            Log.d("CommentsRepository", "Existing User: $existingUser, Existing Post: $existingPost")
-
-                            if (existingUser != null && existingPost != null) {
-                                Log.d("CommentsRepository", "adding a comment: ${comment.content}")
-
-                                commentDao.add(comment)
-                            }
-                        }
-                    }
-                }
-            }
-            .addOnFailureListener { e ->
-                Log.e("CommentsRepository", "Error fetching comments from Firestore", e)
-            }
+//        firestoreHandle.get()
+//            .addOnSuccessListener { documents ->
+//                Log.d("CommentsRepository", "Fetched comments from Firestore: ${documents.size()}")
+//                val comments = mutableListOf<CommentModel>()
+//                for (document in documents) {
+//                    val comment = CommentModel.fromMap(document.data)
+//                    comments.add(comment)
+//                    Log.d("CommentsRepository", "Firestore comment: ${comment.content}, PostId: ${comment.postId}")
+//                }
+//
+//                // Insert fetched comments into Room DB
+//                CoroutineScope(Dispatchers.IO).launch {
+//                    Log.d("CommentsRepository", "Fetchedd comments: $comments")
+//                    comments.forEach { comment ->
+//                        CoroutineScope(Dispatchers.IO).launch {
+//                            val existingUser = userDao.getUserByUid(comment.userId);
+//                            val existingPost = postDao.getDataById(comment.postId);
+////                            Log.d("CommentsRepository", "Existing User: $existingUser, Existing Post: $existingPost")
+//
+//                            if (existingUser != null && existingPost != null) {
+//                                Log.d("CommentsRepository", "adding a comment: ${comment.content}")
+//
+//                                commentDao.add(comment)
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//            .addOnFailureListener { e ->
+//                Log.e("CommentsRepository", "Error fetching comments from Firestore", e)
+//            }
 
         return liveData
     }
