@@ -111,6 +111,7 @@ class CreatePostFragment : Fragment() {
             } else {
                 Toast.makeText(requireContext(), "Please fill in all fields", Toast.LENGTH_SHORT).show()
             }
+            getCurrentLocation()
         }
     }
 
