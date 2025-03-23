@@ -43,7 +43,6 @@ class PostsListFragment : Fragment() {
         postsViewModel.getAllPosts().observe(viewLifecycleOwner) { posts ->
             if (posts.isEmpty()) postsViewModel.invalidatePosts()
             postsAdapter.updatePosts(posts)
-
         }
         fetchCommentsForPosts()  // Fetch comments for these posts
     }

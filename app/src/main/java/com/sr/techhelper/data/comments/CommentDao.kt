@@ -2,6 +2,7 @@ package com.sr.techhelper.data.comments
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import com.sr.techhelper.data.posts.PostModel
 
 @Dao
 interface CommentDao {
@@ -19,6 +20,9 @@ interface CommentDao {
 
     @Query("DELETE FROM comments WHERE postId = :postId")
     suspend fun deleteByPostId(postId: String)
+
+    @Upsert
+    fun upsertAll(vararg comments: CommentModel)
 
     @Query("DELETE FROM comments")
     fun deleteAll()

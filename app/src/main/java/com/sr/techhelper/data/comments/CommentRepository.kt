@@ -6,6 +6,7 @@ import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.sr.techhelper.data.posts.PostDTO
 import com.sr.techhelper.data.users.UsersRepository
 import com.sr.techhelper.room.DatabaseHolder
 import kotlinx.coroutines.CoroutineScope
@@ -73,4 +74,18 @@ class CommentsRepository {
             }
         }
     }
+
+    suspend fun loadCommentsFromRemoteSource() =
+        withContext(Dispatchers.IO) {
+            val comments = firestoreHandle.orderBy("id")
+                .get().await().toObjects(CommentDTO::class.java).map { it.toCommentModel() }
+
+            if (comments.isNotEmpty()) {
+                commentDao.upsertAll(*comments.toTypedArray())
+            }
+        }
+    fun deleteAll() {
+        commentDao.deleteAll()
+    }
+
 }
