@@ -98,11 +98,12 @@ class PostsViewModel : ViewModel() {
     }
 
     fun deletePostById(
-        postId: String,
+        postId: String, onComplete: () -> Unit
     ) {
         viewModelScope.launch(Dispatchers.Main) {
             commentsRepository.deleteCommentsByPostId(postId) // Delete comments associated with the post
             repository.deleteById(postId) // Delete a post by ID from the repository
+            onComplete()
         }
     }
 

@@ -80,10 +80,11 @@ class EditPostFragment : Fragment() {
 
             deleteButton.setOnClickListener {
                 postId?.let { id ->
-                    viewModel.deletePostById(id)
+                    viewModel.deletePostById(id) {
+                        val action = EditPostFragmentDirections.actionEditPostFragmentToPostListFragment()
+                        Navigation.findNavController(it).navigate(action)
+                    }
                 }
-                val action = EditPostFragmentDirections.actionEditPostFragmentToPostListFragment()
-                Navigation.findNavController(it).navigate(action)
             }
 
             saveButton.setOnClickListener {
