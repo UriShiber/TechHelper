@@ -36,6 +36,7 @@ import com.sr.techhelper.utils.ImageUtils
 class ProfilePageFragment : Fragment() {
     private val commentsViewModel: CommentsViewModel by activityViewModels()
     private lateinit var postsList: RecyclerView
+    private lateinit var postsAdapter: PostsAdapter
     private val viewModel: PostsViewModel by activityViewModels()
     private var userId: String = FirebaseAuth.getInstance().currentUser!!.uid
 

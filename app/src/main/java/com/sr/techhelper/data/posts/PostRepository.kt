@@ -59,6 +59,7 @@ class PostsRepository {
 
             if (posts.isNotEmpty()) {
                 usersRepository.cacheUsersIfNotExisting(posts.map { it.userId })
+                postDao.deleteAll()
                 postDao.upsertAll(*posts.toTypedArray())
             }
         }

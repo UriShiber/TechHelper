@@ -1,5 +1,6 @@
 package com.sr.techhelper.data.comments
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
@@ -8,6 +9,7 @@ import com.google.firebase.ktx.Firebase
 import com.sr.techhelper.data.posts.PostDTO
 import com.sr.techhelper.data.users.UsersRepository
 import com.sr.techhelper.room.DatabaseHolder
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
@@ -19,7 +21,33 @@ class CommentsRepository {
     private val firestoreHandle = Firebase.firestore.collection("comments")
 
     fun getAllComments(): LiveData<List<CommentWithSender>> {
-        return commentDao.getAllComments()
+        val liveData = commentDao.getAllComments()
+
+        firestoreHandle.get()
+            .addOnSuccessListener { documents ->
+                Log.d("CommentsRepository", "Fetched comments from Firestore: ${documents.size()}")
+                val comments = mutableListOf<CommentModel>()
+                for (document in documents) {
+                    val comment = CommentModel.fromMap(document.data)
+                    comments.add(comment)
+                    Log.d("CommentsRepository", "Firestore comment: ${comment.content}, PostId: ${comment.postId}")
+                }
+
+                // Insert fetched comments into Room DB
+                CoroutineScope(Dispatchers.IO).launch {
+                    Log.d("CommentsRepository", "Fetchedd comments: $comments")
+                    comments.forEach { comment ->
+                        CoroutineScope(Dispatchers.IO).launch {
+                            commentDao.add(comment)
+                        }
+                    }
+                }
+            }
+            .addOnFailureListener { e ->
+                Log.e("CommentsRepository", "Error fetching comments from Firestore", e)
+            }
+
+        return liveData
     }
 
     suspend fun add(comment: CommentModel) = withContext(Dispatchers.IO) {

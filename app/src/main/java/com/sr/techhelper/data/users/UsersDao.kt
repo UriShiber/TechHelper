@@ -27,5 +27,4 @@ interface UsersDao {
 
     @Query("DELETE FROM users")
     fun deleteAll()
-
 }
