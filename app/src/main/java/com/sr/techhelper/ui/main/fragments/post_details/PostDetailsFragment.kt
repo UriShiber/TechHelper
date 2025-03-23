@@ -60,6 +60,7 @@ class PostDetailsFragment : Fragment() {
 
         // Observe the posts LiveData
         viewModel.getAllPosts().observe(viewLifecycleOwner) { posts ->
+            println(posts)
             if (posts.isEmpty()) viewModel.invalidatePosts()
 
             // Find the current post
