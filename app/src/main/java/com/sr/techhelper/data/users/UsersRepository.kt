@@ -80,4 +80,9 @@ class UsersRepository {
             }
             return@withContext users
         }
+
+    fun deleteAll() {
+        usersDao.deleteAll()
+
+    }
 }

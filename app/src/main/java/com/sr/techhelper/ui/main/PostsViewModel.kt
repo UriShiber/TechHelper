@@ -30,6 +30,9 @@ class PostsViewModel : ViewModel() {
     }
 
     fun getAllPosts(): LiveData<List<PostWithSender>> {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.loadPostsFromRemoteSource(50, 0) // Fetch posts from remote source
+        }
         return this.repository.getAllPosts() // Fetch all posts from repository
     }
 

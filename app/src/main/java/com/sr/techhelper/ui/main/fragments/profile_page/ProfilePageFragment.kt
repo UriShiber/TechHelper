@@ -121,6 +121,7 @@ class ProfilePageFragment : Fragment() {
             }
 
         })
+        fetchCommentsForPosts(postsList.adapter as PostsAdapter)  // Fetch comments for these posts
     }
 
     private fun initPostsList(context: Context) {
@@ -140,6 +141,13 @@ class ProfilePageFragment : Fragment() {
                     LinearLayoutManager.VERTICAL
                 )
             )
+        }
+    }
+
+    private fun fetchCommentsForPosts(adapter: PostsAdapter) {
+        commentsViewModel.getAllComments().observe(viewLifecycleOwner) { commentsList ->
+            Log.d("PostsAdapter", "Fetching comments: $commentsList")
+            adapter.updateComments(commentsList)
         }
     }
 

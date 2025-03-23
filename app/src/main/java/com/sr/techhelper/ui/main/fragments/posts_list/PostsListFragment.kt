@@ -43,14 +43,14 @@ class PostsListFragment : Fragment() {
         postsViewModel.getAllPosts().observe(viewLifecycleOwner) { posts ->
             if (posts.isEmpty()) postsViewModel.invalidatePosts()
             postsAdapter.updatePosts(posts)
-            fetchCommentsForPosts(posts)  // Fetch comments for these posts
         }
+        fetchCommentsForPosts()  // Fetch comments for these posts
     }
 
-    private fun fetchCommentsForPosts(posts: List<PostWithSender>) {
+    private fun fetchCommentsForPosts() {
         commentsViewModel.getAllComments().observe(viewLifecycleOwner) { commentsList ->
             Log.d("PostsAdapter", "Fetching comments: $commentsList")
-            comments = commentsList.map { it }
+            comments = commentsList
             postsAdapter.updateComments(comments)
         }
     }

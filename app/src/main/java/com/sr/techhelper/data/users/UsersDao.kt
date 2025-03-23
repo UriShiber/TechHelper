@@ -24,4 +24,8 @@ interface UsersDao {
 
     @Update
     fun updateUserData(user: UserModel)
+
+    @Query("DELETE FROM users")
+    fun deleteAll()
+
 }
