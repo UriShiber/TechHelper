@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.sr.techhelper.R
 import com.sr.techhelper.data.comments.CommentModel
 import com.sr.techhelper.data.comments.CommentWithSender
@@ -21,6 +22,7 @@ import com.sr.techhelper.ui.main.PostsViewModel
 
 class PostsListFragment : Fragment() {
     private lateinit var postsList: RecyclerView
+    private lateinit var swipeRefreshLayout: SwipeRefreshLayout
     private val postsViewModel: PostsViewModel by activityViewModels()
     private val commentsViewModel: CommentsViewModel by activityViewModels()
     private lateinit var postsAdapter: PostsAdapter
@@ -30,7 +32,14 @@ class PostsListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_posts_list, container, false)
+        val view = inflater.inflate(R.layout.fragment_posts_list, container, false)
+        swipeRefreshLayout = view.findViewById(R.id.post_list_view)
+
+        swipeRefreshLayout.setOnRefreshListener {
+            postsViewModel.getAllPosts()
+        }
+
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -45,6 +54,7 @@ class PostsListFragment : Fragment() {
                 postsViewModel.invalidatePosts()
             } else {
                 postsAdapter.updatePosts(posts)
+                swipeRefreshLayout.isRefreshing = false // Stop the refreshing animation
             }
         }
         fetchCommentsForPosts()  // Fetch comments for these posts
