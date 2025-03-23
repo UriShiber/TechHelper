@@ -76,6 +76,7 @@ class UsersRepository {
                 if (uids.isNotEmpty()) firestoreHandle.whereIn("id", uids) else firestoreHandle
             val users = usersQuery.get().await().toObjects(UserDTO::class.java).map {it.toUserModel()}
             if (users.isNotEmpty()) {
+                usersDao.deleteAll()
                 usersDao.upsertAll(*users.toTypedArray())
             }
             return@withContext users

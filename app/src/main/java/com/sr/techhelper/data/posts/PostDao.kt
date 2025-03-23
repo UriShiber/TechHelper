@@ -29,4 +29,7 @@ interface PostDao {
 
     @Upsert
     fun upsertAll(vararg post: PostModel)
+
+    @Query("DELETE FROM posts")
+    fun deleteAll()
 }
