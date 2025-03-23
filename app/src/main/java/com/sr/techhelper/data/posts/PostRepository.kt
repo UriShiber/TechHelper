@@ -56,11 +56,20 @@ class PostsRepository {
 //            postDao.deleteAll()
 //            println("delete users")
 //            usersRepository.deleteAll()
+            val postsFromRoom = postDao.getAllPostsOnce() // Get all posts from Room once
+            val firestorePostIds = posts.map { it.id }.toSet()
+            val postsToDelete = postsFromRoom.filter { !firestorePostIds.contains(it.post.id) }
+            postsToDelete.forEach { postWithSender ->
+                commentsRepository.deleteCommentsByPostId(postWithSender.post.id) // Assuming you have this method
+                postDao.delete(postWithSender.post)
+            }
 
             if (posts.isNotEmpty()) {
                 usersRepository.cacheUsersIfNotExisting(posts.map { it.userId })
-//                postDao.deleteAll()
                 postDao.upsertAll(*posts.toTypedArray())
+            } else {
+                commentsRepository.deleteAll()
+                postDao.deleteAll()
             }
         }
 }
