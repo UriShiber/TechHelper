@@ -88,7 +88,6 @@ class PostsAdapter(
 
             postLocationLat.text = "Lat: ${post.post.locationLat}"
             postLocationLng.text = "Lng: ${post.post.locationLng}"
-            collapseCommentsButton.text = "see " + postComments.size + " comments"
 
             itemView.setOnClickListener {
                 onPostClick(post)
@@ -115,6 +114,15 @@ class PostsAdapter(
             // Set up the event listener for the "Submit" button
             addCommentsubmitButton.setOnClickListener {
                 submitComment(post)
+            }
+
+            if(postComments.size > 0) {
+                collapseCommentsButton.visibility = View.VISIBLE
+                if (commentsRecyclerView.visibility == View.GONE) {
+                    collapseCommentsButton.text = "see " + postComments.size + " comments"
+                }
+            } else {
+                collapseCommentsButton.visibility = View.GONE
             }
 
             collapseCommentsButton.setOnClickListener {

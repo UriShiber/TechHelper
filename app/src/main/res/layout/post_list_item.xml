@@ -141,9 +141,10 @@
                 style="@style/Widget.MaterialComponents.Button.TextButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="see comments"
+                android:text="hide comments"
                 android:textColor="@color/colorPrimary"
                 app:icon="@drawable/ic_arrow_down"
+                android:visibility="gone"
                 app:iconGravity="end"
                 app:iconTint="@color/colorPrimary" />
 

@@ -22,6 +22,7 @@ import androidx.navigation.Navigation
 import com.sr.techhelper.R
 import com.sr.techhelper.data.posts.PostWithSender
 import com.sr.techhelper.ui.main.PostsViewModel
+import com.sr.techhelper.ui.main.fragments.posts_list.PostsListFragmentDirections
 import com.sr.techhelper.utils.ImageUtils
 import java.io.ByteArrayOutputStream
 
@@ -81,7 +82,8 @@ class EditPostFragment : Fragment() {
                 postId?.let { id ->
                     viewModel.deletePostById(id)
                 }
-                Navigation.findNavController(it).popBackStack()
+                val action = EditPostFragmentDirections.actionEditPostFragmentToPostListFragment()
+                Navigation.findNavController(it).navigate(action)
             }
 
             saveButton.setOnClickListener {
